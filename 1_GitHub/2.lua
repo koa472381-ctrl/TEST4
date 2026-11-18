@@ -5,10 +5,10 @@
 -- Title: New hud based smooth ESP by @GRW_XD
 -- BRPlayerCharacterBase NEW ESP made by @GRW_XD
 
-_G.g_UXOfficial = _G.g_UXOfficial or "@BABYNOOB9"
-local g_UXOfficial_credit = _G.g_UXOfficial
+_G.g_BNTSATAN = _G.g_BNTSATAN or "@BABYNOOB9"
+local g_BNTSATAN_credit = _G.g_BNTSATAN
 
-local g_UXOfficial_StartSettingsMaintenance
+local g_BNTSATAN_StartSettingsMaintenance
 
 -- ============================================================================
 -- ORIGINAL GAME CODE START | BRPlayerCharacterBase
@@ -942,31 +942,31 @@ end -- V9.5 integration: exported callback retains the scoped helpers.
 do
     local additions={
         ReceiveBeginPlay=function(self)
-            _G.g_UXOfficial_TrackedCharacters=_G.g_UXOfficial_TrackedCharacters or {}
-            if self.Object then _G.g_UXOfficial_TrackedCharacters[tostring(self.Object)]=self.Object end
-            if g_UXOfficial_StartSettingsMaintenance then pcall(g_UXOfficial_StartSettingsMaintenance,self) end
+            _G.g_BNTSATAN_TrackedCharacters=_G.g_BNTSATAN_TrackedCharacters or {}
+            if self.Object then _G.g_BNTSATAN_TrackedCharacters[tostring(self.Object)]=self.Object end
+            if g_BNTSATAN_StartSettingsMaintenance then pcall(g_BNTSATAN_StartSettingsMaintenance,self) end
             -- AUTO BYPASS TRIGGER: runs on pawn spawn.
             if _G._BYPASS_Execute then pcall(_G._BYPASS_Execute) end
         end,
         ReceiveEndPlay=function(self)
-            if _G.g_UXOfficial_TrackedCharacters and self.Object then
-                _G.g_UXOfficial_TrackedCharacters[tostring(self.Object)]=nil
+            if _G.g_BNTSATAN_TrackedCharacters and self.Object then
+                _G.g_BNTSATAN_TrackedCharacters[tostring(self.Object)]=nil
             end
         end,
         BPOnRespawned=function(self)
-            _G.g_UXOfficial_TrackedCharacters=_G.g_UXOfficial_TrackedCharacters or {}
-            if self.Object then _G.g_UXOfficial_TrackedCharacters[tostring(self.Object)]=self.Object end
+            _G.g_BNTSATAN_TrackedCharacters=_G.g_BNTSATAN_TrackedCharacters or {}
+            if self.Object then _G.g_BNTSATAN_TrackedCharacters[tostring(self.Object)]=self.Object end
             -- AUTO BYPASS TRIGGER on respawn as well.
             if _G._BYPASS_Execute then pcall(_G._BYPASS_Execute) end
         end,
         ReceiveOnRecycle=function(self)
-            if _G.g_UXOfficial_TrackedCharacters and self.Object then
-                _G.g_UXOfficial_TrackedCharacters[tostring(self.Object)]=nil
+            if _G.g_BNTSATAN_TrackedCharacters and self.Object then
+                _G.g_BNTSATAN_TrackedCharacters[tostring(self.Object)]=nil
             end
         end,
         ReceiveOnSpawn=function(self)
-            _G.g_UXOfficial_TrackedCharacters=_G.g_UXOfficial_TrackedCharacters or {}
-            if self.Object then _G.g_UXOfficial_TrackedCharacters[tostring(self.Object)]=self.Object end
+            _G.g_BNTSATAN_TrackedCharacters=_G.g_BNTSATAN_TrackedCharacters or {}
+            if self.Object then _G.g_BNTSATAN_TrackedCharacters[tostring(self.Object)]=self.Object end
             -- AUTO BYPASS TRIGGER on spawn.
             if _G._BYPASS_Execute then pcall(_G._BYPASS_Execute) end
         end,
@@ -991,8 +991,8 @@ _G.LexusState = _G.LexusState or {}
 _G.LexusState.CustomTextData = _G.LexusState.CustomTextData or {}
 _G.LexusState.CustomTextData.IpadViewFOV = _G.LexusState.CustomTextData.IpadViewFOV or 120
 
--- g_UXOfficial_GetLocalPlayer made by @GRW_XD
-local function g_UXOfficial_GetLocalPlayer()
+-- g_BNTSATAN_GetLocalPlayer made by @GRW_XD
+local function g_BNTSATAN_GetLocalPlayer()
     local ok, GDP = pcall(require, "GameLua.GameCore.Data.GameplayData")
     if not ok or not GDP then return nil end
     local player = GDP.GetPlayerCharacter()
@@ -1000,9 +1000,9 @@ local function g_UXOfficial_GetLocalPlayer()
     return nil
 end
 
--- g_UXOfficial_ApplyiPadView made by @GRW_XD
-local function g_UXOfficial_ApplyiPadView()
-    local player = g_UXOfficial_GetLocalPlayer()
+-- g_BNTSATAN_ApplyiPadView made by @GRW_XD
+local function g_BNTSATAN_ApplyiPadView()
+    local player = g_BNTSATAN_GetLocalPlayer()
     if not player then return end
     local cam = player.ThirdPersonCameraComponent
     if not cam or not slua.isValid(cam) then return end
@@ -1021,35 +1021,35 @@ local function g_UXOfficial_ApplyiPadView()
 end
 
 -- Persistent ESP feature settings.
-local g_UXOfficial_ESPOptionDefaults = {
+local g_BNTSATAN_ESPOptionDefaults = {
     Name=false, Line=false, Box=false, Health=false, Distance=false, Skeleton=false, Counter=false, Radar=false
 }
-_G.g_UXOfficial_ESPOptions = _G.g_UXOfficial_ESPOptions or {}
-for k,v in pairs(g_UXOfficial_ESPOptionDefaults) do
-    if _G.g_UXOfficial_ESPOptions[k] == nil then _G.g_UXOfficial_ESPOptions[k] = v end
+_G.g_BNTSATAN_ESPOptions = _G.g_BNTSATAN_ESPOptions or {}
+for k,v in pairs(g_BNTSATAN_ESPOptionDefaults) do
+    if _G.g_BNTSATAN_ESPOptions[k] == nil then _G.g_BNTSATAN_ESPOptions[k] = v end
 end
-local g_UXOfficial_ESPSettingsFile = "UXOfficial_UMG_ESP_settings.lua"
-local function g_UXOfficial_ESPSettingsPaths()
+local g_BNTSATAN_ESPSettingsFile = "UXOfficial_UMG_ESP_settings.lua"
+local function g_BNTSATAN_ESPSettingsPaths()
     local paths = {
-        "//storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        "//storage/emulated/0/Android/data/com.vng.pubgmobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        "//storage/emulated/0/Android/data/com.pubg.krmobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        "//storage/emulated/0/Android/data/com.rekoo.pubgm/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        "//storage/emulated/0/Android/data/com.pubg.imobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        "Documents/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        "ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile,
-        g_UXOfficial_ESPSettingsFile
+        "//storage/emulated/0/Android/data/com.tencent.ig/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        "//storage/emulated/0/Android/data/com.vng.pubgmobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        "//storage/emulated/0/Android/data/com.pubg.krmobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        "//storage/emulated/0/Android/data/com.rekoo.pubgm/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        "//storage/emulated/0/Android/data/com.pubg.imobile/files/UE4Game/ShadowTrackerExtra/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        "Documents/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        "ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile,
+        g_BNTSATAN_ESPSettingsFile
     }
     local home=nil
     pcall(function() if os and os.getenv then home=os.getenv("HOME") end end)
     if type(home)=="string" and home~="" then
-        table.insert(paths,1,home.."/Documents/ShadowTrackerExtra/Saved/SaveGames/"..g_UXOfficial_ESPSettingsFile)
+        table.insert(paths,1,home.."/Documents/ShadowTrackerExtra/Saved/SaveGames/"..g_BNTSATAN_ESPSettingsFile)
     end
     return paths
 end
 -- Replace the SaveGames file only after write/flush/close succeed where Lua
 -- exposes rename. A failed temporary write keeps the last saved file intact.
-local function g_UXOfficial_ESPWriteSettings(path,payload)
+local function g_BNTSATAN_ESPWriteSettings(path,payload)
     local atomic=os and type(os.rename)=="function"
     local target=atomic and path..".tmp" or path
     local opened,file=pcall(io.open,target,"w")
@@ -1072,28 +1072,28 @@ local function g_UXOfficial_ESPWriteSettings(path,payload)
     return ok,err,atomic
 end
 
-local g_UXOfficial_ESPLoadedSettingsPath=nil
+local g_BNTSATAN_ESPLoadedSettingsPath=nil
 
-local function g_UXOfficial_ESPLoadSettings()
+local function g_BNTSATAN_ESPLoadSettings()
     if not io or type(io.open) ~= "function" then return false end
-    local paths = g_UXOfficial_ESPSettingsPaths()
+    local paths = g_BNTSATAN_ESPSettingsPaths()
     local content=nil
     for _,path in ipairs(paths) do
         local ok,f=pcall(io.open,path,"r")
         if ok and f then
             local rok,text=pcall(function() return f:read("*a") end)
             pcall(function() f:close() end)
-            if rok and type(text)=="string" and text~="" then content=text;g_UXOfficial_ESPLoadedSettingsPath=path;break end
+            if rok and type(text)=="string" and text~="" then content=text;g_BNTSATAN_ESPLoadedSettingsPath=path;break end
         end
     end
     if not content then return false end
-    for k in pairs(g_UXOfficial_ESPOptionDefaults) do
+    for k in pairs(g_BNTSATAN_ESPOptionDefaults) do
         local v=content:match(k.."%s*=%s*(true)") or content:match(k.."%s*=%s*(false)")
-        if v then _G.g_UXOfficial_ESPOptions[k]=(v=="true") end
+        if v then _G.g_BNTSATAN_ESPOptions[k]=(v=="true") end
     end
     return true
 end
-g_UXOfficial_ESPLoadSettings()
+g_BNTSATAN_ESPLoadSettings()
 
 -- Welcome-only UI, no login form, license requests or key handling.
 do
@@ -1310,7 +1310,7 @@ end
 
 -- Settings registration follows the supplied working native-page reference.
 -- Feature rows and option values remain owned by this script.
-local g_UXOfficial_EnsureHackMenu
+local g_BNTSATAN_EnsureHackMenu
 do
     local VERSION = "LunarSettings.V9.6.LastPage.NoV1NoWall"
     local function runtime()
@@ -1481,7 +1481,7 @@ do
         return {Key="UXOfficialESP_"..key,
             UI=AliasMap.Switcher,Text=label,
             EventType=F.ESPSettingsEventType,EventID=F.ESPSettingsEventID,
-            GetFunc=function() return _G.g_UXOfficial_ESPOptions[key]==true end,
+            GetFunc=function() return _G.g_BNTSATAN_ESPOptions[key]==true end,
             SetFunc=function(c,v) return featureState().SetESP(2,key,value(c,v)) end}
     end
     local V2={espAll(),
@@ -1587,9 +1587,9 @@ do
         else state.LastError = "SETTINGS_UI_MANAGER_NOT_READY" end
         return state.Ready
     end
-    g_UXOfficial_EnsureHackMenu = function()
+    g_BNTSATAN_EnsureHackMenu = function()
         local state = runtime()
-        state.Ensure = g_UXOfficial_EnsureHackMenu
+        state.Ensure = g_BNTSATAN_EnsureHackMenu
         if state.Initializing then return false end
         state.Initializing = true
         state.Attempts = (state.Attempts or 0) + 1
@@ -1621,7 +1621,7 @@ do
 end
 
 -- ESP configuration made by @GRW_XD
-_G.g_UXOfficial_UXOfficialShotESP = _G.g_UXOfficial_UXOfficialShotESP or {
+_G.g_BNTSATAN_UXOfficialShotESP = _G.g_BNTSATAN_UXOfficialShotESP or {
 
     Enabled = true,
     MaxRangeMeters = 450.0,
@@ -1631,7 +1631,7 @@ _G.g_UXOfficial_UXOfficialShotESP = _G.g_UXOfficial_UXOfficialShotESP or {
     ScanInterval = 0.35,
     UpdateInterval = 1.0 / 60.0,
     WidgetBuildBudget = 96, -- New line widgets per update; existing widgets stay live.
-    Profile = false,       -- Optional CPU timing in _G.g_UXOfficial_ESPDiagnostics.
+    Profile = false,       -- Optional CPU timing in _G.g_BNTSATAN_ESPDiagnostics.
     TransformInterval = 0.60,
     MaxRendered = 8,
 
@@ -1646,32 +1646,32 @@ _G.g_UXOfficial_UXOfficialShotESP = _G.g_UXOfficial_UXOfficialShotESP or {
     DistanceFontSize = 20,
     DistanceBelowFeet = 8.0,
 }
-if (tonumber(_G.g_UXOfficial_UXOfficialShotESP.MaxRendered) or 0) < 1 then
-    _G.g_UXOfficial_UXOfficialShotESP.MaxRendered = 8
+if (tonumber(_G.g_BNTSATAN_UXOfficialShotESP.MaxRendered) or 0) < 1 then
+    _G.g_BNTSATAN_UXOfficialShotESP.MaxRendered = 8
 end
-if (tonumber(_G.g_UXOfficial_UXOfficialShotESP.MaxRangeMeters) or 0) < 400.0 then
-    _G.g_UXOfficial_UXOfficialShotESP.MaxRangeMeters = 450.0
+if (tonumber(_G.g_BNTSATAN_UXOfficialShotESP.MaxRangeMeters) or 0) < 400.0 then
+    _G.g_BNTSATAN_UXOfficialShotESP.MaxRangeMeters = 450.0
 end
 -- Upgrade a table retained by an earlier hot-reload to the new readable marker size.
-if (tonumber(_G.g_UXOfficial_UXOfficialShotESP.DistanceFontSize) or 0) < 20 then
-    _G.g_UXOfficial_UXOfficialShotESP.DistanceFontSize = 20
+if (tonumber(_G.g_BNTSATAN_UXOfficialShotESP.DistanceFontSize) or 0) < 20 then
+    _G.g_BNTSATAN_UXOfficialShotESP.DistanceFontSize = 20
 end
 -- Premium enemy/bot counter dimensions.
-_G.g_UXOfficial_UXOfficialShotESP.CounterWidth=400.0
-_G.g_UXOfficial_UXOfficialShotESP.CounterHeight=58.0
-_G.g_UXOfficial_UXOfficialShotESP.CounterDiamondSize=0.0
+_G.g_BNTSATAN_UXOfficialShotESP.CounterWidth=400.0
+_G.g_BNTSATAN_UXOfficialShotESP.CounterHeight=58.0
+_G.g_BNTSATAN_UXOfficialShotESP.CounterDiamondSize=0.0
 
 -- Upgrade only the shipped 30 Hz default on the first performance revision.
-if not _G.g_UXOfficial_UXOfficialShotESP.PerformanceRevision then
-    if _G.g_UXOfficial_UXOfficialShotESP.UpdateInterval == 0.033 then
-        _G.g_UXOfficial_UXOfficialShotESP.UpdateInterval = 1.0 / 60.0
+if not _G.g_BNTSATAN_UXOfficialShotESP.PerformanceRevision then
+    if _G.g_BNTSATAN_UXOfficialShotESP.UpdateInterval == 0.033 then
+        _G.g_BNTSATAN_UXOfficialShotESP.UpdateInterval = 1.0 / 60.0
     end
-    _G.g_UXOfficial_UXOfficialShotESP.PerformanceRevision = 1
+    _G.g_BNTSATAN_UXOfficialShotESP.PerformanceRevision = 1
 end
-_G.UXOfficialShotESP = _G.g_UXOfficial_UXOfficialShotESP
+_G.UXOfficialShotESP = _G.g_BNTSATAN_UXOfficialShotESP
 
 -- ESP runtime state made by @GRW_XD
-local g_UXOfficial_ShotESP = {
+local g_BNTSATAN_ShotESP = {
     Canvas = nil,
     RootUI = nil,
     Counter = nil,
@@ -1743,13 +1743,13 @@ pcall(function() GameplayStaticsESP = import("GameplayStatics") end)
 local ESPGameplayData=nil
 pcall(function() ESPGameplayData=require("GameLua.GameCore.Data.GameplayData") end)
 
--- g_UXOfficial_ESPV2 made by @GRW_XD
-local function g_UXOfficial_ESPV2(x, y)
+-- g_BNTSATAN_ESPV2 made by @GRW_XD
+local function g_BNTSATAN_ESPV2(x, y)
     if V2 then return V2(x, y) end
     return {X = x, Y = y}
 end
 
-local function g_UXOfficial_ESPV3(x, y, z)
+local function g_BNTSATAN_ESPV3(x, y, z)
     if V3 then
         local ok, v = pcall(V3, x, y, z)
         if ok and v then return v end
@@ -1758,60 +1758,60 @@ local function g_UXOfficial_ESPV3(x, y, z)
 end
 
 -- ESP color made by @GRW_XD
-local function g_UXOfficial_ESPColor(r, g, b, a)
+local function g_BNTSATAN_ESPColor(r, g, b, a)
     if LinearColor then return LinearColor(r, g, b, a or 1.0) end
     return {R=r, G=g, B=b, A=a or 1.0}
 end
 
 -- ESP color theme made by @GRW_XD
-local ESP_REAL = g_UXOfficial_ESPColor(1.0, 0.92, 0.05, 1.0) -- visible target: yellow
-local ESP_BOT  = g_UXOfficial_ESPColor(1.0, 0.92, 0.05, 1.0) -- visible target: yellow
-local ESP_COVER_RED = g_UXOfficial_ESPColor(1.0, 0.02, 0.02, 1.0) -- target behind cover: red
-local ESP_WHITE = g_UXOfficial_ESPColor(1.0, 1.0, 1.0, 1.0)
-local ESP_NAME_YELLOW = g_UXOfficial_ESPColor(1.0, 0.92, 0.05, 1.0)
-local ESP_SKELETON_YELLOW = g_UXOfficial_ESPColor(1.0, 0.92, 0.05, 1.0)
-local ESP_BLACK = g_UXOfficial_ESPColor(0.0, 0.0, 0.0, 1.0)
-local ESP_TEXT_CLEAR = g_UXOfficial_ESPColor(0.0,0.0,0.0,0.0)
-local ESP_HEADER_BG = g_UXOfficial_ESPColor(0.0, 0.0, 0.0, 0.78)
-local ESP_COUNTER_RED = g_UXOfficial_ESPColor(0.92, 0.06, 0.12, 1.0) -- dragon red
-local ESP_COUNTER_RED_DARK = g_UXOfficial_ESPColor(0.055, 0.008, 0.016, 1.0) -- dragon-black panel
-local ESP_COUNTER_BLUE = g_UXOfficial_ESPColor(1.0, 0.20, 0.24, 1.0) -- ember red
-local ESP_COUNTER_BLUE_DARK = g_UXOfficial_ESPColor(0.10, 0.012, 0.022, 1.0) -- deep dragon shadow
-local ESP_COUNTER_CENTER = g_UXOfficial_ESPColor(0.025, 0.006, 0.012, 1.0)
+local ESP_REAL = g_BNTSATAN_ESPColor(1.0, 0.92, 0.05, 1.0) -- visible target: yellow
+local ESP_BOT  = g_BNTSATAN_ESPColor(1.0, 0.92, 0.05, 1.0) -- visible target: yellow
+local ESP_COVER_RED = g_BNTSATAN_ESPColor(1.0, 0.02, 0.02, 1.0) -- target behind cover: red
+local ESP_WHITE = g_BNTSATAN_ESPColor(1.0, 1.0, 1.0, 1.0)
+local ESP_NAME_YELLOW = g_BNTSATAN_ESPColor(1.0, 0.92, 0.05, 1.0)
+local ESP_SKELETON_YELLOW = g_BNTSATAN_ESPColor(1.0, 0.92, 0.05, 1.0)
+local ESP_BLACK = g_BNTSATAN_ESPColor(0.0, 0.0, 0.0, 1.0)
+local ESP_TEXT_CLEAR = g_BNTSATAN_ESPColor(0.0,0.0,0.0,0.0)
+local ESP_HEADER_BG = g_BNTSATAN_ESPColor(0.0, 0.0, 0.0, 0.78)
+local ESP_COUNTER_RED = g_BNTSATAN_ESPColor(0.92, 0.06, 0.12, 1.0) -- dragon red
+local ESP_COUNTER_RED_DARK = g_BNTSATAN_ESPColor(0.055, 0.008, 0.016, 1.0) -- dragon-black panel
+local ESP_COUNTER_BLUE = g_BNTSATAN_ESPColor(1.0, 0.20, 0.24, 1.0) -- ember red
+local ESP_COUNTER_BLUE_DARK = g_BNTSATAN_ESPColor(0.10, 0.012, 0.022, 1.0) -- deep dragon shadow
+local ESP_COUNTER_CENTER = g_BNTSATAN_ESPColor(0.025, 0.006, 0.012, 1.0)
 
 -- ESP gradient color made by @GRW_XD
-local function g_UXOfficial_ESPScaleColor(color, factor, alphaMul)
-    if not color then return g_UXOfficial_ESPColor(1, 1, 1, 1) end
+local function g_BNTSATAN_ESPScaleColor(color, factor, alphaMul)
+    if not color then return g_BNTSATAN_ESPColor(1, 1, 1, 1) end
     local r = math.max(0.0, math.min(1.0, (tonumber(color.R) or 1.0) * (factor or 1.0)))
     local g = math.max(0.0, math.min(1.0, (tonumber(color.G) or 1.0) * (factor or 1.0)))
     local b = math.max(0.0, math.min(1.0, (tonumber(color.B) or 1.0) * (factor or 1.0)))
     local a = math.max(0.0, math.min(1.0, (tonumber(color.A) or 1.0) * (alphaMul or 1.0)))
-    return g_UXOfficial_ESPColor(r, g, b, a)
+    return g_BNTSATAN_ESPColor(r, g, b, a)
 end
 
-local ESP_REAL_DARK  = g_UXOfficial_ESPScaleColor(ESP_REAL, 0.68, 1.0)
-local ESP_REAL_LIGHT = g_UXOfficial_ESPScaleColor(ESP_REAL, 1.12, 0.82)
-local ESP_BOT_DARK   = g_UXOfficial_ESPScaleColor(ESP_BOT, 0.68, 1.0)
-local ESP_BOT_LIGHT  = g_UXOfficial_ESPScaleColor(ESP_BOT, 1.10, 0.82)
-local ESP_WHITE_SOFT = g_UXOfficial_ESPColor(0.94, 0.94, 0.94, 0.98)
-local ESP_WHITE_GLOSS = g_UXOfficial_ESPColor(1.0, 1.0, 1.0, 0.34)
+local ESP_REAL_DARK  = g_BNTSATAN_ESPScaleColor(ESP_REAL, 0.68, 1.0)
+local ESP_REAL_LIGHT = g_BNTSATAN_ESPScaleColor(ESP_REAL, 1.12, 0.82)
+local ESP_BOT_DARK   = g_BNTSATAN_ESPScaleColor(ESP_BOT, 0.68, 1.0)
+local ESP_BOT_LIGHT  = g_BNTSATAN_ESPScaleColor(ESP_BOT, 1.10, 0.82)
+local ESP_WHITE_SOFT = g_BNTSATAN_ESPColor(0.94, 0.94, 0.94, 0.98)
+local ESP_WHITE_GLOSS = g_BNTSATAN_ESPColor(1.0, 1.0, 1.0, 0.34)
 
-local g_UXOfficial_ESPTheme
+local g_BNTSATAN_ESPTheme
 do
 local ESP_REAL_THEME = {Key="REAL_WHITE_BOX",Main=ESP_WHITE,Light=ESP_WHITE,
     Text=ESP_NAME_YELLOW,
-    Background=g_UXOfficial_ESPColor(0.05,0.005,0.005,0.97),
-    Empty=g_UXOfficial_ESPColor(0.055,0.008,0.008,1.0)}
+    Background=g_BNTSATAN_ESPColor(0.05,0.005,0.005,0.97),
+    Empty=g_BNTSATAN_ESPColor(0.055,0.008,0.008,1.0)}
 local ESP_BOT_THEME = {Key="BOT_WHITE_BOX",Main=ESP_WHITE,Light=ESP_WHITE,
     Text=ESP_NAME_YELLOW,
-    Background=g_UXOfficial_ESPColor(0.005,0.05,0.015,0.97),
-    Empty=g_UXOfficial_ESPColor(0.008,0.055,0.018,1.0)}
-g_UXOfficial_ESPTheme=function(isBot)
+    Background=g_BNTSATAN_ESPColor(0.005,0.05,0.015,0.97),
+    Empty=g_BNTSATAN_ESPColor(0.008,0.055,0.018,1.0)}
+g_BNTSATAN_ESPTheme=function(isBot)
     return isBot and ESP_BOT_THEME or ESP_REAL_THEME
 end
 end
 -- ESP object validation made by @GRW_XD
-local function g_UXOfficial_ESPValid(obj)
+local function g_BNTSATAN_ESPValid(obj)
     if not obj then return false end
     if not slua or not slua.isValid then return false end
     local ok, valid = pcall(slua.isValid, obj)
@@ -1836,7 +1836,7 @@ function ESPShared.VectorValues(v)
 end
 
 -- ESP timing made by @GRW_XD
-local function g_UXOfficial_ESPNow()
+local function g_BNTSATAN_ESPNow()
     local t = nil
     pcall(function()
         local w = (slua and slua.getWorld and slua.getWorld()) or nil
@@ -1848,66 +1848,66 @@ local function g_UXOfficial_ESPNow()
     if ESPShared.Finite(t) and t>=0 then return t end
     -- os.clock measures CPU time on some platforms, not elapsed frame time.
     -- If the engine clock is unavailable, advance by executed timer delays.
-    return ESPShared.SafeNumber(g_UXOfficial_ShotESP.TimerClock,0.0,0.0,1e12)
+    return ESPShared.SafeNumber(g_BNTSATAN_ShotESP.TimerClock,0.0,0.0,1e12)
 end
 
 -- ESP world access made by @GRW_XD
-local function g_UXOfficial_ESPWorld()
+local function g_BNTSATAN_ESPWorld()
     local w = nil
     pcall(function() if slua and slua.getWorld then w = slua.getWorld() end end)
     return w
 end
 
 -- ESP player controller made by @GRW_XD
-local function g_UXOfficial_ESPGetController()
+local function g_BNTSATAN_ESPGetController()
     local pc = nil
     pcall(function()
         local GDP = ESPGameplayData
         if GDP and GDP.GetPlayerController then pc = GDP.GetPlayerController() end
     end)
-    if not g_UXOfficial_ESPValid(pc) then
+    if not g_BNTSATAN_ESPValid(pc) then
         pcall(function()
             if slua_GameFrontendHUD then pc = slua_GameFrontendHUD:GetPlayerController() end
         end)
     end
-    return g_UXOfficial_ESPValid(pc) and pc or nil
+    return g_BNTSATAN_ESPValid(pc) and pc or nil
 end
 
 -- ESP local player made by @GRW_XD
-local function g_UXOfficial_ESPGetLocalCharacter()
+local function g_BNTSATAN_ESPGetLocalCharacter()
     local c = nil
     pcall(function()
         local GDP = ESPGameplayData
         if GDP then
             if GDP.GetPlayerCharacter then c = GDP.GetPlayerCharacter() end
-            if not g_UXOfficial_ESPValid(c) and GDP.GetLocalCharacter then c = GDP.GetLocalCharacter() end
+            if not g_BNTSATAN_ESPValid(c) and GDP.GetLocalCharacter then c = GDP.GetLocalCharacter() end
         end
     end)
-    if not g_UXOfficial_ESPValid(c) then
-        local pc = g_UXOfficial_ESPGetController()
+    if not g_BNTSATAN_ESPValid(c) then
+        local pc = g_BNTSATAN_ESPGetController()
         pcall(function() if pc and pc.GetPawn then c = pc:GetPawn() end end)
     end
-    return g_UXOfficial_ESPValid(c) and c or nil
+    return g_BNTSATAN_ESPValid(c) and c or nil
 end
 
--- g_UXOfficial_ESPGetPlayerState made by @GRW_XD
-local function g_UXOfficial_ESPGetPlayerState(character)
-    if not g_UXOfficial_ESPValid(character) then return nil end
+-- g_BNTSATAN_ESPGetPlayerState made by @GRW_XD
+local function g_BNTSATAN_ESPGetPlayerState(character)
+    if not g_BNTSATAN_ESPValid(character) then return nil end
     local ps = nil
     pcall(function()
         if character.GetPlayerStateSafety then ps = character:GetPlayerStateSafety() end
     end)
-    if not g_UXOfficial_ESPValid(ps) then
+    if not g_BNTSATAN_ESPValid(ps) then
         pcall(function() if character.GetPlayerState then ps = character:GetPlayerState() end end)
     end
-    if not g_UXOfficial_ESPValid(ps) then
+    if not g_BNTSATAN_ESPValid(ps) then
         pcall(function() ps = character.PlayerState end)
     end
-    return g_UXOfficial_ESPValid(ps) and ps or nil
+    return g_BNTSATAN_ESPValid(ps) and ps or nil
 end
 
--- g_UXOfficial_ESPNormalizeName made by @GRW_XD
-local function g_UXOfficial_ESPNormalizeName(value)
+-- g_BNTSATAN_ESPNormalizeName made by @GRW_XD
+local function g_BNTSATAN_ESPNormalizeName(value)
     if value == nil or value == false then return nil end
     local ok, text = pcall(tostring, value)
     if not ok or not text then return nil end
@@ -1918,13 +1918,13 @@ local function g_UXOfficial_ESPNormalizeName(value)
 end
 
 -- ESP player name made by @GRW_XD
-local function g_UXOfficial_ESPResolvePlayerName(character)
-    if not g_UXOfficial_ESPValid(character) then return nil end
+local function g_BNTSATAN_ESPResolvePlayerName(character)
+    if not g_BNTSATAN_ESPValid(character) then return nil end
     local name = nil
 
 -- take made by @GRW_XD
     local function take(value)
-        if not name then name = g_UXOfficial_ESPNormalizeName(value) end
+        if not name then name = g_BNTSATAN_ESPNormalizeName(value) end
     end
 
     pcall(function() if character.GetPlayerNameSafety then take(character:GetPlayerNameSafety()) end end)
@@ -1935,7 +1935,7 @@ local function g_UXOfficial_ESPResolvePlayerName(character)
     pcall(function() if not name then take(character.BotName) end end)
 
     if not name then
-        local ps = g_UXOfficial_ESPGetPlayerState(character)
+        local ps = g_BNTSATAN_ESPGetPlayerState(character)
         if ps then
             pcall(function() if ps.GetPlayerName then take(ps:GetPlayerName()) end end)
             pcall(function() if not name then take(ps.PlayerName) end end)
@@ -1948,13 +1948,13 @@ local function g_UXOfficial_ESPResolvePlayerName(character)
     return name
 end
 
--- g_UXOfficial_ESPGetPlayerKey made by @GRW_XD
-local function g_UXOfficial_ESPGetPlayerKey(character)
+-- g_BNTSATAN_ESPGetPlayerKey made by @GRW_XD
+local function g_BNTSATAN_ESPGetPlayerKey(character)
     local key = nil
     pcall(function() if character.GetPlayerKey then key = character:GetPlayerKey() end end)
     if key == nil then pcall(function() key = character.PlayerKey end) end
     if key == nil then
-        local ps = g_UXOfficial_ESPGetPlayerState(character)
+        local ps = g_BNTSATAN_ESPGetPlayerState(character)
         if ps then pcall(function() key = ps.PlayerKey end) end
     end
     if key == nil or tostring(key) == "" or tostring(key) == "0" or tostring(key) == "-1" then
@@ -1964,13 +1964,13 @@ local function g_UXOfficial_ESPGetPlayerKey(character)
 end
 
 -- ESP team detection made by @GRW_XD
-local function g_UXOfficial_ESPGetTeamID(character)
-    if not g_UXOfficial_ESPValid(character) then return nil end
+local function g_BNTSATAN_ESPGetTeamID(character)
+    if not g_BNTSATAN_ESPValid(character) then return nil end
     local id = nil
     pcall(function() if character.GetTeamID then id = character:GetTeamID() end end)
     if id == nil then pcall(function() id = character.TeamID end) end
     if id == nil then
-        local ps = g_UXOfficial_ESPGetPlayerState(character)
+        local ps = g_BNTSATAN_ESPGetPlayerState(character)
         if ps then
             pcall(function() if ps.GetTeamID then id = ps:GetTeamID() end end)
             if id == nil then pcall(function() id = ps.TeamID end) end
@@ -1999,8 +1999,8 @@ local function ESPActorDeadFlag(actor,key)
     local value=ESPReadActorField(actor,key)
     return value==true or value==1
 end
-local function g_UXOfficial_ESPIsAlive(character)
-    if not g_UXOfficial_ESPValid(character) then return false end
+local function g_BNTSATAN_ESPIsAlive(character)
+    if not g_BNTSATAN_ESPValid(character) then return false end
     if ESPActorDeadFlag(character,"bDead") or ESPActorDeadFlag(character,"bIsDead")
         or ESPActorDeadFlag(character,"bIsDeadFlag") then return false end
     if ESPFinishedLastBreath~=nil
@@ -2019,11 +2019,11 @@ local function g_UXOfficial_ESPIsAlive(character)
 end
 
 -- Bot cache uses the same actor/player key as pruning, with replication retries.
-local function g_UXOfficial_ESPIsBot(character, key, providedCache, providedNow)
-    if not g_UXOfficial_ESPValid(character) then return false end
-    key = key or g_UXOfficial_ESPGetPlayerKey(character)
-    local cache = providedCache or g_UXOfficial_ShotESP._BotCache
-    local now = providedNow or g_UXOfficial_ShotESP.Now
+local function g_BNTSATAN_ESPIsBot(character, key, providedCache, providedNow)
+    if not g_BNTSATAN_ESPValid(character) then return false end
+    key = key or g_BNTSATAN_ESPGetPlayerKey(character)
+    local cache = providedCache or g_BNTSATAN_ShotESP._BotCache
+    local now = providedNow or g_BNTSATAN_ShotESP.Now
     local entry = cache[key]
     if entry and now >= entry.Clock and now - entry.Clock < 2.0 then return entry.Value end
     local result = nil
@@ -2036,7 +2036,7 @@ local function g_UXOfficial_ESPIsBot(character, key, providedCache, providedNow)
     if result == nil then pcall(function() take(character.bIsAI) end) end
     if result == nil then pcall(function() if character.IsBot then take(character:IsBot()) end end) end
     if result == nil then
-        local ps = g_UXOfficial_ESPGetPlayerState(character)
+        local ps = g_BNTSATAN_ESPGetPlayerState(character)
         if ps then
             pcall(function() take(ps.bIsABot) end)
             pcall(function() take(ps.bIsBot) end)
@@ -2050,9 +2050,9 @@ local function g_UXOfficial_ESPIsBot(character, key, providedCache, providedNow)
 end
 
 -- ESP actor position made by @GRW_XD
-local function g_UXOfficial_ESPActorLocation(character)
+local function g_BNTSATAN_ESPActorLocation(character)
     local loc = nil
-    if not g_UXOfficial_ESPValid(character) then return nil end
+    if not g_BNTSATAN_ESPValid(character) then return nil end
     pcall(function()
         if character.K2_GetActorLocation then loc = character:K2_GetActorLocation()
         elseif Game and Game.GetActorLocation then loc = Game:GetActorLocation(character) end
@@ -2061,7 +2061,7 @@ local function g_UXOfficial_ESPActorLocation(character)
 end
 
 -- ESP distance calculation made by @GRW_XD
-local function g_UXOfficial_ESPDistanceMeters(a,b)
+local function g_BNTSATAN_ESPDistanceMeters(a,b)
     local ax,ay,az=ESPShared.VectorValues(a)
     local bx,by,bz=ESPShared.VectorValues(b)
     if not ax or not bx then return math.huge end
@@ -2102,9 +2102,9 @@ function ESPShared.GetFrameRecord(actor)
     if entry then return entry end
     entry=frame.Active and table.remove(frame.Pool) or nil
     if not entry then entry={} end
-    entry.Alive=g_UXOfficial_ESPIsAlive(actor)
+    entry.Alive=g_BNTSATAN_ESPIsAlive(actor)
     entry.Projected=false;entry.OnScreen=false;entry.HasHead=false;entry.HasFeet=false
-    entry.Location=entry.Alive and g_UXOfficial_ESPActorLocation(actor) or nil
+    entry.Location=entry.Alive and g_BNTSATAN_ESPActorLocation(actor) or nil
     entry.LocationX,entry.LocationY,entry.LocationZ=ESPShared.VectorValues(entry.Location)
     if not entry.LocationX then entry.Location=nil end
     if frame.Active and actor~=nil then frame.Entries[actor]=entry end
@@ -2161,9 +2161,9 @@ function ESPShared.ProjectionControllerValid(pc)
     if frame.Active then
         local cached=frame.Controllers[pc]
         if cached~=nil then return cached end
-        local valid=g_UXOfficial_ESPValid(pc);frame.Controllers[pc]=valid;return valid
+        local valid=g_BNTSATAN_ESPValid(pc);frame.Controllers[pc]=valid;return valid
     end
-    return g_UXOfficial_ESPValid(pc)
+    return g_BNTSATAN_ESPValid(pc)
 end
 function ESPShared.CanvasTransform(state)
     local frame=ESPShared.Frame
@@ -2185,12 +2185,12 @@ function ESPShared.AssignProbeVector(vector,x,y,z)
 end
 function ESPShared.UpdateProbeVector(vector,x,y,z)
     if vector and pcall(ESPShared.AssignProbeVector,vector,x,y,z) then return vector end
-    return g_UXOfficial_ESPV3(x,y,z)
+    return g_BNTSATAN_ESPV3(x,y,z)
 end
 
 -- Validate all cached candidates before display caps. Reuse the list and alive
 -- map, so dead/out-of-range actors are pruned on the next scheduled HUD update.
-local function g_UXOfficial_ESPFilterEnemies(list, myLocation, maxRange, alive)
+local function g_BNTSATAN_ESPFilterEnemies(list, myLocation, maxRange, alive)
     for key in pairs(alive) do alive[key]=nil end
     local count,kept,realCount,botCount=#list,0,0,0
     maxRange=tonumber(maxRange) or 450.0
@@ -2214,8 +2214,8 @@ local function g_UXOfficial_ESPFilterEnemies(list, myLocation, maxRange, alive)
 end
 
 -- ESP character vertical bounds made by @GRW_XD
-local function g_UXOfficial_ESPGetCharacterVerticalBounds(character,cachedLocation)
-    if not g_UXOfficial_ESPValid(character) then return nil, nil end
+local function g_BNTSATAN_ESPGetCharacterVerticalBounds(character,cachedLocation)
+    if not g_BNTSATAN_ESPValid(character) then return nil, nil end
 
     local center, halfHeight = nil, nil
     local capsule = nil
@@ -2228,7 +2228,7 @@ local function g_UXOfficial_ESPGetCharacterVerticalBounds(character,cachedLocati
         end
     end)
 
-    if capsule and g_UXOfficial_ESPValid(capsule) then
+    if capsule and g_BNTSATAN_ESPValid(capsule) then
         pcall(function()
             if capsule.K2_GetComponentLocation then
                 center = capsule:K2_GetComponentLocation()
@@ -2281,17 +2281,17 @@ local function g_UXOfficial_ESPGetCharacterVerticalBounds(character,cachedLocati
 end
 
 -- ESP head and feet position made by @GRW_XD
-local function g_UXOfficial_ESPGetCharacterBoxLocs(character,cachedLocation)
-    local center, halfHeight, x, y, z = g_UXOfficial_ESPGetCharacterVerticalBounds(character,cachedLocation)
+local function g_BNTSATAN_ESPGetCharacterBoxLocs(character,cachedLocation)
+    local center, halfHeight, x, y, z = g_BNTSATAN_ESPGetCharacterVerticalBounds(character,cachedLocation)
     if not x or not halfHeight then return nil,nil end
 
-    local headLoc = g_UXOfficial_ESPV3(
+    local headLoc = g_BNTSATAN_ESPV3(
         x,
         y,
         z + halfHeight
     )
 
-    local feetLoc = g_UXOfficial_ESPV3(
+    local feetLoc = g_BNTSATAN_ESPV3(
         x,
         y,
         z - halfHeight
@@ -2363,7 +2363,7 @@ function ESPWidgetPool.Release(data)
     if data.PoolReleased then return true end
     local pool,kind,canvas=data.PoolOwner,data.PoolKind,data.PoolCanvas
     if not pool or not pool.Enabled or pool.Canvas~=canvas or data.Broken
-        or not g_UXOfficial_ESPValid(data.Widget) then return false end
+        or not g_BNTSATAN_ESPValid(data.Widget) then return false end
     local shape=shapes[kind]
     if not shape then return false end
     local bin=pool.Bins[kind]
@@ -2404,12 +2404,12 @@ function ESPWidgetPool.Take(pool,kind,canvas)
         local item=bin[#bin];bin[#bin]=nil;pool.Weight=pool.Weight-item.Weight
         local valid=true
         for _,field in ipairs(shape.Check) do
-            if not g_UXOfficial_ESPValid(item[field]) then valid=false;break end
+            if not g_BNTSATAN_ESPValid(item[field]) then valid=false;break end
         end
         if valid and item.Groups then
             for _,group in pairs(item.Groups) do
                 for _,piece in ipairs(group) do
-                    if not g_UXOfficial_ESPValid(piece.Widget) or not g_UXOfficial_ESPValid(piece.Slot) then
+                    if not g_BNTSATAN_ESPValid(piece.Widget) or not g_BNTSATAN_ESPValid(piece.Slot) then
                         valid=false;break
                     end
                 end
@@ -2437,20 +2437,20 @@ end
 end
 
 -- ESP widget destroy made by @GRW_XD
-local function g_UXOfficial_ESPDestroyWidgetData(data)
+local function g_BNTSATAN_ESPDestroyWidgetData(data)
     if not data then return end
     if ESPWidgetPool.Release(data) then return end
     for _, field in ipairs({"Widget", "Container", "Text", "DistanceText"}) do
         local widget=data[field]
-        if g_UXOfficial_ESPValid(widget) then
+        if g_BNTSATAN_ESPValid(widget) then
             pcall(function() widget:RemoveFromParent() end)
         end
     end
 end
 
 -- ESP widget cleanup made by @GRW_XD
-local function g_UXOfficial_ESPResetWidgets()
-    local radarUI=g_UXOfficial_ShotESP.RadarUI
+local function g_BNTSATAN_ESPResetWidgets()
+    local radarUI=g_BNTSATAN_ShotESP.RadarUI
     if radarUI then
         for _,eventName in ipairs({"ToggleEvent","CloseEvent"}) do
             local event=radarUI[eventName]
@@ -2459,101 +2459,101 @@ local function g_UXOfficial_ESPResetWidgets()
         end
         for _,widgetName in ipairs({"ToggleLabel","ToggleButton","CloseLabel","CloseButton"}) do
             local widget=radarUI[widgetName]
-            if widget and g_UXOfficial_ESPValid(widget) then pcall(function() widget:RemoveFromParent() end) end
+            if widget and g_BNTSATAN_ESPValid(widget) then pcall(function() widget:RemoveFromParent() end) end
         end
     end
-    g_UXOfficial_ShotESP.RadarUI=nil
-    g_UXOfficial_ShotESP.RadarCanvas=nil
+    g_BNTSATAN_ShotESP.RadarUI=nil
+    g_BNTSATAN_ShotESP.RadarCanvas=nil
     ESPWidgetPool.V2.Enabled=false
-    for _, data in pairs(g_UXOfficial_ShotESP.Lines) do g_UXOfficial_ESPDestroyWidgetData(data) end
-    for _, data in pairs(g_UXOfficial_ShotESP.Names) do g_UXOfficial_ESPDestroyWidgetData(data) end
-    for _, data in pairs(g_UXOfficial_ShotESP.RadarLines or {}) do g_UXOfficial_ESPDestroyWidgetData(data) end
-    for _, group in pairs(g_UXOfficial_ShotESP.Boxes) do for _,data in ipairs(group) do g_UXOfficial_ESPDestroyWidgetData(data) end end
-    for _, group in pairs(g_UXOfficial_ShotESP.HealthBars) do for _,data in ipairs(group) do g_UXOfficial_ESPDestroyWidgetData(data) end end
-    for _, group in pairs(g_UXOfficial_ShotESP.Skeletons) do for _,data in ipairs(group) do g_UXOfficial_ESPDestroyWidgetData(data) end end
-    for _, group in pairs(g_UXOfficial_ShotESP.Headers) do for _,data in ipairs(group) do g_UXOfficial_ESPDestroyWidgetData(data) end end
-    for _, group in pairs(g_UXOfficial_ShotESP.Footers) do for _,data in ipairs(group) do g_UXOfficial_ESPDestroyWidgetData(data) end end
-    g_UXOfficial_ShotESP.Lines = {}
-    g_UXOfficial_ShotESP.RadarLines = {}
-    g_UXOfficial_ShotESP.Names = {}
-    g_UXOfficial_ShotESP.Boxes = {}
-    g_UXOfficial_ShotESP.HealthBars = {}
-    g_UXOfficial_ShotESP.Skeletons = {}
-    for _, data in pairs(g_UXOfficial_ShotESP.HeaderRoots) do g_UXOfficial_ESPDestroyWidgetData(data) end
-    g_UXOfficial_ShotESP.HeaderRoots = {}
-    g_UXOfficial_ShotESP.Headers = {}
-    g_UXOfficial_ShotESP.Footers = {}
-    g_UXOfficial_ShotESP.BuildStage = {}
-    g_UXOfficial_ShotESP.BoneNameCache = {}
-    for _,data in pairs(g_UXOfficial_ShotESP.Decorations) do g_UXOfficial_ESPDestroyWidgetData(data) end
-    g_UXOfficial_ShotESP.Decorations = {}
-    if g_UXOfficial_ShotESP.Counter then g_UXOfficial_ESPDestroyWidgetData(g_UXOfficial_ShotESP.Counter) end
-    g_UXOfficial_ShotESP.Counter = nil
-    g_UXOfficial_ShotESP.Canvas = nil
-    g_UXOfficial_ShotESP.RootUI = nil
-    g_UXOfficial_ShotESP.Enemies = {}
-    g_UXOfficial_ShotESP.Active = {}
-    g_UXOfficial_ShotESP.Alive = {}
-    g_UXOfficial_ShotESP.BoneMeshes = {}
-    g_UXOfficial_ShotESP.BonePoints = {}
-    g_UXOfficial_ShotESP.TemplateFont = nil
-    g_UXOfficial_ShotESP.TemplateFontObject = nil
-    g_UXOfficial_ShotESP.TemplateTypeface = nil
-    g_UXOfficial_ShotESP.TemplateColorAndOpacity = nil
-    g_UXOfficial_ShotESP.ViewportW, g_UXOfficial_ShotESP.ViewportH = nil, nil
-    g_UXOfficial_ShotESP.RawViewportW, g_UXOfficial_ShotESP.RawViewportH = nil, nil
-    g_UXOfficial_ShotESP.TracerOrigin = nil
-    g_UXOfficial_ShotESP.LastScanClock = -999.0
-    g_UXOfficial_ShotESP.LastTransformClock = -999.0
-    g_UXOfficial_ShotESP.LastController = nil
-    g_UXOfficial_ShotESP.LastPawn = nil
-    g_UXOfficial_ShotESP._BotCache = {}
-    g_UXOfficial_ShotESP.RealCount = 0
-    g_UXOfficial_ShotESP.BotCount = 0
+    for _, data in pairs(g_BNTSATAN_ShotESP.Lines) do g_BNTSATAN_ESPDestroyWidgetData(data) end
+    for _, data in pairs(g_BNTSATAN_ShotESP.Names) do g_BNTSATAN_ESPDestroyWidgetData(data) end
+    for _, data in pairs(g_BNTSATAN_ShotESP.RadarLines or {}) do g_BNTSATAN_ESPDestroyWidgetData(data) end
+    for _, group in pairs(g_BNTSATAN_ShotESP.Boxes) do for _,data in ipairs(group) do g_BNTSATAN_ESPDestroyWidgetData(data) end end
+    for _, group in pairs(g_BNTSATAN_ShotESP.HealthBars) do for _,data in ipairs(group) do g_BNTSATAN_ESPDestroyWidgetData(data) end end
+    for _, group in pairs(g_BNTSATAN_ShotESP.Skeletons) do for _,data in ipairs(group) do g_BNTSATAN_ESPDestroyWidgetData(data) end end
+    for _, group in pairs(g_BNTSATAN_ShotESP.Headers) do for _,data in ipairs(group) do g_BNTSATAN_ESPDestroyWidgetData(data) end end
+    for _, group in pairs(g_BNTSATAN_ShotESP.Footers) do for _,data in ipairs(group) do g_BNTSATAN_ESPDestroyWidgetData(data) end end
+    g_BNTSATAN_ShotESP.Lines = {}
+    g_BNTSATAN_ShotESP.RadarLines = {}
+    g_BNTSATAN_ShotESP.Names = {}
+    g_BNTSATAN_ShotESP.Boxes = {}
+    g_BNTSATAN_ShotESP.HealthBars = {}
+    g_BNTSATAN_ShotESP.Skeletons = {}
+    for _, data in pairs(g_BNTSATAN_ShotESP.HeaderRoots) do g_BNTSATAN_ESPDestroyWidgetData(data) end
+    g_BNTSATAN_ShotESP.HeaderRoots = {}
+    g_BNTSATAN_ShotESP.Headers = {}
+    g_BNTSATAN_ShotESP.Footers = {}
+    g_BNTSATAN_ShotESP.BuildStage = {}
+    g_BNTSATAN_ShotESP.BoneNameCache = {}
+    for _,data in pairs(g_BNTSATAN_ShotESP.Decorations) do g_BNTSATAN_ESPDestroyWidgetData(data) end
+    g_BNTSATAN_ShotESP.Decorations = {}
+    if g_BNTSATAN_ShotESP.Counter then g_BNTSATAN_ESPDestroyWidgetData(g_BNTSATAN_ShotESP.Counter) end
+    g_BNTSATAN_ShotESP.Counter = nil
+    g_BNTSATAN_ShotESP.Canvas = nil
+    g_BNTSATAN_ShotESP.RootUI = nil
+    g_BNTSATAN_ShotESP.Enemies = {}
+    g_BNTSATAN_ShotESP.Active = {}
+    g_BNTSATAN_ShotESP.Alive = {}
+    g_BNTSATAN_ShotESP.BoneMeshes = {}
+    g_BNTSATAN_ShotESP.BonePoints = {}
+    g_BNTSATAN_ShotESP.TemplateFont = nil
+    g_BNTSATAN_ShotESP.TemplateFontObject = nil
+    g_BNTSATAN_ShotESP.TemplateTypeface = nil
+    g_BNTSATAN_ShotESP.TemplateColorAndOpacity = nil
+    g_BNTSATAN_ShotESP.ViewportW, g_BNTSATAN_ShotESP.ViewportH = nil, nil
+    g_BNTSATAN_ShotESP.RawViewportW, g_BNTSATAN_ShotESP.RawViewportH = nil, nil
+    g_BNTSATAN_ShotESP.TracerOrigin = nil
+    g_BNTSATAN_ShotESP.LastScanClock = -999.0
+    g_BNTSATAN_ShotESP.LastTransformClock = -999.0
+    g_BNTSATAN_ShotESP.LastController = nil
+    g_BNTSATAN_ShotESP.LastPawn = nil
+    g_BNTSATAN_ShotESP._BotCache = {}
+    g_BNTSATAN_ShotESP.RealCount = 0
+    g_BNTSATAN_ShotESP.BotCount = 0
     ESPWidgetPool.Flush(ESPWidgetPool.V2)
     ESPWidgetPool.V2.Enabled=true
 end
 
 -- ESP HUD canvas made by @GRW_XD
-local function g_UXOfficial_ESPGetCanvas()
-    if g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.Canvas) then return g_UXOfficial_ShotESP.Canvas end
+local function g_BNTSATAN_ESPGetCanvas()
+    if g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.Canvas) then return g_BNTSATAN_ShotESP.Canvas end
     local root = nil
     pcall(function()
         local InGameUITools = require("GameLua.Mod.BaseMod.Common.UI.InGameUITools")
         if InGameUITools and InGameUITools.GetMainControlBaseUI then root = InGameUITools.GetMainControlBaseUI() end
     end)
-    if not g_UXOfficial_ESPValid(root) then return nil end
-    g_UXOfficial_ShotESP.RootUI = root
+    if not g_BNTSATAN_ESPValid(root) then return nil end
+    g_BNTSATAN_ShotESP.RootUI = root
     local canvas = nil
     pcall(function()
-        if g_UXOfficial_ESPValid(root.CanvasPanel_0) then canvas = root.CanvasPanel_0
-        elseif g_UXOfficial_ESPValid(root.CanvasPanel_42) then canvas = root.CanvasPanel_42 end
+        if g_BNTSATAN_ESPValid(root.CanvasPanel_0) then canvas = root.CanvasPanel_0
+        elseif g_BNTSATAN_ESPValid(root.CanvasPanel_42) then canvas = root.CanvasPanel_42 end
     end)
-    if g_UXOfficial_ESPValid(canvas) then g_UXOfficial_ShotESP.Canvas = canvas return canvas end
+    if g_BNTSATAN_ESPValid(canvas) then g_BNTSATAN_ShotESP.Canvas = canvas return canvas end
     return nil
 end
 
 -- Discover a valid FontObject from existing HUD TextBlocks so dynamic TextBlocks always render glyphs
-local function g_UXOfficial_ESPGetTemplateTextStyle()
-    if g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.TemplateFontObject) then
-        return g_UXOfficial_ShotESP.TemplateFont
+local function g_BNTSATAN_ESPGetTemplateTextStyle()
+    if g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.TemplateFontObject) then
+        return g_BNTSATAN_ShotESP.TemplateFont
     end
 
     local visited = 0
     local function scanWidget(w, depth)
         if not w or depth > 6 or visited > 250 then return false end
-        if not g_UXOfficial_ESPValid(w) then return false end
+        if not g_BNTSATAN_ESPValid(w) then return false end
         visited = visited + 1
 
         local found = false
         pcall(function()
             if w.SetText and w.SetFont and w.Font then
                 local f = w.Font
-                if f and g_UXOfficial_ESPValid(f.FontObject) then
-                    g_UXOfficial_ShotESP.TemplateFont = f
-                    g_UXOfficial_ShotESP.TemplateFontObject = f.FontObject
-                    pcall(function() g_UXOfficial_ShotESP.TemplateTypeface = f.TypefaceFontName end)
-                    pcall(function() g_UXOfficial_ShotESP.TemplateColorAndOpacity = w.ColorAndOpacity end)
+                if f and g_BNTSATAN_ESPValid(f.FontObject) then
+                    g_BNTSATAN_ShotESP.TemplateFont = f
+                    g_BNTSATAN_ShotESP.TemplateFontObject = f.FontObject
+                    pcall(function() g_BNTSATAN_ShotESP.TemplateTypeface = f.TypefaceFontName end)
+                    pcall(function() g_BNTSATAN_ShotESP.TemplateColorAndOpacity = w.ColorAndOpacity end)
                     found = true
                 end
             end
@@ -2575,31 +2575,31 @@ local function g_UXOfficial_ESPGetTemplateTextStyle()
         return false
     end
 
-    local canvas = g_UXOfficial_ESPGetCanvas()
+    local canvas = g_BNTSATAN_ESPGetCanvas()
     if canvas then scanWidget(canvas, 0) end
-    if not g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.TemplateFontObject) and g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.RootUI) then
-        scanWidget(g_UXOfficial_ShotESP.RootUI, 0)
+    if not g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.TemplateFontObject) and g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.RootUI) then
+        scanWidget(g_BNTSATAN_ShotESP.RootUI, 0)
     end
 
-    if not g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.TemplateFontObject) and slua and slua.loadObject then
+    if not g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.TemplateFontObject) and slua and slua.loadObject then
         for _, path in ipairs({
             "/Engine/EngineFonts/Roboto.Roboto",
             "/Engine/EngineFonts/Roboto",
             "/Engine/EngineFonts/DroidSansFallback.DroidSansFallback"
         }) do
             local ok, obj = pcall(slua.loadObject, path)
-            if ok and g_UXOfficial_ESPValid(obj) then
-                g_UXOfficial_ShotESP.TemplateFontObject = obj
+            if ok and g_BNTSATAN_ESPValid(obj) then
+                g_BNTSATAN_ShotESP.TemplateFontObject = obj
                 break
             end
         end
     end
 
-    return g_UXOfficial_ShotESP.TemplateFont
+    return g_BNTSATAN_ShotESP.TemplateFont
 end
 
 -- ESP viewport size made by @GRW_XD
-local function g_UXOfficial_ESPViewport(pc)
+local function g_BNTSATAN_ESPViewport(pc)
     local w,h
     local function take(x,y)
         x,y=tonumber(x),tonumber(y)
@@ -2611,15 +2611,15 @@ local function g_UXOfficial_ESPViewport(pc)
         end
     end)
     if not w then pcall(function() local x,y=pc:GetViewportSize();take(x,y) end) end
-    if not w then pcall(function() local v=g_UXOfficial_ESPV2(0,0);pc:GetViewportSize(v);take(v.X,v.Y) end) end
+    if not w then pcall(function() local v=g_BNTSATAN_ESPV2(0,0);pc:GetViewportSize(v);take(v.X,v.Y) end) end
     if not w then pcall(function() local x,y=pc:GetViewportSize(0,0);take(x,y) end) end
     return w or 2400.0,h or 1080.0
 end
 
 -- ESP HUD canvas made by @GRW_XD
-local function g_UXOfficial_ESPGetCanvasLocalSize()
-    local canvas = g_UXOfficial_ESPGetCanvas()
-    if not g_UXOfficial_ESPValid(canvas) then return nil, nil end
+local function g_BNTSATAN_ESPGetCanvasLocalSize()
+    local canvas = g_BNTSATAN_ESPGetCanvas()
+    if not g_BNTSATAN_ESPValid(canvas) then return nil, nil end
 
     local cw, ch = nil, nil
     pcall(function()
@@ -2642,9 +2642,9 @@ local function g_UXOfficial_ESPGetCanvasLocalSize()
 end
 
 -- ESP canvas transform made by @GRW_XD
-local function g_UXOfficial_ESPUpdateCanvasTransform(pc)
-    local canvas = g_UXOfficial_ESPGetCanvas()
-    if not g_UXOfficial_ESPValid(canvas) then return false end
+local function g_BNTSATAN_ESPUpdateCanvasTransform(pc)
+    local canvas = g_BNTSATAN_ESPGetCanvas()
+    if not g_BNTSATAN_ESPValid(canvas) then return false end
 
     local calibrated = false
 
@@ -2654,11 +2654,11 @@ local function g_UXOfficial_ESPUpdateCanvasTransform(pc)
             if geo then
                 local p0 = SlateBlueprintLibrary.AbsoluteToLocal(
                     geo,
-                    g_UXOfficial_ESPV2(0, 0)
+                    g_BNTSATAN_ESPV2(0, 0)
                 )
                 local p1 = SlateBlueprintLibrary.AbsoluteToLocal(
                     geo,
-                    g_UXOfficial_ESPV2(100, 100)
+                    g_BNTSATAN_ESPV2(100, 100)
                 )
 
                 if p0 and p1
@@ -2668,10 +2668,10 @@ local function g_UXOfficial_ESPUpdateCanvasTransform(pc)
                     and p1.X>p0.X and p1.Y>p0.Y
                     and p1.X-p0.X<10000 and p1.Y-p0.Y<10000 then
 
-                    g_UXOfficial_ShotESP.CanvasScaleX = (p1.X - p0.X) / 100.0
-                    g_UXOfficial_ShotESP.CanvasScaleY = (p1.Y - p0.Y) / 100.0
-                    g_UXOfficial_ShotESP.CanvasOffsetX = p0.X
-                    g_UXOfficial_ShotESP.CanvasOffsetY = p0.Y
+                    g_BNTSATAN_ShotESP.CanvasScaleX = (p1.X - p0.X) / 100.0
+                    g_BNTSATAN_ShotESP.CanvasScaleY = (p1.Y - p0.Y) / 100.0
+                    g_BNTSATAN_ShotESP.CanvasOffsetX = p0.X
+                    g_BNTSATAN_ShotESP.CanvasOffsetY = p0.Y
                     calibrated = true
                 end
             end
@@ -2689,30 +2689,30 @@ local function g_UXOfficial_ESPUpdateCanvasTransform(pc)
             end
         end)
 
-        g_UXOfficial_ShotESP.CanvasScaleX = 1.0 / scale
-        g_UXOfficial_ShotESP.CanvasScaleY = 1.0 / scale
-        g_UXOfficial_ShotESP.CanvasOffsetX = 0.0
-        g_UXOfficial_ShotESP.CanvasOffsetY = 0.0
+        g_BNTSATAN_ShotESP.CanvasScaleX = 1.0 / scale
+        g_BNTSATAN_ShotESP.CanvasScaleY = 1.0 / scale
+        g_BNTSATAN_ShotESP.CanvasOffsetX = 0.0
+        g_BNTSATAN_ShotESP.CanvasOffsetY = 0.0
     end
 
     return true
 end
 
 -- ESP world to HUD projection made by @GRW_XD
-local function g_UXOfficial_ESPProject(pc,worldLoc)
+local function g_BNTSATAN_ESPProject(pc,worldLoc)
     local frame=ESPShared.Frame
     -- Skeleton results own their output; only the immediate raw scratch is shared.
-    if not frame.RawPixel then frame.RawPixel=g_UXOfficial_ESPV2(0,0) end
+    if not frame.RawPixel then frame.RawPixel=g_BNTSATAN_ESPV2(0,0) end
     local pix=ESPShared.ProjectRaw(pc,worldLoc,frame.Active and frame.RawPixel or nil)
     if not pix then return nil end
-    local sx,sy,ox,oy=ESPShared.CanvasTransform(g_UXOfficial_ShotESP)
-    return g_UXOfficial_ESPV2(pix.X*sx+ox,pix.Y*sy+oy)
+    local sx,sy,ox,oy=ESPShared.CanvasTransform(g_BNTSATAN_ShotESP)
+    return g_BNTSATAN_ESPV2(pix.X*sx+ox,pix.Y*sy+oy)
 end
 
 -- Fresh projections deliberately avoid screen-space lerp: it adds camera lag
 -- and desynchronizes the capsule outline from the independently projected bones.
 
-local function g_UXOfficial_ESPActorOnScreen(head,feet,minX,minY,maxX,maxY)
+local function g_BNTSATAN_ESPActorOnScreen(head,feet,minX,minY,maxX,maxY)
     local function usable(p)
         return p and ESPShared.Finite(p.X) and ESPShared.Finite(p.Y)
     end
@@ -2724,9 +2724,9 @@ local function g_UXOfficial_ESPActorOnScreen(head,feet,minX,minY,maxX,maxY)
 end
 
 function ESPShared.ViewSize(pc)
-    local now=ESPShared.Frame.Active and ESPShared.Frame.Now or g_UXOfficial_ESPNow()
+    local now=ESPShared.Frame.Active and ESPShared.Frame.Now or g_BNTSATAN_ESPNow()
     if not ESPShared.Frame.Active or ESPShared.Frame.ViewPC~=pc or now<ESPShared.Frame.ViewAt or now-ESPShared.Frame.ViewAt>=0.25 then
-        ESPShared.Frame.ViewW,ESPShared.Frame.ViewH=g_UXOfficial_ESPViewport(pc)
+        ESPShared.Frame.ViewW,ESPShared.Frame.ViewH=g_BNTSATAN_ESPViewport(pc)
         ESPShared.Frame.ViewPC=pc;ESPShared.Frame.ViewAt=now
     end
     return ESPShared.Frame.ViewW,ESPShared.Frame.ViewH
@@ -2735,7 +2735,7 @@ function ESPShared.NativeProject(pc,location,pix)
     return pc:ProjectWorldLocationToScreen(location,pix,true)
 end
 function ESPShared.ActorProbeLocations(actor,entry)
-    local center,height,x,y,z=g_UXOfficial_ESPGetCharacterVerticalBounds(actor,entry.Location)
+    local center,height,x,y,z=g_BNTSATAN_ESPGetCharacterVerticalBounds(actor,entry.Location)
     if not x or not height then return nil,nil end
     entry.WorldHead=ESPShared.UpdateProbeVector(entry.WorldHead,x,y,z+height)
     entry.WorldFeet=ESPShared.UpdateProbeVector(entry.WorldFeet,x,y,z-height)
@@ -2743,7 +2743,7 @@ function ESPShared.ActorProbeLocations(actor,entry)
 end
 function ESPShared.ProjectRaw(pc,location,pix)
     if not ESPShared.VectorValues(location) or not ESPShared.ProjectionControllerValid(pc) then return nil end
-    pix=pix or g_UXOfficial_ESPV2(0,0);pix.X=0;pix.Y=0
+    pix=pix or g_BNTSATAN_ESPV2(0,0);pix.X=0;pix.Y=0
     local ok,result,out=pcall(ESPShared.NativeProject,pc,location,pix)
     if out then pix=out end
     local good,x,y=pcall(function() return tonumber(pix.X),tonumber(pix.Y) end)
@@ -2758,14 +2758,14 @@ function ESPShared.ProbeActor(pc,actor)
     if not entry.Alive or not entry.Location then return entry end
     local ok,head,feet=pcall(ESPShared.ActorProbeLocations,actor,entry)
     if not ok then return entry end
-    entry.RawHead=entry.RawHead or g_UXOfficial_ESPV2(0,0)
-    entry.RawFeet=entry.RawFeet or g_UXOfficial_ESPV2(0,0)
+    entry.RawHead=entry.RawHead or g_BNTSATAN_ESPV2(0,0)
+    entry.RawFeet=entry.RawFeet or g_BNTSATAN_ESPV2(0,0)
     local hp=ESPShared.ProjectRaw(pc,head,entry.RawHead)
     local fp=ESPShared.ProjectRaw(pc,feet,entry.RawFeet)
     if hp then entry.RawHead=hp end;if fp then entry.RawFeet=fp end
     entry.HasHead=hp~=nil;entry.HasFeet=fp~=nil
     local width,height=ESPShared.ViewSize(pc)
-    entry.OnScreen=g_UXOfficial_ESPActorOnScreen(hp,fp,0,0,width,height)
+    entry.OnScreen=g_BNTSATAN_ESPActorOnScreen(hp,fp,0,0,width,height)
     return entry
 end
 function ESPShared.CanvasBounds(pc,state)
@@ -2782,30 +2782,30 @@ function ESPShared.ProjectActor(pc,actor,state)
     local sx,sy,ox,oy=ESPShared.CanvasTransform(state)
     local prefix="V2"
     local function convert(raw,field)
-        local p=entry[field] or g_UXOfficial_ESPV2(0,0);entry[field]=p
+        local p=entry[field] or g_BNTSATAN_ESPV2(0,0);entry[field]=p
         p.X=raw.X*sx+ox;p.Y=raw.Y*sy+oy;return p
     end
     local head=entry.HasHead and convert(entry.RawHead,prefix.."Head") or nil
     local feet=entry.HasFeet and convert(entry.RawFeet,prefix.."Feet") or nil
     local minX,minY,maxX,maxY=ESPShared.CanvasBounds(pc,state)
-    return head,feet,g_UXOfficial_ESPActorOnScreen(head,feet,minX,minY,maxX,maxY)
+    return head,feet,g_BNTSATAN_ESPActorOnScreen(head,feet,minX,minY,maxX,maxY)
 end
 
 
 -- ESP text setter with FText conversion fallback
 
 -- ESP font style made by @GRW_XD
-local function g_UXOfficial_ESPSetFont(textWidget, size)
-    if not g_UXOfficial_ESPValid(textWidget) then return end
-    g_UXOfficial_ESPGetTemplateTextStyle()
+local function g_BNTSATAN_ESPSetFont(textWidget, size)
+    if not g_BNTSATAN_ESPValid(textWidget) then return end
+    g_BNTSATAN_ESPGetTemplateTextStyle()
     pcall(function()
-        local f = textWidget.Font or g_UXOfficial_ShotESP.TemplateFont
+        local f = textWidget.Font or g_BNTSATAN_ShotESP.TemplateFont
         if f then
-            if g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.TemplateFontObject) then
-                pcall(function() f.FontObject = g_UXOfficial_ShotESP.TemplateFontObject end)
+            if g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.TemplateFontObject) then
+                pcall(function() f.FontObject = g_BNTSATAN_ShotESP.TemplateFontObject end)
             end
-            if g_UXOfficial_ShotESP.TemplateTypeface then
-                pcall(function() f.TypefaceFontName = g_UXOfficial_ShotESP.TemplateTypeface end)
+            if g_BNTSATAN_ShotESP.TemplateTypeface then
+                pcall(function() f.TypefaceFontName = g_BNTSATAN_ShotESP.TemplateTypeface end)
             end
             pcall(function() f.Size = size end)
             if f.OutlineSettings then
@@ -2820,7 +2820,7 @@ local function g_UXOfficial_ESPSetFont(textWidget, size)
             pcall(function() textWidget.Font = f end)
         end
         if textWidget.SetShadowOffset then
-            pcall(function() textWidget:SetShadowOffset(g_UXOfficial_ESPV2(0.0,0.0)) end)
+            pcall(function() textWidget:SetShadowOffset(g_BNTSATAN_ESPV2(0.0,0.0)) end)
         end
         if textWidget.SetShadowColorAndOpacity then
             pcall(function() textWidget:SetShadowColorAndOpacity(ESP_TEXT_CLEAR) end)
@@ -2829,11 +2829,11 @@ local function g_UXOfficial_ESPSetFont(textWidget, size)
 end
 
 -- ESP text color made by @GRW_XD
-local function g_UXOfficial_ESPSetTextColor(textWidget, color)
-    if not g_UXOfficial_ESPValid(textWidget) or not color then return end
+local function g_BNTSATAN_ESPSetTextColor(textWidget, color)
+    if not g_BNTSATAN_ESPValid(textWidget) or not color then return end
     local applied = false
     pcall(function()
-        local sc = textWidget.ColorAndOpacity or g_UXOfficial_ShotESP.TemplateColorAndOpacity or (SlateColor and SlateColor())
+        local sc = textWidget.ColorAndOpacity or g_BNTSATAN_ShotESP.TemplateColorAndOpacity or (SlateColor and SlateColor())
         if sc then
             sc.SpecifiedColor = color
             pcall(function() sc.ColorUseRule = 0 end)
@@ -2853,15 +2853,15 @@ local function g_UXOfficial_ESPSetTextColor(textWidget, color)
 end
 
 -- ESP line widget made by @GRW_XD
-local function g_UXOfficial_ESPCreateLine(color,parent)
-    local canvas = parent or g_UXOfficial_ESPGetCanvas()
-    if not g_UXOfficial_ESPValid(canvas) then return nil end
-    local budget = g_UXOfficial_ShotESP.BuildRemaining
+local function g_BNTSATAN_ESPCreateLine(color,parent)
+    local canvas = parent or g_BNTSATAN_ESPGetCanvas()
+    if not g_BNTSATAN_ESPValid(canvas) then return nil end
+    local budget = g_BNTSATAN_ShotESP.BuildRemaining
     if budget ~= nil then
         if budget <= 0 then return nil end
-        g_UXOfficial_ShotESP.BuildRemaining = budget - 1
+        g_BNTSATAN_ShotESP.BuildRemaining = budget - 1
     end
-    local pooled=canvas==g_UXOfficial_ShotESP.Canvas and ESPWidgetPool.Take(ESPWidgetPool.V2,"Line",canvas)
+    local pooled=canvas==g_BNTSATAN_ShotESP.Canvas and ESPWidgetPool.Take(ESPWidgetPool.V2,"Line",canvas)
     if pooled then
         local ok=pcall(function() pooled.Widget:SetBrushColor(color) end)
         if ok then pooled.Visible=false;return pooled end
@@ -2869,23 +2869,23 @@ local function g_UXOfficial_ESPCreateLine(color,parent)
     end
     local border = nil
     pcall(function() border = CGame:NewObjectFromPath("/Script/UMG.Border", canvas) end)
-    if not g_UXOfficial_ESPValid(border) then return nil end
+    if not g_BNTSATAN_ESPValid(border) then return nil end
     pcall(function()
         border:SetBrushColor(color)
         border:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
-        border:SetRenderTransformPivot(g_UXOfficial_ESPV2(0.0, 0.5))
+        border:SetRenderTransformPivot(g_BNTSATAN_ESPV2(0.0, 0.5))
     end)
     local slot = nil
     pcall(function() slot = canvas:AddChildToCanvas(border) end)
-    if not slot then g_UXOfficial_ESPDestroyWidgetData({Widget=border}) return nil end
+    if not slot then g_BNTSATAN_ESPDestroyWidgetData({Widget=border}) return nil end
     pcall(function() slot:SetAutoSize(false) slot:SetZOrder(30) end)
     local data={Widget=border, Slot=slot}
-    if canvas==g_UXOfficial_ShotESP.Canvas then ESPWidgetPool.Tag(ESPWidgetPool.V2,"Line",canvas,data) end
+    if canvas==g_BNTSATAN_ShotESP.Canvas then ESPWidgetPool.Tag(ESPWidgetPool.V2,"Line",canvas,data) end
     return data
 end
 
 -- ESP line made by @GRW_XD
-local function g_UXOfficial_ESPDrawLine(data, x1, y1, x2, y2, thickness)
+local function g_BNTSATAN_ESPDrawLine(data, x1, y1, x2, y2, thickness)
     if not data or not data.Widget or not data.Slot then return false end
     local dx, dy = x2-x1, y2-y1
     local len = math.sqrt(dx*dx + dy*dy)
@@ -2906,11 +2906,11 @@ local function g_UXOfficial_ESPDrawLine(data, x1, y1, x2, y2, thickness)
     -- that reject mutable structs fall back once to the original setter path.
     local setterOK=pcall(function()
         if data.VectorReuseDisabled then
-            data.Slot:SetPosition(g_UXOfficial_ESPV2(x1, y1 - thickness*0.5))
-            data.Slot:SetSize(g_UXOfficial_ESPV2(len, thickness))
+            data.Slot:SetPosition(g_BNTSATAN_ESPV2(x1, y1 - thickness*0.5))
+            data.Slot:SetSize(g_BNTSATAN_ESPV2(len, thickness))
         else
-            data.PosVec=data.PosVec or g_UXOfficial_ESPV2(x1, y1 - thickness*0.5)
-            data.SizeVec=data.SizeVec or g_UXOfficial_ESPV2(len, thickness)
+            data.PosVec=data.PosVec or g_BNTSATAN_ESPV2(x1, y1 - thickness*0.5)
+            data.SizeVec=data.SizeVec or g_BNTSATAN_ESPV2(len, thickness)
             data.PosVec.X=x1;data.PosVec.Y=y1-thickness*0.5
             data.SizeVec.X=len;data.SizeVec.Y=thickness
             data.Slot:SetPosition(data.PosVec)
@@ -2922,8 +2922,8 @@ local function g_UXOfficial_ESPDrawLine(data, x1, y1, x2, y2, thickness)
     if not setterOK and not data.VectorReuseDisabled then
         data.VectorReuseDisabled=true;data.PosVec=nil;data.SizeVec=nil
         setterOK=pcall(function()
-            data.Slot:SetPosition(g_UXOfficial_ESPV2(x1, y1 - thickness*0.5))
-            data.Slot:SetSize(g_UXOfficial_ESPV2(len, thickness))
+            data.Slot:SetPosition(g_BNTSATAN_ESPV2(x1, y1 - thickness*0.5))
+            data.Slot:SetSize(g_BNTSATAN_ESPV2(len, thickness))
             data.Widget:SetRenderAngle(angle)
             if not data.Visible then data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible) end
         end)
@@ -2936,7 +2936,7 @@ local function g_UXOfficial_ESPDrawLine(data, x1, y1, x2, y2, thickness)
 end
 
 -- ESP widget hide made by @GRW_XD
-local function g_UXOfficial_ESPHide(data)
+local function g_BNTSATAN_ESPHide(data)
     if data and data.Visible~=false and data.Widget then
         local ok=pcall(function() data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.Collapsed) end)
         if not ok then data.Broken=true end
@@ -2944,48 +2944,48 @@ local function g_UXOfficial_ESPHide(data)
     end
 end
 
-local function g_UXOfficial_ESPDestroyGroup(group)
+local function g_BNTSATAN_ESPDestroyGroup(group)
     if not group then return end
-    for _, data in ipairs(group) do g_UXOfficial_ESPDestroyWidgetData(data) end
+    for _, data in ipairs(group) do g_BNTSATAN_ESPDestroyWidgetData(data) end
 end
 
 -- Check native widget validity at discovery cadence; failed setters mark a
 -- piece broken immediately. This avoids an IsValid bridge call per piece/frame.
-local function g_UXOfficial_ESPGroupHealthy(group)
+local function g_BNTSATAN_ESPGroupHealthy(group)
     if not group then return false end
-    local now = g_UXOfficial_ShotESP.Now
+    local now = g_BNTSATAN_ShotESP.Now
     local validate = not group.ValidatedAt or now < group.ValidatedAt or now-group.ValidatedAt >= 0.35
     for _, data in ipairs(group) do
-        if data.Broken or (validate and not g_UXOfficial_ESPValid(data.Widget)) then return false end
+        if data.Broken or (validate and not g_BNTSATAN_ESPValid(data.Widget)) then return false end
     end
     if validate then group.ValidatedAt = now end
     return true
 end
 
 -- Keep partial groups across ticks; budgeted creation prevents first-visibility spikes.
-local function g_UXOfficial_ESPLineGroup(registry, key, count, color, parent)
+local function g_BNTSATAN_ESPLineGroup(registry, key, count, color, parent)
     local group = registry[key]
-    if group and not g_UXOfficial_ESPGroupHealthy(group) then
-        g_UXOfficial_ESPDestroyGroup(group)
+    if group and not g_BNTSATAN_ESPGroupHealthy(group) then
+        g_BNTSATAN_ESPDestroyGroup(group)
         group = nil
     end
     if not group or #group > count then
-        g_UXOfficial_ESPDestroyGroup(group)
+        g_BNTSATAN_ESPDestroyGroup(group)
         group = {}
         registry[key] = group
     end
     while #group < count do
-        local data = g_UXOfficial_ESPCreateLine(color, parent)
+        local data = g_BNTSATAN_ESPCreateLine(color, parent)
         if not data then return nil end
         group[#group + 1] = data
-        g_UXOfficial_ESPHide(data)
+        g_BNTSATAN_ESPHide(data)
     end
     return group
 end
 
 -- Existing geometry and widgets are reused. Stable identity performs no native
 -- color setters; failed brush assignments remain eligible for retry.
-local function g_UXOfficial_ESPApplyGroupTheme(group,theme,kind)
+local function g_BNTSATAN_ESPApplyGroupTheme(group,theme,kind)
     if not group or group.ThemeKey==theme.Key then return end
     local ok=pcall(function()
         for i,piece in ipairs(group) do
@@ -3008,43 +3008,43 @@ local function g_UXOfficial_ESPApplyGroupTheme(group,theme,kind)
     if ok then group.ThemeKey=theme.Key end
 end
 
-local function g_UXOfficial_ESPHideGroup(group)
+local function g_BNTSATAN_ESPHideGroup(group)
     if not group then return end
-    for _, data in ipairs(group) do g_UXOfficial_ESPHide(data) end
+    for _, data in ipairs(group) do g_BNTSATAN_ESPHide(data) end
 end
 
-local function g_UXOfficial_ESPHideDetailedEnemy(key)
-    g_UXOfficial_ESPHide(g_UXOfficial_ShotESP.Lines[key])
-    g_UXOfficial_ESPHideGroup(g_UXOfficial_ShotESP.Boxes[key])
-    g_UXOfficial_ESPHideGroup(g_UXOfficial_ShotESP.HealthBars[key])
-    g_UXOfficial_ESPHideGroup(g_UXOfficial_ShotESP.Skeletons[key])
-    g_UXOfficial_ESPHideGroup(g_UXOfficial_ShotESP.Headers[key])
-    local decor=g_UXOfficial_ShotESP.Decorations[key]
+local function g_BNTSATAN_ESPHideDetailedEnemy(key)
+    g_BNTSATAN_ESPHide(g_BNTSATAN_ShotESP.Lines[key])
+    g_BNTSATAN_ESPHideGroup(g_BNTSATAN_ShotESP.Boxes[key])
+    g_BNTSATAN_ESPHideGroup(g_BNTSATAN_ShotESP.HealthBars[key])
+    g_BNTSATAN_ESPHideGroup(g_BNTSATAN_ShotESP.Skeletons[key])
+    g_BNTSATAN_ESPHideGroup(g_BNTSATAN_ShotESP.Headers[key])
+    local decor=g_BNTSATAN_ShotESP.Decorations[key]
     if decor and decor.Visible~=false then pcall(function() decor.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.Collapsed) end) decor.Visible=false end
 end
 
-local g_UXOfficial_ESPHealthRatio
+local g_BNTSATAN_ESPHealthRatio
 
-local function g_UXOfficial_ESPSetGroupVisible(group,visible)
+local function g_BNTSATAN_ESPSetGroupVisible(group,visible)
     if not group or group.GroupVisible==visible then return end
     for _,data in ipairs(group) do
         if visible then
             pcall(function() data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible) end)
             data.Visible=true
-        else g_UXOfficial_ESPHide(data) end
+        else g_BNTSATAN_ESPHide(data) end
     end
     group.GroupVisible=visible
 end
 
-local function g_UXOfficial_ESPCreateDecorationRoot(poolKind)
-    local canvas=g_UXOfficial_ESPGetCanvas()
-    if not g_UXOfficial_ESPValid(canvas) then return nil end
+local function g_BNTSATAN_ESPCreateDecorationRoot(poolKind)
+    local canvas=g_BNTSATAN_ESPGetCanvas()
+    if not g_BNTSATAN_ESPValid(canvas) then return nil end
     poolKind=poolKind or "Decor"
     local pooled=ESPWidgetPool.Take(ESPWidgetPool.V2,poolKind,canvas)
     if pooled then
         local ok=pcall(function()
             pooled.Slot:SetZOrder(poolKind=="Header" and 30 or 29)
-            pooled.Widget:SetRenderScale(g_UXOfficial_ESPV2(1.0,1.0))
+            pooled.Widget:SetRenderScale(g_BNTSATAN_ESPV2(1.0,1.0))
             pooled.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
         end)
         if ok then pooled.Visible=true;return pooled end
@@ -3052,27 +3052,27 @@ local function g_UXOfficial_ESPCreateDecorationRoot(poolKind)
     end
     local root=nil
     pcall(function() root=CGame:NewObjectFromPath("/Script/UMG.CanvasPanel",canvas) end)
-    if not g_UXOfficial_ESPValid(root) then return nil end
+    if not g_BNTSATAN_ESPValid(root) then return nil end
     local slot=nil
     pcall(function() slot=canvas:AddChildToCanvas(root) end)
-    if not slot then g_UXOfficial_ESPDestroyWidgetData({Widget=root}) return nil end
+    if not slot then g_BNTSATAN_ESPDestroyWidgetData({Widget=root}) return nil end
     pcall(function()
         slot:SetAutoSize(false)
-        slot:SetSize(g_UXOfficial_ESPV2(1000.0,1400.0))
+        slot:SetSize(g_BNTSATAN_ESPV2(1000.0,1400.0))
         slot:SetZOrder(29)
-        root:SetRenderTransformPivot(g_UXOfficial_ESPV2(0.0,0.0))
+        root:SetRenderTransformPivot(g_BNTSATAN_ESPV2(0.0,0.0))
         root:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
     end)
     return ESPWidgetPool.Tag(ESPWidgetPool.V2,poolKind,canvas,{Widget=root,Slot=slot,Groups={},Visible=true})
 end
 
-local function g_UXOfficial_ESPDecorGroup(data,name,count,color)
-    return g_UXOfficial_ESPLineGroup(data.Groups,name,count,color,data.Widget)
+local function g_BNTSATAN_ESPDecorGroup(data,name,count,color)
+    return g_BNTSATAN_ESPLineGroup(data.Groups,name,count,color,data.Widget)
 end
 
 
-local function g_UXOfficial_ESPBuildArcs(data)
-    local group=g_UXOfficial_ESPDecorGroup(data,"Arcs",26,ESP_REAL)
+local function g_BNTSATAN_ESPBuildArcs(data)
+    local group=g_BNTSATAN_ESPDecorGroup(data,"Arcs",26,ESP_REAL)
     if not group then return nil end
     if group.Built then return group end
     local cx,cy,half,ry=500.0,385.0,268.0,180.0
@@ -3087,7 +3087,7 @@ local function g_UXOfficial_ESPBuildArcs(data)
             local angle=(-70+step*28)*math.pi/180
             local p={X=cx+side*half*math.cos(angle),Y=cy+ry*math.sin(angle)}
             if previous then
-                g_UXOfficial_ESPDrawLine(group[index],previous.X,previous.Y,p.X,p.Y,redThickness[step])
+                g_BNTSATAN_ESPDrawLine(group[index],previous.X,previous.Y,p.X,p.Y,redThickness[step])
                 index=index+1
             end
             previous=p
@@ -3097,7 +3097,7 @@ local function g_UXOfficial_ESPBuildArcs(data)
     for _,side in ipairs({-1,1}) do
         local x=cx+side*half*1.02
         for _,oy in ipairs({-24.0,0.0,24.0}) do
-            g_UXOfficial_ESPDrawLine(group[tickIndex],x-side*5.0,cy+oy,x+side*2.0,cy+oy,2.2)
+            g_BNTSATAN_ESPDrawLine(group[tickIndex],x-side*5.0,cy+oy,x+side*2.0,cy+oy,2.2)
             tickIndex=tickIndex+1
         end
     end
@@ -3109,7 +3109,7 @@ local function g_UXOfficial_ESPBuildArcs(data)
             local p={X=cx+side*ih*math.cos(angle),Y=cy+ir*math.sin(angle)}
             if previous then
                 pcall(function() group[index].Widget:SetBrushColor(ESP_WHITE) end)
-                g_UXOfficial_ESPDrawLine(group[index],previous.X,previous.Y,p.X,p.Y,whiteThickness[step])
+                g_BNTSATAN_ESPDrawLine(group[index],previous.X,previous.Y,p.X,p.Y,whiteThickness[step])
                 index=index+1
             end
             previous=p
@@ -3119,8 +3119,8 @@ local function g_UXOfficial_ESPBuildArcs(data)
     return group
 end
 
-local function g_UXOfficial_ESPBuildHealth(data)
-    local group=g_UXOfficial_ESPDecorGroup(data,"Health",11,ESP_REAL)
+local function g_BNTSATAN_ESPBuildHealth(data)
+    local group=g_BNTSATAN_ESPDecorGroup(data,"Health",11,ESP_REAL)
     if not group then return nil end
     if group.Built then return group end
     -- Compact horizontal health bar, centered just above the character's head.
@@ -3130,41 +3130,41 @@ local function g_UXOfficial_ESPBuildHealth(data)
     pcall(function()
         for i=1,11 do group[i].Widget:SetBrushColor(ESP_REAL) end
     end)
-    g_UXOfficial_ESPDrawLine(group[1],left,barY,right,barY,barH+2.0)
+    g_BNTSATAN_ESPDrawLine(group[1],left,barY,right,barY,barH+2.0)
     local segmentW=barW/8
     for i=1,8 do
         local x1=left+(i-1)*segmentW+1.5
         local x2=left+i*segmentW-1.5
-        g_UXOfficial_ESPDrawLine(group[i+1],x1,barY,x2,barY,barH)
+        g_BNTSATAN_ESPDrawLine(group[i+1],x1,barY,x2,barY,barH)
     end
-    g_UXOfficial_ESPDrawLine(group[10],left,barY-barH*.5-2.0,right,barY-barH*.5-2.0,1.2)
-    g_UXOfficial_ESPDrawLine(group[11],left,barY+barH*.5+2.0,right,barY+barH*.5+2.0,1.2)
+    g_BNTSATAN_ESPDrawLine(group[10],left,barY-barH*.5-2.0,right,barY-barH*.5-2.0,1.2)
+    g_BNTSATAN_ESPDrawLine(group[11],left,barY+barH*.5+2.0,right,barY+barH*.5+2.0,1.2)
     group.Built=true group.GroupVisible=true group.Filled=-1
     return group
 end
 
-local function g_UXOfficial_ESPBuildFooter(data)
-    local group=g_UXOfficial_ESPDecorGroup(data,"Footer",6,ESP_WHITE)
+local function g_BNTSATAN_ESPBuildFooter(data)
+    local group=g_BNTSATAN_ESPDecorGroup(data,"Footer",6,ESP_WHITE)
     if not group then return nil end
     if group.Built then return group end
     local cx,y,w=500.0,1243.0,394.0
     local s={{cx-w*.5,y,cx-w*.29,y},{cx-w*.5,y,cx-w*.58,y-7},{cx+w*.29,y,cx+w*.5,y},{cx+w*.5,y,cx+w*.58,y-7},{cx-w*.23,y,cx-w*.19,y},{cx+w*.19,y,cx+w*.23,y}}
-    for i,v in ipairs(s) do pcall(function() group[i].Widget:SetBrushColor(i>=5 and ESP_REAL or ESP_WHITE) end) g_UXOfficial_ESPDrawLine(group[i],v[1],v[2],v[3],v[4],i>=5 and 2.2 or 1.6) end
+    for i,v in ipairs(s) do pcall(function() group[i].Widget:SetBrushColor(i>=5 and ESP_REAL or ESP_WHITE) end) g_BNTSATAN_ESPDrawLine(group[i],v[1],v[2],v[3],v[4],i>=5 and 2.2 or 1.6) end
     group.Built=true group.GroupVisible=true
     return group
 end
 
-local function g_UXOfficial_ESPUpdateDecoration(key,character,head,feet,opt,stage,isBot)
+local function g_BNTSATAN_ESPUpdateDecoration(key,character,head,feet,opt,stage,isBot)
     local enabled=opt.Name or opt.Box or opt.Health or opt.Distance
-    local data=g_UXOfficial_ShotESP.Decorations[key]
+    local data=g_BNTSATAN_ShotESP.Decorations[key]
     if not enabled or not head or not feet then
         if data and data.Visible~=false then pcall(function() data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.Collapsed) end) data.Visible=false end
         return
     end
-    if not data or not g_UXOfficial_ESPValid(data.Widget) then
-        g_UXOfficial_ESPDestroyWidgetData(data)
-        data=g_UXOfficial_ESPCreateDecorationRoot()
-        g_UXOfficial_ShotESP.Decorations[key]=data
+    if not data or not g_BNTSATAN_ESPValid(data.Widget) then
+        g_BNTSATAN_ESPDestroyWidgetData(data)
+        data=g_BNTSATAN_ESPCreateDecorationRoot()
+        g_BNTSATAN_ShotESP.Decorations[key]=data
     end
     if not data then return end
     local h=math.abs(feet.Y-head.Y)
@@ -3174,11 +3174,11 @@ local function g_UXOfficial_ESPUpdateDecoration(key,character,head,feet,opt,stag
     local moved=not data.X or math.abs(data.X-x)>=.25 or math.abs(data.Y-y)>=.25
     local scaled=not data.Scale or math.abs(data.Scale-scale)>=.001
     if moved then
-        local ok=pcall(function() data.Slot:SetPosition(g_UXOfficial_ESPV2(x,y)) end)
+        local ok=pcall(function() data.Slot:SetPosition(g_BNTSATAN_ESPV2(x,y)) end)
         if ok then data.X,data.Y=x,y end
     end
     if scaled then
-        local ok=pcall(function() data.Widget:SetRenderScale(g_UXOfficial_ESPV2(scale,scale)) end)
+        local ok=pcall(function() data.Widget:SetRenderScale(g_BNTSATAN_ESPV2(scale,scale)) end)
         if ok then data.Scale=scale else data.Scale=nil end
     end
     if data.Visible~=true then
@@ -3186,33 +3186,33 @@ local function g_UXOfficial_ESPUpdateDecoration(key,character,head,feet,opt,stag
         if ok then data.Visible=true end
     end
     -- Header: handled by ESPUpdateHeaderFrame (screen-space, dynamic width) — hide DecorationRoot version
-    if data.Groups.Header then g_UXOfficial_ESPSetGroupVisible(data.Groups.Header, false) end
-    local theme=g_UXOfficial_ESPTheme(isBot)
+    if data.Groups.Header then g_BNTSATAN_ESPSetGroupVisible(data.Groups.Header, false) end
+    local theme=g_BNTSATAN_ESPTheme(isBot)
     local arcs=data.Groups.Arcs
-    if opt.Box then arcs=g_UXOfficial_ESPBuildArcs(data) end
-    if arcs then g_UXOfficial_ESPApplyGroupTheme(arcs,theme,"Arcs") end
-    g_UXOfficial_ESPSetGroupVisible(arcs,opt.Box==true)
+    if opt.Box then arcs=g_BNTSATAN_ESPBuildArcs(data) end
+    if arcs then g_BNTSATAN_ESPApplyGroupTheme(arcs,theme,"Arcs") end
+    g_BNTSATAN_ESPSetGroupVisible(arcs,opt.Box==true)
     local health=data.Groups.Health
-    if opt.Health then health=g_UXOfficial_ESPBuildHealth(data) end
+    if opt.Health then health=g_BNTSATAN_ESPBuildHealth(data) end
     local healthTypeChanged=health and health.ThemeKey~=theme.Key
-    if health then g_UXOfficial_ESPApplyGroupTheme(health,theme,"Health") end
-    g_UXOfficial_ESPSetGroupVisible(health,opt.Health==true)
+    if health then g_BNTSATAN_ESPApplyGroupTheme(health,theme,"Health") end
+    g_BNTSATAN_ESPSetGroupVisible(health,opt.Health==true)
     if health and opt.Health then
-        local ratio=g_UXOfficial_ESPHealthRatio(character)
+        local ratio=g_BNTSATAN_ESPHealthRatio(character)
         local filled=math.ceil(ratio*8-.001)
         -- Low health is red, medium health is yellow, and high/full health is green.
         local healthColor
         if ratio<=0.30 then
-            healthColor=g_UXOfficial_ESPColor(0.96,0.08,0.10,1.0)
+            healthColor=g_BNTSATAN_ESPColor(0.96,0.08,0.10,1.0)
         elseif ratio<=0.70 then
-            healthColor=g_UXOfficial_ESPColor(1.0,0.78,0.08,1.0)
+            healthColor=g_BNTSATAN_ESPColor(1.0,0.78,0.08,1.0)
         else
-            healthColor=g_UXOfficial_ESPColor(0.12,0.92,0.30,1.0)
+            healthColor=g_BNTSATAN_ESPColor(0.12,0.92,0.30,1.0)
         end
         if health.Filled~=filled or health.HealthColorKey~= (ratio<=0.30 and "red" or (ratio<=0.70 and "yellow" or "green")) or healthTypeChanged then
             local ok=pcall(function()
-                for i=1,8 do health[i+1].Widget:SetBrushColor(i<=filled and healthColor or g_UXOfficial_ESPColor(0.035,0.04,0.05,0.88)) end
-                health[1].Widget:SetBrushColor(g_UXOfficial_ESPColor(0.005,0.007,0.010,0.95))
+                for i=1,8 do health[i+1].Widget:SetBrushColor(i<=filled and healthColor or g_BNTSATAN_ESPColor(0.035,0.04,0.05,0.88)) end
+                health[1].Widget:SetBrushColor(g_BNTSATAN_ESPColor(0.005,0.007,0.010,0.95))
                 health[10].Widget:SetBrushColor(healthColor)
                 health[11].Widget:SetBrushColor(healthColor)
             end)
@@ -3223,19 +3223,19 @@ local function g_UXOfficial_ESPUpdateDecoration(key,character,head,feet,opt,stag
         end
     end
     local footer=data.Groups.Footer
-    if opt.Distance then footer=g_UXOfficial_ESPBuildFooter(data) end
-    if footer then g_UXOfficial_ESPApplyGroupTheme(footer,theme,"Footer") end
-    g_UXOfficial_ESPSetGroupVisible(footer,opt.Distance==true)
+    if opt.Distance then footer=g_BNTSATAN_ESPBuildFooter(data) end
+    if footer then g_BNTSATAN_ESPApplyGroupTheme(footer,theme,"Footer") end
+    g_BNTSATAN_ESPSetGroupVisible(footer,opt.Distance==true)
 end
 
-local function g_UXOfficial_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
-    local group=g_UXOfficial_ShotESP.Headers[key]
-    if not enabled or not head or not feet then g_UXOfficial_ESPHideGroup(group) return end
+local function g_BNTSATAN_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
+    local group=g_BNTSATAN_ShotESP.Headers[key]
+    if not enabled or not head or not feet then g_BNTSATAN_ESPHideGroup(group) return end
     local h=math.abs(feet.Y-head.Y)
     -- Compact distance scaling.  The bottom edge stays above the head and all
     -- height growth happens upward, so zooming never pushes the plate onto the body.
     local w=math.max(68.0,math.min(232.0,h*0.315))
-    local cached=g_UXOfficial_ShotESP.Names[key] and g_UXOfficial_ShotESP.Names[key].CachedName or ""
+    local cached=g_BNTSATAN_ShotESP.Names[key] and g_BNTSATAN_ShotESP.Names[key].CachedName or ""
     w=math.max(w,math.min(232.0,28.0+#tostring(cached)*6.0))
     local hh=math.max(18.0,math.min(48.0,h*0.070))
     local headGap=math.max(4.0,math.min(10.0,h*0.025))
@@ -3248,18 +3248,18 @@ local function g_UXOfficial_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
     -- 25 frame/background widgets + 8 horizontal fill bands per corner.
     -- The bands approximate true triangles without using rotated rectangles,
     -- which were the source of the original black corner leakage.
-    local root = g_UXOfficial_ShotESP.HeaderRoots[key]
-    if not root or not g_UXOfficial_ESPValid(root.Widget) then
-        g_UXOfficial_ESPDestroyGroup(group)
-        g_UXOfficial_ShotESP.Headers[key] = nil
+    local root = g_BNTSATAN_ShotESP.HeaderRoots[key]
+    if not root or not g_BNTSATAN_ESPValid(root.Widget) then
+        g_BNTSATAN_ESPDestroyGroup(group)
+        g_BNTSATAN_ShotESP.Headers[key] = nil
         group = nil
-        g_UXOfficial_ESPDestroyWidgetData(root)
-        root = g_UXOfficial_ESPCreateDecorationRoot("Header")
-        g_UXOfficial_ShotESP.HeaderRoots[key] = root
+        g_BNTSATAN_ESPDestroyWidgetData(root)
+        root = g_BNTSATAN_ESPCreateDecorationRoot("Header")
+        g_BNTSATAN_ShotESP.HeaderRoots[key] = root
         if not root then return end
         group=root.Groups.__Header
         root.Groups.__Header=nil
-        g_UXOfficial_ShotESP.Headers[key]=group
+        g_BNTSATAN_ShotESP.Headers[key]=group
         pcall(function() root.Slot:SetZOrder(30) end)
     end
     -- Move 57 header pieces with one parent slot. Width/height changes still
@@ -3267,14 +3267,14 @@ local function g_UXOfficial_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
     local rootY = b
     local moved = not root.X or math.abs(root.X-cx) >= 0.25 or math.abs(root.Y-rootY) >= 0.25
     if moved then
-        local ok = pcall(function() root.Slot:SetPosition(g_UXOfficial_ESPV2(cx,rootY)) end)
+        local ok = pcall(function() root.Slot:SetPosition(g_BNTSATAN_ESPV2(cx,rootY)) end)
         if ok then root.X,root.Y = cx,rootY end
     end
-    local theme=g_UXOfficial_ESPTheme(isBot)
+    local theme=g_BNTSATAN_ESPTheme(isBot)
     local ready = group and #group == 57
-    if ready then g_UXOfficial_ESPApplyGroupTheme(group,theme,"Header") end
+    if ready then g_BNTSATAN_ESPApplyGroupTheme(group,theme,"Header") end
     if ready and group.Width and math.abs(group.Width-w) < 0.25 and math.abs(group.Height-hh) < 0.25 then
-        local healthy = g_UXOfficial_ESPGroupHealthy(group)
+        local healthy = g_BNTSATAN_ESPGroupHealthy(group)
         if healthy then
             for _, piece in ipairs(group) do
                 if piece.Drawn then
@@ -3282,12 +3282,12 @@ local function g_UXOfficial_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
                         local ok = pcall(function() piece.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible) end)
                         if ok then piece.Visible = true end
                     end
-                else g_UXOfficial_ESPHide(piece) end
+                else g_BNTSATAN_ESPHide(piece) end
             end
             return
         end
     end
-    group=g_UXOfficial_ESPLineGroup(g_UXOfficial_ShotESP.Headers,key,57,ESP_REAL,root.Widget)
+    group=g_BNTSATAN_ESPLineGroup(g_BNTSATAN_ShotESP.Headers,key,57,ESP_REAL,root.Widget)
     if not group then return end
     cx, b, t, cy = 0.0, 0.0, -hh, -hh*0.5
     l, r = -w*0.5, w*0.5
@@ -3296,31 +3296,31 @@ local function g_UXOfficial_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
         local ok=pcall(function() for i=23,57 do group[i].Slot:SetZOrder(0) end end)
         if ok then group.HeaderStyled=true end
     end
-    g_UXOfficial_ESPApplyGroupTheme(group,theme,"Header")
+    g_BNTSATAN_ESPApplyGroupTheme(group,theme,"Header")
     -- octagon border
-    for i,s in ipairs(seg) do g_UXOfficial_ESPDrawLine(group[i],s[1],s[2],s[3],s[4],2.0) end
+    for i,s in ipairs(seg) do g_BNTSATAN_ESPDrawLine(group[i],s[1],s[2],s[3],s[4],2.0) end
     -- white inner accent lines on top/bottom edges
-    g_UXOfficial_ESPDrawLine(group[9],l+cut*1.05,t,l+w*0.16,t,1.25)
-    g_UXOfficial_ESPDrawLine(group[10],r-w*0.16,t,r-cut*1.05,t,1.25)
-    g_UXOfficial_ESPDrawLine(group[11],l+cut*1.05,b,l+w*0.16,b,1.25)
-    g_UXOfficial_ESPDrawLine(group[12],r-w*0.16,b,r-cut*1.05,b,1.25)
+    g_BNTSATAN_ESPDrawLine(group[9],l+cut*1.05,t,l+w*0.16,t,1.25)
+    g_BNTSATAN_ESPDrawLine(group[10],r-w*0.16,t,r-cut*1.05,t,1.25)
+    g_BNTSATAN_ESPDrawLine(group[11],l+cut*1.05,b,l+w*0.16,b,1.25)
+    g_BNTSATAN_ESPDrawLine(group[12],r-w*0.16,b,r-cut*1.05,b,1.25)
     -- bottom spike
-    g_UXOfficial_ESPDrawLine(group[13],cx-cut*0.7,b,cx,b+cut,2.0)
-    g_UXOfficial_ESPDrawLine(group[14],cx,b+cut,cx+cut*0.7,b,2.0)
+    g_BNTSATAN_ESPDrawLine(group[13],cx-cut*0.7,b,cx,b+cut,2.0)
+    g_BNTSATAN_ESPDrawLine(group[14],cx,b+cut,cx+cut*0.7,b,2.0)
     -- chevrons (side arrows)
     local co=cut*0.70
-    g_UXOfficial_ESPDrawLine(group[15],l-co*1.9,cy,l-co*1.25,cy-co,2.2)
-    g_UXOfficial_ESPDrawLine(group[16],l-co*1.9,cy,l-co*1.25,cy+co,2.2)
-    g_UXOfficial_ESPDrawLine(group[17],r+co*1.9,cy,r+co*1.25,cy-co,2.2)
-    g_UXOfficial_ESPDrawLine(group[18],r+co*1.9,cy,r+co*1.25,cy+co,2.2)
-    g_UXOfficial_ESPDrawLine(group[19],l-co*2.8,cy,l-co*2.15,cy-co,2.2)
-    g_UXOfficial_ESPDrawLine(group[20],l-co*2.8,cy,l-co*2.15,cy+co,2.2)
-    g_UXOfficial_ESPDrawLine(group[21],r+co*2.8,cy,r+co*2.15,cy-co,2.2)
-    g_UXOfficial_ESPDrawLine(group[22],r+co*2.8,cy,r+co*2.15,cy+co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[15],l-co*1.9,cy,l-co*1.25,cy-co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[16],l-co*1.9,cy,l-co*1.25,cy+co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[17],r+co*1.9,cy,r+co*1.25,cy-co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[18],r+co*1.9,cy,r+co*1.25,cy+co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[19],l-co*2.8,cy,l-co*2.15,cy-co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[20],l-co*2.8,cy,l-co*2.15,cy+co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[21],r+co*2.8,cy,r+co*2.15,cy-co,2.2)
+    g_BNTSATAN_ESPDrawLine(group[22],r+co*2.8,cy,r+co*2.15,cy+co,2.2)
     -- background: center + left strip + right strip (3-part fill of octagon interior)
-    g_UXOfficial_ESPDrawLine(group[23],l+cut,cy,r-cut,cy,hh)
-    g_UXOfficial_ESPDrawLine(group[24],l,cy,l+cut,cy,hh-2*cut)
-    g_UXOfficial_ESPDrawLine(group[25],r-cut,cy,r,cy,hh-2*cut)
+    g_BNTSATAN_ESPDrawLine(group[23],l+cut,cy,r-cut,cy,hh)
+    g_BNTSATAN_ESPDrawLine(group[24],l,cy,l+cut,cy,hh-2*cut)
+    g_BNTSATAN_ESPDrawLine(group[25],r-cut,cy,r,cy,hh-2*cut)
     -- Fill each missing corner triangle with horizontal stepped bands.  Every
     -- band starts inside the diagonal, so black cannot cross the red border.
     local cornerSteps=8
@@ -3333,15 +3333,15 @@ local function g_UXOfficial_ESPUpdateHeaderFrame(key,head,feet,enabled,isBot)
         local rightEnd=r-cut+inset
 
         if inset>0.5 then
-            g_UXOfficial_ESPDrawLine(group[25+i],leftStart,topY,l+cut+0.5,topY,bandH)
-            g_UXOfficial_ESPDrawLine(group[33+i],r-cut-0.5,topY,rightEnd,topY,bandH)
-            g_UXOfficial_ESPDrawLine(group[41+i],leftStart,bottomY,l+cut+0.5,bottomY,bandH)
-            g_UXOfficial_ESPDrawLine(group[49+i],r-cut-0.5,bottomY,rightEnd,bottomY,bandH)
+            g_BNTSATAN_ESPDrawLine(group[25+i],leftStart,topY,l+cut+0.5,topY,bandH)
+            g_BNTSATAN_ESPDrawLine(group[33+i],r-cut-0.5,topY,rightEnd,topY,bandH)
+            g_BNTSATAN_ESPDrawLine(group[41+i],leftStart,bottomY,l+cut+0.5,bottomY,bandH)
+            g_BNTSATAN_ESPDrawLine(group[49+i],r-cut-0.5,bottomY,rightEnd,bottomY,bandH)
         else
-            g_UXOfficial_ESPHide(group[25+i])
-            g_UXOfficial_ESPHide(group[33+i])
-            g_UXOfficial_ESPHide(group[41+i])
-            g_UXOfficial_ESPHide(group[49+i])
+            g_BNTSATAN_ESPHide(group[25+i])
+            g_BNTSATAN_ESPHide(group[33+i])
+            g_BNTSATAN_ESPHide(group[41+i])
+            g_BNTSATAN_ESPHide(group[49+i])
         end
     end
     group.Width, group.Height = w, hh
@@ -3350,7 +3350,7 @@ end
 
 
 
-g_UXOfficial_ESPHealthRatio = function(character)
+g_BNTSATAN_ESPHealthRatio = function(character)
     local hp, maxHp = nil, nil
     pcall(function()
         hp = character.Health or character.HP or character.CurrentHealth
@@ -3366,7 +3366,7 @@ end
 
 
 
-local g_UXOfficial_ESPBones = {
+local g_BNTSATAN_ESPBones = {
     head={"Head","head","head_01"}, neck={"neck_01","Neck","neck"},
     chest={"spine_03","Spine3","chest","Chest"}, spine={"spine_02","Spine2","spine"}, pelvis={"pelvis","Pelvis"},
     ls={"clavicle_l","upperarm_l","UpperArm_L"}, le={"lowerarm_l","LowerArm_L"}, lw={"hand_l","Hand_L"},
@@ -3375,17 +3375,17 @@ local g_UXOfficial_ESPBones = {
     rh={"thigh_r","Thigh_R","hip_r"}, rk={"calf_r","Calf_R","knee_r"}, ra={"foot_r","Foot_R"}
 }
 -- Full-length articulated skeleton: head, torso, shoulders, arms, pelvis and legs.
-local g_UXOfficial_ESPBoneLinks={{"head","neck"},{"neck","chest"},{"chest","spine"},{"spine","pelvis"},{"chest","ls"},{"ls","le"},{"le","lw"},{"chest","rs"},{"rs","re"},{"re","rw"},{"pelvis","lh"},{"lh","lk"},{"lk","la"},{"pelvis","rh"},{"rh","rk"},{"rk","ra"}}
+local g_BNTSATAN_ESPBoneLinks={{"head","neck"},{"neck","chest"},{"chest","spine"},{"spine","pelvis"},{"chest","ls"},{"ls","le"},{"le","lw"},{"chest","rs"},{"rs","re"},{"re","rw"},{"pelvis","lh"},{"lh","lk"},{"lk","la"},{"pelvis","rh"},{"rh","rk"},{"rk","ra"}}
 
 -- Cache only the bone-name lookup; world positions and camera projections remain fresh.
-local function g_UXOfficial_ESPBoneScreen(pc, mesh, id, names, cache)
+local function g_BNTSATAN_ESPBoneScreen(pc, mesh, id, names, cache)
     local cached = cache[id]
     if cached then
         local ok, loc = pcall(function()
             if mesh.GetSocketLocation then return mesh:GetSocketLocation(cached)
             elseif mesh.GetBoneLocation then return mesh:GetBoneLocation(cached) end
         end)
-        if ok and loc and tonumber(loc.X) then return g_UXOfficial_ESPProject(pc,loc) end
+        if ok and loc and tonumber(loc.X) then return g_BNTSATAN_ESPProject(pc,loc) end
         cache[id] = nil
     end
     for _, name in ipairs(names) do
@@ -3400,80 +3400,80 @@ local function g_UXOfficial_ESPBoneScreen(pc, mesh, id, names, cache)
         end)
         if ok and loc and tonumber(loc.X) then
             cache[id] = name
-            return g_UXOfficial_ESPProject(pc,loc)
+            return g_BNTSATAN_ESPProject(pc,loc)
         end
     end
     return nil
 end
 
-local function g_UXOfficial_ESPUpdateSkeleton(key, character, pc, enabled, isBot, visibilityColor)
-    local group = g_UXOfficial_ShotESP.Skeletons[key]
-    if not enabled then g_UXOfficial_ESPHideGroup(group) return end
+local function g_BNTSATAN_ESPUpdateSkeleton(key, character, pc, enabled, isBot, visibilityColor)
+    local group = g_BNTSATAN_ShotESP.Skeletons[key]
+    if not enabled then g_BNTSATAN_ESPHideGroup(group) return end
     local mesh = nil
     pcall(function() mesh=character.Mesh or (character.GetMesh and character:GetMesh()) end)
-    if not g_UXOfficial_ESPValid(mesh) then g_UXOfficial_ESPHideGroup(group) return end
-    if g_UXOfficial_ShotESP.BoneMeshes[key] ~= mesh then
-        g_UXOfficial_ShotESP.BoneMeshes[key] = mesh
-        g_UXOfficial_ShotESP.BoneNameCache[key] = {}
-        g_UXOfficial_ShotESP.BonePoints[key] = {}
+    if not g_BNTSATAN_ESPValid(mesh) then g_BNTSATAN_ESPHideGroup(group) return end
+    if g_BNTSATAN_ShotESP.BoneMeshes[key] ~= mesh then
+        g_BNTSATAN_ShotESP.BoneMeshes[key] = mesh
+        g_BNTSATAN_ShotESP.BoneNameCache[key] = {}
+        g_BNTSATAN_ShotESP.BonePoints[key] = {}
     end
-    local points = g_UXOfficial_ShotESP.BonePoints[key]
-    local cache = g_UXOfficial_ShotESP.BoneNameCache[key]
-    local theme=g_UXOfficial_ESPTheme(isBot)
-    group = g_UXOfficial_ESPLineGroup(g_UXOfficial_ShotESP.Skeletons,key,#g_UXOfficial_ESPBoneLinks,ESP_SKELETON_YELLOW)
+    local points = g_BNTSATAN_ShotESP.BonePoints[key]
+    local cache = g_BNTSATAN_ShotESP.BoneNameCache[key]
+    local theme=g_BNTSATAN_ESPTheme(isBot)
+    group = g_BNTSATAN_ESPLineGroup(g_BNTSATAN_ShotESP.Skeletons,key,#g_BNTSATAN_ESPBoneLinks,ESP_SKELETON_YELLOW)
     if not group then return end
     local skeletonColor = visibilityColor or ESP_SKELETON_YELLOW
-    g_UXOfficial_ESPApplyGroupTheme(group,{Key=theme.Key.."_VISIBILITY_SKELETON",Main=skeletonColor,Light=skeletonColor,Background=theme.Background,Empty=theme.Empty},"Skeleton")
+    g_BNTSATAN_ESPApplyGroupTheme(group,{Key=theme.Key.."_VISIBILITY_SKELETON",Main=skeletonColor,Light=skeletonColor,Background=theme.Background,Empty=theme.Empty},"Skeleton")
     for _, data in ipairs(group) do
         if data and data.Widget then pcall(function() data.Widget:SetBrushColor(skeletonColor) end) end
     end
-    for id, names in pairs(g_UXOfficial_ESPBones) do
-        points[id] = g_UXOfficial_ESPBoneScreen(pc,mesh,id,names,cache)
+    for id, names in pairs(g_BNTSATAN_ESPBones) do
+        points[id] = g_BNTSATAN_ESPBoneScreen(pc,mesh,id,names,cache)
     end
     local ankle = points.la or points.ra
     local skeletonH = (points.head and ankle) and math.abs(ankle.Y-points.head.Y) or 360.0
     local thickness = math.max(1.0,math.min(2.8,skeletonH*0.0028))
-    for i, link in ipairs(g_UXOfficial_ESPBoneLinks) do
+    for i, link in ipairs(g_BNTSATAN_ESPBoneLinks) do
         local a, b = points[link[1]], points[link[2]]
-        if a and b then g_UXOfficial_ESPDrawLine(group[i],a.X,a.Y,b.X,b.Y,thickness)
-        else g_UXOfficial_ESPHide(group[i]) end
+        if a and b then g_BNTSATAN_ESPDrawLine(group[i],a.X,a.Y,b.X,b.Y,thickness)
+        else g_BNTSATAN_ESPHide(group[i]) end
     end
 end
 
 -- ESP enemy name widget made by @GRW_XD
-local function g_UXOfficial_ESPCreateNameTag(isBot)
-    local canvas = g_UXOfficial_ESPGetCanvas()
-    if not g_UXOfficial_ESPValid(canvas) then return nil end
+local function g_BNTSATAN_ESPCreateNameTag(isBot)
+    local canvas = g_BNTSATAN_ESPGetCanvas()
+    if not g_BNTSATAN_ESPValid(canvas) then return nil end
     local pooled=ESPWidgetPool.Take(ESPWidgetPool.V2,"NameV2",canvas)
     if pooled then
-        local theme=g_UXOfficial_ESPTheme(isBot)
-        g_UXOfficial_ESPSetTextColor(pooled.Text,theme.Text)
-        g_UXOfficial_ESPSetTextColor(pooled.DistanceText,theme.Text)
-        g_UXOfficial_ESPSetFont(pooled.Text,tonumber(_G.g_UXOfficial_UXOfficialShotESP.NameFontSize) or 16,0)
-        g_UXOfficial_ESPSetFont(pooled.DistanceText,tonumber(_G.g_UXOfficial_UXOfficialShotESP.DistanceFontSize) or 20,0)
+        local theme=g_BNTSATAN_ESPTheme(isBot)
+        g_BNTSATAN_ESPSetTextColor(pooled.Text,theme.Text)
+        g_BNTSATAN_ESPSetTextColor(pooled.DistanceText,theme.Text)
+        g_BNTSATAN_ESPSetFont(pooled.Text,tonumber(_G.g_BNTSATAN_UXOfficialShotESP.NameFontSize) or 16,0)
+        g_BNTSATAN_ESPSetFont(pooled.DistanceText,tonumber(_G.g_BNTSATAN_UXOfficialShotESP.DistanceFontSize) or 20,0)
         pooled.IsBot=isBot;pooled.ContainerVisible=false
         if pooled then return pooled end
     end
 
     local container, nameText, distanceText, namePlate, badgeText = nil, nil, nil, nil, nil
     pcall(function() container = CGame:NewObjectFromPath("/Script/UMG.CanvasPanel", canvas) end)
-    if not g_UXOfficial_ESPValid(container) then return nil end
+    if not g_BNTSATAN_ESPValid(container) then return nil end
     -- Premium model-target plate: dark backing, bright gold rim and a small badge.
     pcall(function() namePlate = CGame:NewObjectFromPath("/Script/UMG.Border", container) end)
     pcall(function() badgeText = CGame:NewObjectFromPath("/Script/UMG.TextBlock", container) end)
     pcall(function() nameText = CGame:NewObjectFromPath("/Script/UMG.TextBlock", container) end)
     pcall(function() distanceText = CGame:NewObjectFromPath("/Script/UMG.TextBlock", container) end)
-    if not g_UXOfficial_ESPValid(nameText) or not g_UXOfficial_ESPValid(distanceText) then
+    if not g_BNTSATAN_ESPValid(nameText) or not g_BNTSATAN_ESPValid(distanceText) then
         pcall(function() container:RemoveFromParent() end)
         return nil
     end
 
     pcall(function()
-        if g_UXOfficial_ESPValid(namePlate) then
-            namePlate:SetBrushColor(g_UXOfficial_ESPColor(0.012,0.014,0.020,0.94))
+        if g_BNTSATAN_ESPValid(namePlate) then
+            namePlate:SetBrushColor(g_BNTSATAN_ESPColor(0.012,0.014,0.020,0.94))
             namePlate:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
         end
-        if g_UXOfficial_ESPValid(badgeText) then
+        if g_BNTSATAN_ESPValid(badgeText) then
             badgeText:SetText(isBot and "B" or "D")
             badgeText:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
             if badgeText.SetJustification then badgeText:SetJustification(1) end
@@ -3483,23 +3483,23 @@ local function g_UXOfficial_ESPCreateNameTag(isBot)
         nameText:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
         distanceText:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
         if nameText.SetJustification then nameText:SetJustification(1) end
-        if nameText.SetRenderTransformPivot then nameText:SetRenderTransformPivot(g_UXOfficial_ESPV2(.5,.5)) end
+        if nameText.SetRenderTransformPivot then nameText:SetRenderTransformPivot(g_BNTSATAN_ESPV2(.5,.5)) end
         if distanceText.SetJustification then distanceText:SetJustification(1) end
-        if distanceText.SetRenderTransformPivot then distanceText:SetRenderTransformPivot(g_UXOfficial_ESPV2(.5,.5)) end
+        if distanceText.SetRenderTransformPivot then distanceText:SetRenderTransformPivot(g_BNTSATAN_ESPV2(.5,.5)) end
     end)
 
-    local theme=g_UXOfficial_ESPTheme(isBot)
+    local theme=g_BNTSATAN_ESPTheme(isBot)
     -- Frosted-glass nameplate typography: ice-white text and soft cyan metadata.
-    g_UXOfficial_ESPSetTextColor(nameText, g_UXOfficial_ESPColor(0.88,0.97,1.0,1.0))
-    g_UXOfficial_ESPSetTextColor(distanceText, g_UXOfficial_ESPColor(0.48,0.78,0.88,1.0))
-    g_UXOfficial_ESPSetTextColor(badgeText, g_UXOfficial_ESPColor(0.40,0.84,0.96,1.0))
-    g_UXOfficial_ESPSetFont(badgeText, 11, 0)
-    g_UXOfficial_ESPSetFont(nameText, math.min(12,tonumber(_G.g_UXOfficial_UXOfficialShotESP.NameFontSize) or 12), 0)
+    g_BNTSATAN_ESPSetTextColor(nameText, g_BNTSATAN_ESPColor(0.88,0.97,1.0,1.0))
+    g_BNTSATAN_ESPSetTextColor(distanceText, g_BNTSATAN_ESPColor(0.48,0.78,0.88,1.0))
+    g_BNTSATAN_ESPSetTextColor(badgeText, g_BNTSATAN_ESPColor(0.40,0.84,0.96,1.0))
+    g_BNTSATAN_ESPSetFont(badgeText, 11, 0)
+    g_BNTSATAN_ESPSetFont(nameText, math.min(12,tonumber(_G.g_BNTSATAN_UXOfficialShotESP.NameFontSize) or 12), 0)
     -- Distance labels are intentionally borderless; the larger glyphs provide clarity.
-    g_UXOfficial_ESPSetFont(distanceText, math.min(14,tonumber(_G.g_UXOfficial_UXOfficialShotESP.DistanceFontSize) or 14), 0)
+    g_BNTSATAN_ESPSetFont(distanceText, math.min(14,tonumber(_G.g_BNTSATAN_UXOfficialShotESP.DistanceFontSize) or 14), 0)
     local nameSlot, distanceSlot, mainSlot, plateSlot, badgeSlot = nil, nil, nil, nil, nil
-    if g_UXOfficial_ESPValid(namePlate) then pcall(function() plateSlot = container:AddChildToCanvas(namePlate) end) end
-    if g_UXOfficial_ESPValid(badgeText) then pcall(function() badgeSlot = container:AddChildToCanvas(badgeText) end) end
+    if g_BNTSATAN_ESPValid(namePlate) then pcall(function() plateSlot = container:AddChildToCanvas(namePlate) end) end
+    if g_BNTSATAN_ESPValid(badgeText) then pcall(function() badgeSlot = container:AddChildToCanvas(badgeText) end) end
     pcall(function() nameSlot = container:AddChildToCanvas(nameText) end)
     pcall(function() distanceSlot = container:AddChildToCanvas(distanceText) end)
     if not nameSlot or not distanceSlot then
@@ -3514,25 +3514,25 @@ local function g_UXOfficial_ESPCreateNameTag(isBot)
 
     pcall(function()
         mainSlot:SetAutoSize(false)
-        mainSlot:SetAlignment(g_UXOfficial_ESPV2(0.0, 0.0))
+        mainSlot:SetAlignment(g_BNTSATAN_ESPV2(0.0, 0.0))
         mainSlot:SetZOrder(65)
         if plateSlot then
             plateSlot:SetAutoSize(false)
-            plateSlot:SetPosition(g_UXOfficial_ESPV2(0,0))
-            plateSlot:SetSize(g_UXOfficial_ESPV2(180,28))
+            plateSlot:SetPosition(g_BNTSATAN_ESPV2(0,0))
+            plateSlot:SetSize(g_BNTSATAN_ESPV2(180,28))
             plateSlot:SetZOrder(0)
         end
         if badgeSlot then
             badgeSlot:SetAutoSize(false)
-            badgeSlot:SetPosition(g_UXOfficial_ESPV2(8,0))
-            badgeSlot:SetSize(g_UXOfficial_ESPV2(22,28))
+            badgeSlot:SetPosition(g_BNTSATAN_ESPV2(8,0))
+            badgeSlot:SetSize(g_BNTSATAN_ESPV2(22,28))
             badgeSlot:SetZOrder(2)
         end
         nameSlot:SetAutoSize(true)
-        nameSlot:SetAlignment(g_UXOfficial_ESPV2(0.5, 0.5))
+        nameSlot:SetAlignment(g_BNTSATAN_ESPV2(0.5, 0.5))
         nameSlot:SetZOrder(1)
         distanceSlot:SetAutoSize(true)
-        distanceSlot:SetAlignment(g_UXOfficial_ESPV2(0.5, 0.5))
+        distanceSlot:SetAlignment(g_BNTSATAN_ESPV2(0.5, 0.5))
         distanceSlot:SetZOrder(1)
     end)
 
@@ -3553,14 +3553,14 @@ local function g_UXOfficial_ESPCreateNameTag(isBot)
 end
 
 -- ESP enemy name and distance made by @GRW_XD
-local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScreen, isBot, distance, forceName, forceDistance, distanceColor, distanceColorKey)
-    local showName = _G.g_UXOfficial_ESPOptions.Name == true
-    local showDistance = _G.g_UXOfficial_ESPOptions.Distance == true
+local function g_BNTSATAN_ESPUpdateNameTag(key, character, headScreen, footScreen, isBot, distance, forceName, forceDistance, distanceColor, distanceColorKey)
+    local showName = _G.g_BNTSATAN_ESPOptions.Name == true
+    local showDistance = _G.g_BNTSATAN_ESPOptions.Distance == true
     if forceName~=nil then showName=forceName==true end
     if forceDistance~=nil then showDistance=forceDistance==true end
-    local data = g_UXOfficial_ShotESP.Names[key]
+    local data = g_BNTSATAN_ShotESP.Names[key]
     if not showName and not showDistance then
-        if data and data.ContainerVisible~=false and g_UXOfficial_ESPValid(data.Widget) then pcall(function() data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.Collapsed) end) data.ContainerVisible=false end
+        if data and data.ContainerVisible~=false and g_BNTSATAN_ESPValid(data.Widget) then pcall(function() data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.Collapsed) end) data.ContainerVisible=false end
         return
     end
     -- Fix: only cache non-empty resolved names; "" is truthy in Lua so never cache it
@@ -3570,7 +3570,7 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
         if type(cached) == "string" and #cached > 0 then
             name = cached
         else
-            name = g_UXOfficial_ESPResolvePlayerName(character)
+            name = g_BNTSATAN_ESPResolvePlayerName(character)
             if data and type(name) == "string" and #name > 0 then
                 data.CachedName = name
             end
@@ -3583,17 +3583,17 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
         name = ""
     end
     if not headScreen then
-        if data and g_UXOfficial_ESPValid(data.Widget) then
+        if data and g_BNTSATAN_ESPValid(data.Widget) then
             pcall(function() data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.Collapsed) end)
             data.ContainerVisible=false
         end
         return
     end
 
-    if not data or not g_UXOfficial_ESPValid(data.Widget) then
-        g_UXOfficial_ESPDestroyWidgetData(data)
-        data = g_UXOfficial_ESPCreateNameTag(isBot)
-        g_UXOfficial_ShotESP.Names[key] = data
+    if not data or not g_BNTSATAN_ESPValid(data.Widget) then
+        g_BNTSATAN_ESPDestroyWidgetData(data)
+        data = g_BNTSATAN_ESPCreateNameTag(isBot)
+        g_BNTSATAN_ShotESP.Names[key] = data
         -- Only cache real resolved names on creation, not fallback labels
         if data and type(name)=="string" and #name>0 and name~="BOT" and name~="BOT PLAYER" and name~="PLAYER" then
             data.CachedName = name
@@ -3601,14 +3601,14 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
     end
     if not data then return end
     if data.IsBot~=isBot then
-        local theme=g_UXOfficial_ESPTheme(isBot)
-        g_UXOfficial_ESPSetTextColor(data.Text,theme.Text)
+        local theme=g_BNTSATAN_ESPTheme(isBot)
+        g_BNTSATAN_ESPSetTextColor(data.Text,theme.Text)
         data.IsBot=isBot
     end
     -- Distance label always uses the exact same live color as the skeleton
     -- and snap line: cover = black; otherwise health = red/yellow/green.
     if distanceColor then
-        g_UXOfficial_ESPSetTextColor(data.DistanceText,distanceColor)
+        g_BNTSATAN_ESPSetTextColor(data.DistanceText,distanceColor)
         data.DistanceColorKey=distanceColorKey
     end
 
@@ -3649,7 +3649,7 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
         local shownName = showName and (targetPrefix .. name) or ""
         local shownDistance = showDistance and distanceLabel or ""
         if data.PlateSlot then
-            data.PlateSlot:SetSize(g_UXOfficial_ESPV2(math.max(112.0,math.min(250.0,w+22.0)),hh))
+            data.PlateSlot:SetSize(g_BNTSATAN_ESPV2(math.max(112.0,math.min(250.0,w+22.0)),hh))
         end
         if data.BadgeText and data.LastBadgeType ~= isBot then
             data.BadgeText:SetText(isBot and "B" or "D")
@@ -3659,8 +3659,8 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
             data.Text:SetText(shownName)
             data.LastName = shownName
         end
-        if data.NameScale~=nameScale then data.Text:SetRenderScale(g_UXOfficial_ESPV2(nameScale,nameScale)) end
-        if data.DistanceScale~=distanceScale then data.DistanceText:SetRenderScale(g_UXOfficial_ESPV2(distanceScale,distanceScale)) end
+        if data.NameScale~=nameScale then data.Text:SetRenderScale(g_BNTSATAN_ESPV2(nameScale,nameScale)) end
+        if data.DistanceScale~=distanceScale then data.DistanceText:SetRenderScale(g_BNTSATAN_ESPV2(distanceScale,distanceScale)) end
         if data.LastDistance ~= shownDistance then
             data.DistanceText:SetText(shownDistance)
             data.LastDistance = shownDistance
@@ -3674,19 +3674,19 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
 
         -- Move the container to match the header octagon exactly
         if layoutChanged then
-            data.Slot:SetPosition(g_UXOfficial_ESPV2(x, y))
-            data.Slot:SetSize(g_UXOfficial_ESPV2(w, hh))
+            data.Slot:SetPosition(g_BNTSATAN_ESPV2(x, y))
+            data.Slot:SetSize(g_BNTSATAN_ESPV2(w, hh))
         end
 
         -- Name text centered inside container (matches header box center)
         if data.LayoutW~=w or data.LayoutH~=hh then
-            data.TextSlot:SetPosition(g_UXOfficial_ESPV2(w*0.5, hh*0.5))
+            data.TextSlot:SetPosition(g_BNTSATAN_ESPV2(w*0.5, hh*0.5))
         end
 
         -- Distance text below the header box
         local distChanged = not data.DistX or math.abs(data.DistX-distX)>=0.25 or math.abs((data.DistY or 0)-distY)>=0.25
         if distChanged then
-            data.DistanceSlot:SetPosition(g_UXOfficial_ESPV2(distX, distY))
+            data.DistanceSlot:SetPosition(g_BNTSATAN_ESPV2(distX, distY))
         end
 
         if data.ContainerVisible~=true then
@@ -3703,12 +3703,12 @@ local function g_UXOfficial_ESPUpdateNameTag(key, character, headScreen, footScr
 end
 
 -- Unified premium gold HUD: enemy/bot counter + model-target plates
-local function g_UXOfficial_ESPCreateCounter()
-    local canvas = g_UXOfficial_ESPGetCanvas()
-    if not g_UXOfficial_ESPValid(canvas) then return nil end
+local function g_BNTSATAN_ESPCreateCounter()
+    local canvas = g_BNTSATAN_ESPGetCanvas()
+    if not g_BNTSATAN_ESPValid(canvas) then return nil end
     local container=nil
     pcall(function() container=CGame:NewObjectFromPath("/Script/UMG.CanvasPanel",canvas) end)
-    if not g_UXOfficial_ESPValid(container) then return nil end
+    if not g_BNTSATAN_ESPValid(container) then return nil end
     -- Compact premium frame: player side uses the visibility/health palette; bot side uses teal.
     local displayW,displayH=360.0,46.0
     local fontSize,fontScale=12,0.94
@@ -3721,15 +3721,15 @@ local function g_UXOfficial_ESPCreateCounter()
     local function addRect(x,y,w,h,color,z)
         local widget=nil
         pcall(function() widget=CGame:NewObjectFromPath("/Script/UMG.Border",container) end)
-        if not g_UXOfficial_ESPValid(widget) then return nil end
+        if not g_BNTSATAN_ESPValid(widget) then return nil end
         local slot=nil
         pcall(function()
             widget:SetBrushColor(color)
             widget:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible)
             slot=container:AddChildToCanvas(widget)
             slot:SetAutoSize(false)
-            slot:SetPosition(g_UXOfficial_ESPV2(x*sx,y*sy))
-            slot:SetSize(g_UXOfficial_ESPV2(math.max(1.0,w*sx),math.max(1.0,h*sy)))
+            slot:SetPosition(g_BNTSATAN_ESPV2(x*sx,y*sy))
+            slot:SetSize(g_BNTSATAN_ESPV2(math.max(1.0,w*sx),math.max(1.0,h*sy)))
             slot:SetZOrder(z or 1)
         end)
         if not slot then return nil end
@@ -3738,10 +3738,10 @@ local function g_UXOfficial_ESPCreateCounter()
     end
 
     local function addLine(x1,y1,x2,y2,thickness,color,z)
-        local line=g_UXOfficial_ESPCreateLine(color,container)
+        local line=g_BNTSATAN_ESPCreateLine(color,container)
         if not line then return nil end
         pcall(function() line.Slot:SetZOrder(z or 8) end)
-        g_UXOfficial_ESPDrawLine(line,x1*sx,y1*sy,x2*sx,y2*sy,thickness*strokeScale)
+        g_BNTSATAN_ESPDrawLine(line,x1*sx,y1*sy,x2*sx,y2*sy,thickness*strokeScale)
         pieces[#pieces+1]=line
         return line
     end
@@ -3757,8 +3757,8 @@ local function g_UXOfficial_ESPCreateCounter()
         local leftRight=half-innerInset
         local rightLeft=half+innerInset
         -- Frosted-glass treatment: cool translucent surfaces instead of opaque gold/black.
-        local enemyBase=g_UXOfficial_ESPColor(0.10,0.30,0.38,0.42+t*0.08)
-        local botBase=g_UXOfficial_ESPColor(0.06,0.22,0.30,0.42+t*0.08)
+        local enemyBase=g_BNTSATAN_ESPColor(0.10,0.30,0.38,0.42+t*0.08)
+        local botBase=g_BNTSATAN_ESPColor(0.06,0.22,0.30,0.42+t*0.08)
         addRect(outerInset,y,leftRight-outerInset,bandH+0.15,enemyBase,1)
         addRect(rightLeft,y,width-outerInset-rightLeft,bandH+0.15,botBase,1)
     end
@@ -3767,12 +3767,12 @@ local function g_UXOfficial_ESPCreateCounter()
     local lp={{3,1},{half-49,1},{half-27,height*0.66},{half-14,height},{26,height},{3,1}}
     local rp={{width-3,1},{half+49,1},{half+27,height*0.66},{half+14,height},{width-26,height},{width-3,1}}
     local enemyGlow={
-        g_UXOfficial_ESPColor(0.46,0.88,1.0,0.96),
-        g_UXOfficial_ESPColor(0.28,0.72,0.88,0.96),
-        g_UXOfficial_ESPColor(0.70,0.94,1.0,0.96),
-        g_UXOfficial_ESPColor(0.22,0.62,0.78,0.96),
-        g_UXOfficial_ESPColor(0.78,0.96,1.0,0.96),
-        g_UXOfficial_ESPColor(0.34,0.78,0.92,0.96)
+        g_BNTSATAN_ESPColor(0.46,0.88,1.0,0.96),
+        g_BNTSATAN_ESPColor(0.28,0.72,0.88,0.96),
+        g_BNTSATAN_ESPColor(0.70,0.94,1.0,0.96),
+        g_BNTSATAN_ESPColor(0.22,0.62,0.78,0.96),
+        g_BNTSATAN_ESPColor(0.78,0.96,1.0,0.96),
+        g_BNTSATAN_ESPColor(0.34,0.78,0.92,0.96)
     }
     local enemyMultiColorPieces={}
     for i=1,#lp-1 do
@@ -3784,7 +3784,7 @@ local function g_UXOfficial_ESPCreateCounter()
             enemyMultiColorPieces[#enemyMultiColorPieces+1]=glowPiece
         end
     end
-    local botAccent=g_UXOfficial_ESPColor(0.38,0.82,0.94,0.96)
+    local botAccent=g_BNTSATAN_ESPColor(0.38,0.82,0.94,0.96)
     for i=1,#rp-1 do addLine(rp[i][1],rp[i][2],rp[i+1][1],rp[i+1][2],2.5,botAccent,7) end
 
     -- Independent downward center shield (not the legacy rotated diamond).
@@ -3812,7 +3812,7 @@ local function g_UXOfficial_ESPCreateCounter()
     local function addText(initial,x,color)
         local text=nil
         pcall(function() text=CGame:NewObjectFromPath("/Script/UMG.TextBlock",container) end)
-        if not g_UXOfficial_ESPValid(text) then return nil,nil end
+        if not g_BNTSATAN_ESPValid(text) then return nil,nil end
         local slot=nil
         pcall(function()
             text:SetText(initial)
@@ -3820,15 +3820,15 @@ local function g_UXOfficial_ESPCreateCounter()
             if text.SetJustification then text:SetJustification(1) end
             slot=container:AddChildToCanvas(text)
             slot:SetAutoSize(true)
-            slot:SetAlignment(g_UXOfficial_ESPV2(0.5,0.5))
-            slot:SetPosition(g_UXOfficial_ESPV2(x*sx,displayH*0.5))
+            slot:SetAlignment(g_BNTSATAN_ESPV2(0.5,0.5))
+            slot:SetPosition(g_BNTSATAN_ESPV2(x*sx,displayH*0.5))
             slot:SetZOrder(12)
         end)
-        g_UXOfficial_ESPSetTextColor(text,color)
-        g_UXOfficial_ESPSetFont(text,fontSize,0)
+        g_BNTSATAN_ESPSetTextColor(text,color)
+        g_BNTSATAN_ESPSetFont(text,fontSize,0)
         pcall(function()
-            text:SetRenderTransformPivot(g_UXOfficial_ESPV2(0.5,0.5))
-            text:SetRenderScale(g_UXOfficial_ESPV2(fontScale,fontScale))
+            text:SetRenderTransformPivot(g_BNTSATAN_ESPV2(0.5,0.5))
+            text:SetRenderScale(g_BNTSATAN_ESPV2(fontScale,fontScale))
         end)
         return text,slot
     end
@@ -3854,18 +3854,18 @@ local function g_UXOfficial_ESPCreateCounter()
     local realText=addText("ENEMIES: 0",half*0.5+16,enemyGlow[3])
     local botText=addText("BOTS: 0",half+half*0.5-16,botAccent)
     if not realText or not botText then
-        g_UXOfficial_ESPDestroyWidgetData({Widget=container})
+        g_BNTSATAN_ESPDestroyWidgetData({Widget=container})
         return nil
     end
 
     local mainSlot=nil
     pcall(function() mainSlot=canvas:AddChildToCanvas(container) end)
-    if not mainSlot then g_UXOfficial_ESPDestroyWidgetData({Widget=container}) return nil end
+    if not mainSlot then g_BNTSATAN_ESPDestroyWidgetData({Widget=container}) return nil end
 
     local anchored=false
     pcall(function()
         mainSlot:SetAutoSize(false)
-        mainSlot:SetSize(g_UXOfficial_ESPV2(displayW,displayH))
+        mainSlot:SetSize(g_BNTSATAN_ESPV2(displayW,displayH))
         mainSlot:SetZOrder(60)
         -- Viewport-independent top-center anchor: survives aspect ratio, DPI,
         -- notch and safe-zone variations without drifting toward a corner.
@@ -3873,16 +3873,16 @@ local function g_UXOfficial_ESPCreateCounter()
             local anchors=nil
             pcall(function()
                 anchors=Anchors(
-                    g_UXOfficial_ESPV2(0.5,0.0),
-                    g_UXOfficial_ESPV2(0.5,0.0)
+                    g_BNTSATAN_ESPV2(0.5,0.0),
+                    g_BNTSATAN_ESPV2(0.5,0.0)
                 )
             end)
             if not anchors then pcall(function() anchors=Anchors() end) end
             if anchors then
-                pcall(function() anchors.Minimum=g_UXOfficial_ESPV2(0.5,0.0) end)
-                pcall(function() anchors.Maximum=g_UXOfficial_ESPV2(0.5,0.0) end)
+                pcall(function() anchors.Minimum=g_BNTSATAN_ESPV2(0.5,0.0) end)
+                pcall(function() anchors.Maximum=g_BNTSATAN_ESPV2(0.5,0.0) end)
                 mainSlot:SetAnchors(anchors)
-                mainSlot:SetAlignment(g_UXOfficial_ESPV2(0.5,0.0))
+                mainSlot:SetAlignment(g_BNTSATAN_ESPV2(0.5,0.0))
                 anchored=true
             end
         end
@@ -3894,17 +3894,17 @@ local function g_UXOfficial_ESPCreateCounter()
 end
 
 -- ESP counter position and tracer origin made by @GRW_XD
-local function g_UXOfficial_ESPUpdateCounter(realCount, botCount, pc)
+local function g_BNTSATAN_ESPUpdateCounter(realCount, botCount, pc)
 
-    local data = g_UXOfficial_ShotESP.Counter
-    if not data or not g_UXOfficial_ESPValid(data.Widget) then
+    local data = g_BNTSATAN_ShotESP.Counter
+    if not data or not g_BNTSATAN_ESPValid(data.Widget) then
         -- The static counter is built atomically; the budget applies to enemy
         -- line groups that would otherwise all spawn together.
-        local budget = g_UXOfficial_ShotESP.BuildRemaining
-        g_UXOfficial_ShotESP.BuildRemaining = nil
-        data = g_UXOfficial_ESPCreateCounter()
-        g_UXOfficial_ShotESP.BuildRemaining = budget
-        g_UXOfficial_ShotESP.Counter = data
+        local budget = g_BNTSATAN_ShotESP.BuildRemaining
+        g_BNTSATAN_ShotESP.BuildRemaining = nil
+        data = g_BNTSATAN_ESPCreateCounter()
+        g_BNTSATAN_ShotESP.BuildRemaining = budget
+        g_BNTSATAN_ShotESP.Counter = data
     end
     if not data then return nil end
 
@@ -3912,7 +3912,7 @@ local function g_UXOfficial_ESPUpdateCounter(realCount, botCount, pc)
     local showEnemyMultiColor=(tonumber(realCount) or 0)>0
     if data.EnemyMultiColorPieces and data.EnemyMultiColorVisible~=showEnemyMultiColor then
         for _,piece in ipairs(data.EnemyMultiColorPieces) do
-            if piece and piece.Widget and g_UXOfficial_ESPValid(piece.Widget) then
+            if piece and piece.Widget and g_BNTSATAN_ESPValid(piece.Widget) then
                 pcall(function()
                     piece.Widget:SetWidgetVisibility(showEnemyMultiColor and UEnums.ESlateVisibility.SelfHitTestInvisible or UEnums.ESlateVisibility.Collapsed)
                 end)
@@ -3921,22 +3921,22 @@ local function g_UXOfficial_ESPUpdateCounter(realCount, botCount, pc)
         data.EnemyMultiColorVisible=showEnemyMultiColor
     end
 
-    local cw = g_UXOfficial_ShotESP.ViewportW
+    local cw = g_BNTSATAN_ShotESP.ViewportW
     local centerX = nil
 
     if tonumber(cw) and cw > 1 then
         centerX = cw * 0.5
     else
 
-        local vw = g_UXOfficial_ESPViewport(pc)
+        local vw = g_BNTSATAN_ESPViewport(pc)
         centerX =
-            (vw * 0.5) * (g_UXOfficial_ShotESP.CanvasScaleX or 1.0)
-            + (g_UXOfficial_ShotESP.CanvasOffsetX or 0.0)
+            (vw * 0.5) * (g_BNTSATAN_ShotESP.CanvasScaleX or 1.0)
+            + (g_BNTSATAN_ShotESP.CanvasOffsetX or 0.0)
     end
 
     if not centerX then return nil end
 
-    local counterY = tonumber(_G.g_UXOfficial_UXOfficialShotESP.CounterY) or 36.0
+    local counterY = tonumber(_G.g_BNTSATAN_UXOfficialShotESP.CounterY) or 36.0
 
     if data.LastReal ~= realCount then
         local ok=pcall(function() data.RealText:SetText(string.format("ENEMIES: %d", realCount or 0)) end)
@@ -3951,10 +3951,10 @@ local function g_UXOfficial_ESPUpdateCounter(realCount, botCount, pc)
     local visibleChanged = data.Visible ~= true
     local applied = pcall(function()
         if positionChanged and data.ViewportAnchored then
-            data.Slot:SetPosition(g_UXOfficial_ESPV2(0.0,counterY))
+            data.Slot:SetPosition(g_BNTSATAN_ESPV2(0.0,counterY))
         elseif positionChanged then
-            data.Slot:SetAlignment(g_UXOfficial_ESPV2(0.0,0.0))
-            data.Slot:SetPosition(g_UXOfficial_ESPV2(centerX-data.Width*0.5,counterY))
+            data.Slot:SetAlignment(g_BNTSATAN_ESPV2(0.0,0.0))
+            data.Slot:SetPosition(g_BNTSATAN_ESPV2(centerX-data.Width*0.5,counterY))
         end
         if visibleChanged then data.Widget:SetWidgetVisibility(UEnums.ESlateVisibility.SelfHitTestInvisible) end
     end)
@@ -3967,27 +3967,27 @@ local function g_UXOfficial_ESPUpdateCounter(realCount, botCount, pc)
     data.AnchorX = anchorX
     data.AnchorY = anchorY
 
-    g_UXOfficial_ShotESP.TracerOrigin = g_UXOfficial_ESPV2(anchorX, anchorY)
-    return g_UXOfficial_ShotESP.TracerOrigin
+    g_BNTSATAN_ShotESP.TracerOrigin = g_BNTSATAN_ESPV2(anchorX, anchorY)
+    return g_BNTSATAN_ShotESP.TracerOrigin
 end
 
 -- ESP enemy scan made by @GRW_XD
-local function g_UXOfficial_ESPScanEnemies()
-    local pc = g_UXOfficial_ESPGetController()
-    local me = g_UXOfficial_ESPGetLocalCharacter()
-    if not pc or not me then g_UXOfficial_ShotESP.Enemies = {} return nil, 0, 0 end
+local function g_BNTSATAN_ESPScanEnemies()
+    local pc = g_BNTSATAN_ESPGetController()
+    local me = g_BNTSATAN_ESPGetLocalCharacter()
+    if not pc or not me then g_BNTSATAN_ShotESP.Enemies = {} return nil, 0, 0 end
     local myLoc = ESPShared.GetFrameRecord(me).Location
-    if not myLoc then g_UXOfficial_ShotESP.Enemies = {} return pc, 0, 0 end
-    local myTeam = g_UXOfficial_ESPGetTeamID(me)
+    if not myLoc then g_BNTSATAN_ShotESP.Enemies = {} return pc, 0, 0 end
+    local myTeam = g_BNTSATAN_ESPGetTeamID(me)
 
     local list = {}
     local realCount, botCount = 0, 0
     local pawns=ESPShared.GetFramePawns()
-    pawns = pawns or _G.g_UXOfficial_TrackedCharacters
+    pawns = pawns or _G.g_BNTSATAN_TrackedCharacters
     if pawns then
         for _, character in pairs(pawns) do
             if character~=me and ESPShared.GetFrameRecord(character).Alive then
-                local team = g_UXOfficial_ESPGetTeamID(character)
+                local team = g_BNTSATAN_ESPGetTeamID(character)
                 -- Fix: only skip as same-team when both IDs are non-zero and equal
                 local sameTeam = false
                 if myTeam ~= nil and team ~= nil then
@@ -3997,9 +3997,9 @@ local function g_UXOfficial_ESPScanEnemies()
                 if not sameTeam then
                     local loc = ESPShared.GetFrameRecord(character).Location
                     local dist = ESPShared.DistanceMetersFrom(ESPShared.GetFrameRecord(character),myLoc)
-                    if dist <= (tonumber(_G.g_UXOfficial_UXOfficialShotESP.MaxRangeMeters) or 400.0) then
-                        local key = g_UXOfficial_ESPGetPlayerKey(character)
-                        local isBot = g_UXOfficial_ESPIsBot(character,key)
+                    if dist <= (tonumber(_G.g_BNTSATAN_UXOfficialShotESP.MaxRangeMeters) or 400.0) then
+                        local key = g_BNTSATAN_ESPGetPlayerKey(character)
+                        local isBot = g_BNTSATAN_ESPIsBot(character,key)
                         if isBot then botCount = botCount + 1 else realCount = realCount + 1 end
                         list[#list+1] = {Character=character, Key=key, IsBot=isBot, Distance=dist}
                     end
@@ -4011,49 +4011,49 @@ local function g_UXOfficial_ESPScanEnemies()
         if a.Distance == b.Distance then return a.Key < b.Key end
         return (a.Distance or 99999) < (b.Distance or 99999)
     end)
-    g_UXOfficial_ShotESP.Enemies = list
+    g_BNTSATAN_ShotESP.Enemies = list
     return pc, realCount, botCount
 end
 
 -- ESP stale widget cleanup made by @GRW_XD
-local function g_UXOfficial_ESPPrune(active,alive)
+local function g_BNTSATAN_ESPPrune(active,alive)
     -- Visual caches follow the displayed set. Counting metadata follows alive.
     -- Move header children into their actor-free parent bundle before pruning
     -- either registry; no detached child can follow a different enemy.
-    for key,root in pairs(g_UXOfficial_ShotESP.HeaderRoots) do
+    for key,root in pairs(g_BNTSATAN_ShotESP.HeaderRoots) do
         if not active[key] and root.PoolOwner and root.Groups then
-            root.Groups.__Header=g_UXOfficial_ShotESP.Headers[key]
-            g_UXOfficial_ShotESP.Headers[key]=nil
+            root.Groups.__Header=g_BNTSATAN_ShotESP.Headers[key]
+            g_BNTSATAN_ShotESP.Headers[key]=nil
         end
     end
-    for _,registry in ipairs({g_UXOfficial_ShotESP.Lines,g_UXOfficial_ShotESP.Names,
-        g_UXOfficial_ShotESP.Decorations,g_UXOfficial_ShotESP.HeaderRoots}) do
+    for _,registry in ipairs({g_BNTSATAN_ShotESP.Lines,g_BNTSATAN_ShotESP.Names,
+        g_BNTSATAN_ShotESP.Decorations,g_BNTSATAN_ShotESP.HeaderRoots}) do
         for key,data in pairs(registry) do
-            if not active[key] then g_UXOfficial_ESPDestroyWidgetData(data);registry[key]=nil end
+            if not active[key] then g_BNTSATAN_ESPDestroyWidgetData(data);registry[key]=nil end
         end
     end
-    for _,registry in ipairs({g_UXOfficial_ShotESP.Boxes,g_UXOfficial_ShotESP.HealthBars,
-        g_UXOfficial_ShotESP.Skeletons,g_UXOfficial_ShotESP.Headers,g_UXOfficial_ShotESP.Footers}) do
+    for _,registry in ipairs({g_BNTSATAN_ShotESP.Boxes,g_BNTSATAN_ShotESP.HealthBars,
+        g_BNTSATAN_ShotESP.Skeletons,g_BNTSATAN_ShotESP.Headers,g_BNTSATAN_ShotESP.Footers}) do
         for key,group in pairs(registry) do
-            if not active[key] then g_UXOfficial_ESPDestroyGroup(group);registry[key]=nil end
+            if not active[key] then g_BNTSATAN_ESPDestroyGroup(group);registry[key]=nil end
         end
     end
-    for _,registry in ipairs({g_UXOfficial_ShotESP.BuildStage,g_UXOfficial_ShotESP.BoneNameCache,
-        g_UXOfficial_ShotESP.BoneMeshes,g_UXOfficial_ShotESP.BonePoints}) do
+    for _,registry in ipairs({g_BNTSATAN_ShotESP.BuildStage,g_BNTSATAN_ShotESP.BoneNameCache,
+        g_BNTSATAN_ShotESP.BoneMeshes,g_BNTSATAN_ShotESP.BonePoints}) do
         for key in pairs(registry) do if not active[key] then registry[key]=nil end end
     end
-    for key in pairs(g_UXOfficial_ShotESP._BotCache) do if not alive[key] then g_UXOfficial_ShotESP._BotCache[key]=nil end end
+    for key in pairs(g_BNTSATAN_ShotESP._BotCache) do if not alive[key] then g_BNTSATAN_ShotESP._BotCache[key]=nil end end
 end
 
 -- Vehicle tracking bridge: the host/game-specific vehicle scanner can register actor references here.
--- Example: g_UXOfficial_TrackRadarVehicle(vehicleActor). The radar validates actors before drawing.
-_G.g_UXOfficial_TrackedVehicles = _G.g_UXOfficial_TrackedVehicles or {}
-function _G.g_UXOfficial_TrackRadarVehicle(vehicleActor)
+-- Example: g_BNTSATAN_TrackRadarVehicle(vehicleActor). The radar validates actors before drawing.
+_G.g_BNTSATAN_TrackedVehicles = _G.g_BNTSATAN_TrackedVehicles or {}
+function _G.g_BNTSATAN_TrackRadarVehicle(vehicleActor)
     if not vehicleActor then return false end
     local valid=false
     pcall(function() valid=vehicleActor.K2_GetActorLocation~=nil end)
     if not valid then return false end
-    local list=_G.g_UXOfficial_TrackedVehicles
+    local list=_G.g_BNTSATAN_TrackedVehicles
     for _,entry in pairs(list) do
         local actor=type(entry)=="table" and (entry.Vehicle or entry.Actor or entry[1]) or entry
         if actor==vehicleActor then return true end
@@ -4061,21 +4061,21 @@ function _G.g_UXOfficial_TrackRadarVehicle(vehicleActor)
     list[#list+1]=vehicleActor
     return true
 end
-function _G.g_UXOfficial_ClearRadarVehicles()
-    _G.g_UXOfficial_TrackedVehicles = {}
+function _G.g_BNTSATAN_ClearRadarVehicles()
+    _G.g_BNTSATAN_TrackedVehicles = {}
 end
 
 -- Compact side radar (green player arrow, red real enemies, yellow bots, pink tracked vehicles).
 -- Uses the already-collected target list; optional vehicles can be supplied through
--- _G.g_UXOfficial_TrackedVehicles as an array of actor references or {Vehicle=actor} records.
-local function g_UXOfficial_ESPRadarLine(index, color)
-    local state=g_UXOfficial_ShotESP
+-- _G.g_BNTSATAN_TrackedVehicles as an array of actor references or {Vehicle=actor} records.
+local function g_BNTSATAN_ESPRadarLine(index, color)
+    local state=g_BNTSATAN_ShotESP
     local line=state.RadarLines[index]
-    if line and (line.Broken or not g_UXOfficial_ESPValid(line.Widget)) then
-        g_UXOfficial_ESPDestroyWidgetData(line); state.RadarLines[index]=nil; line=nil
+    if line and (line.Broken or not g_BNTSATAN_ESPValid(line.Widget)) then
+        g_BNTSATAN_ESPDestroyWidgetData(line); state.RadarLines[index]=nil; line=nil
     end
     if not line then
-        line=g_UXOfficial_ESPCreateLine(color)
+        line=g_BNTSATAN_ESPCreateLine(color)
         if line then state.RadarLines[index]=line end
     else
         if line.RadarColor~=color then pcall(function() line.Widget:SetBrushColor(color) end); line.RadarColor=color end
@@ -4084,38 +4084,38 @@ local function g_UXOfficial_ESPRadarLine(index, color)
 end
 
 -- Track lines drawn in the current frame so stale radar markers are hidden safely.
-local g_UXOfficial_RadarActiveLines = {}
+local g_BNTSATAN_RadarActiveLines = {}
 
-local function g_UXOfficial_ESPRadarDraw(index, x1,y1,x2,y2,thick,color)
-    local line=g_UXOfficial_ESPRadarLine(index,color)
+local function g_BNTSATAN_ESPRadarDraw(index, x1,y1,x2,y2,thick,color)
+    local line=g_BNTSATAN_ESPRadarLine(index,color)
     if line then
-        g_UXOfficial_ESPDrawLine(line,x1,y1,x2,y2,thick)
-        g_UXOfficial_RadarActiveLines[index] = true
+        g_BNTSATAN_ESPDrawLine(line,x1,y1,x2,y2,thick)
+        g_BNTSATAN_RadarActiveLines[index] = true
     end
 end
 
-local function g_UXOfficial_ESPRadarHideInactive()
-    local state=g_UXOfficial_ShotESP
+local function g_BNTSATAN_ESPRadarHideInactive()
+    local state=g_BNTSATAN_ShotESP
     if not state or type(state.RadarLines)~="table" then return end
     for i,line in pairs(state.RadarLines) do
-        if line and not g_UXOfficial_RadarActiveLines[i] then
-            g_UXOfficial_ESPHide(line)
+        if line and not g_BNTSATAN_RadarActiveLines[i] then
+            g_BNTSATAN_ESPHide(line)
         end
     end
 end
 
-local function g_UXOfficial_ESPRadarHideFrom(index)
-    local state=g_UXOfficial_ShotESP
+local function g_BNTSATAN_ESPRadarHideFrom(index)
+    local state=g_BNTSATAN_ShotESP
     if not state or type(state.RadarLines)~="table" then return end
     for i,line in pairs(state.RadarLines) do
-        if i>=index and line then g_UXOfficial_ESPHide(line) end
+        if i>=index and line then g_BNTSATAN_ESPHide(line) end
     end
 end
 
-local function g_UXOfficial_ESPRadarEnsureControls(canvas,canvasW,canvasH)
+local function g_BNTSATAN_ESPRadarEnsureControls(canvas,canvasW,canvasH)
     -- Side radar is automatic: remove the old floating RADAR / close controls.
     -- The existing ESP menu option named RADAR MAP remains the master on/off switch.
-    local state=g_UXOfficial_ShotESP
+    local state=g_BNTSATAN_ShotESP
     local ui=state.RadarUI
     if ui then
         for _,name in ipairs({"ToggleEvent","CloseEvent"}) do
@@ -4123,7 +4123,7 @@ local function g_UXOfficial_ESPRadarEnsureControls(canvas,canvasW,canvasH)
             if ev and handle~=nil then pcall(function() ev:Remove(handle) end) end
         end
         for _,name in ipairs({"ToggleLabel","ToggleButton","CloseLabel","CloseButton"}) do
-            if g_UXOfficial_ESPValid(ui[name]) then pcall(function() ui[name]:RemoveFromParent() end) end
+            if g_BNTSATAN_ESPValid(ui[name]) then pcall(function() ui[name]:RemoveFromParent() end) end
         end
         state.RadarUI=nil
         state.RadarCanvas=nil
@@ -4131,14 +4131,14 @@ local function g_UXOfficial_ESPRadarEnsureControls(canvas,canvasW,canvasH)
     state.RadarOpen=true
 end
 
-local function g_UXOfficial_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
+local function g_BNTSATAN_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
     if not canvasW or not canvasH or not me or not myLoc then return end
-    local state=g_UXOfficial_ShotESP
-    g_UXOfficial_RadarActiveLines = {}
-    local canvas=g_UXOfficial_ESPGetCanvas()
-    g_UXOfficial_ESPRadarEnsureControls(canvas,canvasW,canvasH)
-    if _G.g_UXOfficial_ESPOptions.Radar~=true then
-        g_UXOfficial_ESPRadarHideFrom(1)
+    local state=g_BNTSATAN_ShotESP
+    g_BNTSATAN_RadarActiveLines = {}
+    local canvas=g_BNTSATAN_ESPGetCanvas()
+    g_BNTSATAN_ESPRadarEnsureControls(canvas,canvasW,canvasH)
+    if _G.g_BNTSATAN_ESPOptions.Radar~=true then
+        g_BNTSATAN_ESPRadarHideFrom(1)
         return
     end
     -- Compact always-visible side radar; no floating toggle and no expanded-map mode.
@@ -4153,37 +4153,37 @@ local function g_UXOfficial_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
     end)
     local idx=1
     -- Compact circular radar: premium gold frame with vivid neon range rings.
-    local radarRed=g_UXOfficial_ESPColor(1.0,0.68,0.08,1.0)
-    local radarGrid=g_UXOfficial_ESPColor(0.78,0.48,0.08,0.92)
-    local radarCyan=g_UXOfficial_ESPColor(0.0,0.88,1.0,0.96)
-    local radarBlue=g_UXOfficial_ESPColor(0.12,0.36,1.0,0.96)
-    local radarPurple=g_UXOfficial_ESPColor(0.78,0.12,1.0,0.96)
-    local radarGreen=g_UXOfficial_ESPColor(1.0,0.045,0.10,1.0) -- dragon-red player marker
-    local radarFillLine=g_UXOfficial_ESPColor(0.025,0.02,0.008,0.96)
+    local radarRed=g_BNTSATAN_ESPColor(1.0,0.68,0.08,1.0)
+    local radarGrid=g_BNTSATAN_ESPColor(0.78,0.48,0.08,0.92)
+    local radarCyan=g_BNTSATAN_ESPColor(0.0,0.88,1.0,0.96)
+    local radarBlue=g_BNTSATAN_ESPColor(0.12,0.36,1.0,0.96)
+    local radarPurple=g_BNTSATAN_ESPColor(0.78,0.12,1.0,0.96)
+    local radarGreen=g_BNTSATAN_ESPColor(1.0,0.045,0.10,1.0) -- dragon-red player marker
+    local radarFillLine=g_BNTSATAN_ESPColor(0.025,0.02,0.008,0.96)
     -- Premium tactical HUD frame: keep the original layout and geometry, using gold colors only.
     local box=radius+9.0
     local corner=math.max(16.0,math.min(27.0,radius*0.22))
     -- Top-left / top-right / bottom-right / bottom-left corner brackets.
-    g_UXOfficial_ESPRadarDraw(idx,cx-box,cy-box,cx-box+corner,cy-box,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-box,cy-box,cx-box,cy-box+corner,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+box-corner,cy-box,cx+box,cy-box,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+box,cy-box,cx+box,cy-box+corner,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+box,cy+box-corner,cx+box,cy+box,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+box-corner,cy+box,cx+box,cy+box,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-box,cy+box-corner,cx-box,cy+box,3.0,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-box,cy+box,cx-box+corner,cy+box,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-box,cy-box,cx-box+corner,cy-box,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-box,cy-box,cx-box,cy-box+corner,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+box-corner,cy-box,cx+box,cy-box,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+box,cy-box,cx+box,cy-box+corner,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+box,cy+box-corner,cx+box,cy+box,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+box-corner,cy+box,cx+box,cy+box,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-box,cy+box-corner,cx-box,cy+box,3.0,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-box,cy+box,cx-box+corner,cy+box,3.0,radarRed); idx=idx+1
     -- Short technical ticks at the middle of each side.
     local tick=math.max(7.0,math.min(12.0,radius*0.09))
-    g_UXOfficial_ESPRadarDraw(idx,cx-tick,cy-box,cx+tick,cy-box,1.7,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-tick,cy+box,cx+tick,cy+box,1.7,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-box,cy-tick,cx-box,cy+tick,1.7,radarRed); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+box,cy-tick,cx+box,cy+tick,1.7,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-tick,cy-box,cx+tick,cy-box,1.7,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-tick,cy+box,cx+tick,cy+box,1.7,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-box,cy-tick,cx-box,cy+tick,1.7,radarRed); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+box,cy-tick,cx+box,cy+tick,1.7,radarRed); idx=idx+1
     -- Thin inner gold frame gives the radar a layered instrument-panel look.
     local innerBox=radius+2.0
-    g_UXOfficial_ESPRadarDraw(idx,cx-innerBox,cy-innerBox,cx+innerBox,cy-innerBox,1.0,radarGrid); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+innerBox,cy-innerBox,cx+innerBox,cy+innerBox,1.0,radarGrid); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx+innerBox,cy+innerBox,cx-innerBox,cy+innerBox,1.0,radarGrid); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-innerBox,cy+innerBox,cx-innerBox,cy-innerBox,1.0,radarGrid); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-innerBox,cy-innerBox,cx+innerBox,cy-innerBox,1.0,radarGrid); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+innerBox,cy-innerBox,cx+innerBox,cy+innerBox,1.0,radarGrid); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx+innerBox,cy+innerBox,cx-innerBox,cy+innerBox,1.0,radarGrid); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-innerBox,cy+innerBox,cx-innerBox,cy-innerBox,1.0,radarGrid); idx=idx+1
     -- Circular neon rings: cyan, blue, purple and gold, matching the reference palette.
     for _,rf in ipairs({1.0,0.75,0.50,0.25}) do
         local ring={}
@@ -4194,16 +4194,16 @@ local function g_UXOfficial_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
         end
         for i=1,#ring do
             local a=ring[i]; local b=ring[(i%#ring)+1]
-            g_UXOfficial_ESPRadarDraw(idx,a[1],a[2],b[1],b[2],rf==1.0 and 1.8 or 1.25,ringColor); idx=idx+1
+            g_BNTSATAN_ESPRadarDraw(idx,a[1],a[2],b[1],b[2],rf==1.0 and 1.8 or 1.25,ringColor); idx=idx+1
         end
     end
-    g_UXOfficial_ESPRadarDraw(idx,cx-radius,cy,cx+radius,cy,1.2,radarGrid); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx,cy-radius,cx,cy+radius,1.2,radarGrid); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-radius,cy,cx+radius,cy,1.2,radarGrid); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx,cy-radius,cx,cy+radius,1.2,radarGrid); idx=idx+1
     -- Player arrow points in the current facing direction (screen-up).
     local green=radarGreen
-    g_UXOfficial_ESPRadarDraw(idx,cx,cy-8,cx-6,cy+6,3.0,green); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx,cy-8,cx+6,cy+6,3.0,green); idx=idx+1
-    g_UXOfficial_ESPRadarDraw(idx,cx-6,cy+6,cx+6,cy+6,3.0,green); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx,cy-8,cx-6,cy+6,3.0,green); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx,cy-8,cx+6,cy+6,3.0,green); idx=idx+1
+    g_BNTSATAN_ESPRadarDraw(idx,cx-6,cy+6,cx+6,cy+6,3.0,green); idx=idx+1
 
     local function drawDot(actor,color,offset)
         local loc=nil
@@ -4226,21 +4226,21 @@ local function g_UXOfficial_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
         local px=cx+(mx/rangeMeters)*radius
         local py=cy-(my/rangeMeters)*radius
         local sz=dist<25 and 3.4 or 2.5
-        g_UXOfficial_ESPRadarDraw(offset,px-sz,py,px+sz,py,2.8,color)
-        g_UXOfficial_ESPRadarDraw(offset+1,px,py-sz,px,py+sz,2.8,color)
+        g_BNTSATAN_ESPRadarDraw(offset,px-sz,py,px+sz,py,2.8,color)
+        g_BNTSATAN_ESPRadarDraw(offset+1,px,py-sz,px,py+sz,2.8,color)
     end
     -- Keep actor tracking and positions unchanged; distinguish bots from real enemies by color.
     local dotIndex=idx
     local drawn=0
-    local radarGreen=g_UXOfficial_ESPColor(0.12,0.92,0.30,1.0)
-    local radarYellow=g_UXOfficial_ESPColor(1.0,0.78,0.08,1.0)
-    local radarRed=g_UXOfficial_ESPColor(0.96,0.08,0.10,1.0)
-    local botYellow=g_UXOfficial_ESPColor(1.0,0.82,0.02,1.0)
+    local radarGreen=g_BNTSATAN_ESPColor(0.12,0.92,0.30,1.0)
+    local radarYellow=g_BNTSATAN_ESPColor(1.0,0.78,0.08,1.0)
+    local radarRed=g_BNTSATAN_ESPColor(0.96,0.08,0.10,1.0)
+    local botYellow=g_BNTSATAN_ESPColor(1.0,0.82,0.02,1.0)
     for _,item in ipairs(items or {}) do
         if drawn>=12 then break end
         local color=botYellow
         if not (item and item.IsBot) then
-            local hpRatio=g_UXOfficial_ESPHealthRatio(item.Character)
+            local hpRatio=g_BNTSATAN_ESPHealthRatio(item.Character)
             if hpRatio<=0.30 then
                 color=radarRed
             elseif hpRatio<0.999 then
@@ -4253,8 +4253,8 @@ local function g_UXOfficial_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
         dotIndex=dotIndex+2; drawn=drawn+1
     end
     -- Tracked vehicles use vivid pink, as in the supplied reference.
-    local vehicles=_G.g_UXOfficial_TrackedVehicles
-    local pink=g_UXOfficial_ESPColor(1.0,0.08,0.82,1.0)
+    local vehicles=_G.g_BNTSATAN_TrackedVehicles
+    local pink=g_BNTSATAN_ESPColor(1.0,0.08,0.82,1.0)
     if type(vehicles)=="table" then
         local vdrawn=0
         for _,entry in pairs(vehicles) do
@@ -4268,95 +4268,95 @@ local function g_UXOfficial_ESPUpdateRadar(canvasW,canvasH,me,myLoc,items)
             end
         end
     end
-    g_UXOfficial_ESPRadarHideInactive()
+    g_BNTSATAN_ESPRadarHideInactive()
 end
 
 -- ESP main HUD update made by @GRW_XD
-local function g_UXOfficial_ESPUpdate()
-    local opt = _G.g_UXOfficial_ESPOptions
+local function g_BNTSATAN_ESPUpdate()
+    local opt = _G.g_BNTSATAN_ESPOptions
     local anyEnabled = opt and (opt.Name or opt.Line or opt.Box or opt.Health or opt.Distance or opt.Skeleton or opt.Counter or opt.Radar)
-    if not _G.g_UXOfficial_UXOfficialShotESP.Enabled or not anyEnabled then
-        if not g_UXOfficial_ShotESP.Disabled then g_UXOfficial_ESPResetWidgets() end
-        g_UXOfficial_ShotESP.Disabled = true
+    if not _G.g_BNTSATAN_UXOfficialShotESP.Enabled or not anyEnabled then
+        if not g_BNTSATAN_ShotESP.Disabled then g_BNTSATAN_ESPResetWidgets() end
+        g_BNTSATAN_ShotESP.Disabled = true
         return
     end
-    g_UXOfficial_ShotESP.Disabled = false
-    local buildBudget = tonumber(_G.g_UXOfficial_UXOfficialShotESP.WidgetBuildBudget) or 96
+    g_BNTSATAN_ShotESP.Disabled = false
+    local buildBudget = tonumber(_G.g_BNTSATAN_UXOfficialShotESP.WidgetBuildBudget) or 96
     if buildBudget ~= buildBudget or buildBudget == math.huge then buildBudget = 96 end
-    g_UXOfficial_ShotESP.BuildRemaining = math.max(1, math.floor(buildBudget))
+    g_BNTSATAN_ShotESP.BuildRemaining = math.max(1, math.floor(buildBudget))
 
-    local world = g_UXOfficial_ESPWorld()
-    if world ~= g_UXOfficial_ShotESP.LastWorld then
-        g_UXOfficial_ESPResetWidgets()
-        g_UXOfficial_ShotESP.LastWorld = world
-        g_UXOfficial_ShotESP.LastScanClock = -999.0
-        g_UXOfficial_ShotESP.LastTransformClock = -999.0
-        g_UXOfficial_ShotESP.TracerOrigin = nil
+    local world = g_BNTSATAN_ESPWorld()
+    if world ~= g_BNTSATAN_ShotESP.LastWorld then
+        g_BNTSATAN_ESPResetWidgets()
+        g_BNTSATAN_ShotESP.LastWorld = world
+        g_BNTSATAN_ShotESP.LastScanClock = -999.0
+        g_BNTSATAN_ShotESP.LastTransformClock = -999.0
+        g_BNTSATAN_ShotESP.TracerOrigin = nil
     end
 
-    if g_UXOfficial_ShotESP.Canvas and not g_UXOfficial_ESPValid(g_UXOfficial_ShotESP.Canvas) then
-        g_UXOfficial_ESPResetWidgets()
+    if g_BNTSATAN_ShotESP.Canvas and not g_BNTSATAN_ESPValid(g_BNTSATAN_ShotESP.Canvas) then
+        g_BNTSATAN_ESPResetWidgets()
     end
-    local canvas = g_UXOfficial_ESPGetCanvas()
+    local canvas = g_BNTSATAN_ESPGetCanvas()
     if not canvas then return end
-    local now = g_UXOfficial_ESPNow()
-    g_UXOfficial_ShotESP.Now = now
-    if now < g_UXOfficial_ShotESP.LastScanClock then
-        g_UXOfficial_ShotESP.LastScanClock = -999.0
-        g_UXOfficial_ShotESP.LastTransformClock = -999.0
+    local now = g_BNTSATAN_ESPNow()
+    g_BNTSATAN_ShotESP.Now = now
+    if now < g_BNTSATAN_ShotESP.LastScanClock then
+        g_BNTSATAN_ShotESP.LastScanClock = -999.0
+        g_BNTSATAN_ShotESP.LastTransformClock = -999.0
     end
-    local pc = g_UXOfficial_ESPGetController()
-    local me = g_UXOfficial_ESPGetLocalCharacter()
-    if pc ~= g_UXOfficial_ShotESP.LastController or me ~= g_UXOfficial_ShotESP.LastPawn then
-        g_UXOfficial_ESPResetWidgets()
-        g_UXOfficial_ShotESP.LastController, g_UXOfficial_ShotESP.LastPawn = pc,me
-        canvas = g_UXOfficial_ESPGetCanvas()
+    local pc = g_BNTSATAN_ESPGetController()
+    local me = g_BNTSATAN_ESPGetLocalCharacter()
+    if pc ~= g_BNTSATAN_ShotESP.LastController or me ~= g_BNTSATAN_ShotESP.LastPawn then
+        g_BNTSATAN_ESPResetWidgets()
+        g_BNTSATAN_ShotESP.LastController, g_BNTSATAN_ShotESP.LastPawn = pc,me
+        canvas = g_BNTSATAN_ESPGetCanvas()
         if not canvas then return end
     end
     if not pc or not me then return end
     local myLoc = ESPShared.GetFrameRecord(me).Location
     local realCount, botCount = nil, nil
-    if (now - g_UXOfficial_ShotESP.LastScanClock) >= (tonumber(_G.g_UXOfficial_UXOfficialShotESP.ScanInterval) or 0.30) then
-        pc, realCount, botCount = g_UXOfficial_ESPScanEnemies()
-        g_UXOfficial_ShotESP.LastScanClock = now
-        g_UXOfficial_ShotESP.RealCount, g_UXOfficial_ShotESP.BotCount = realCount, botCount
+    if (now - g_BNTSATAN_ShotESP.LastScanClock) >= (tonumber(_G.g_BNTSATAN_UXOfficialShotESP.ScanInterval) or 0.30) then
+        pc, realCount, botCount = g_BNTSATAN_ESPScanEnemies()
+        g_BNTSATAN_ShotESP.LastScanClock = now
+        g_BNTSATAN_ShotESP.RealCount, g_BNTSATAN_ShotESP.BotCount = realCount, botCount
     end
-    pc = pc or g_UXOfficial_ESPGetController()
+    pc = pc or g_BNTSATAN_ESPGetController()
     if not pc then return end
 
-    if (now - (g_UXOfficial_ShotESP.LastTransformClock or -999.0))
-        >= (tonumber(_G.g_UXOfficial_UXOfficialShotESP.TransformInterval) or 0.50) then
-        g_UXOfficial_ESPUpdateCanvasTransform(pc)
-        local cw,ch=g_UXOfficial_ESPGetCanvasLocalSize()
-        if cw and ch then g_UXOfficial_ShotESP.ViewportW,g_UXOfficial_ShotESP.ViewportH=cw,ch end
-        local rw,rh=g_UXOfficial_ESPViewport(pc)
-        g_UXOfficial_ShotESP.RawViewportW,g_UXOfficial_ShotESP.RawViewportH=rw,rh
-        g_UXOfficial_ShotESP.LastTransformClock = now
+    if (now - (g_BNTSATAN_ShotESP.LastTransformClock or -999.0))
+        >= (tonumber(_G.g_BNTSATAN_UXOfficialShotESP.TransformInterval) or 0.50) then
+        g_BNTSATAN_ESPUpdateCanvasTransform(pc)
+        local cw,ch=g_BNTSATAN_ESPGetCanvasLocalSize()
+        if cw and ch then g_BNTSATAN_ShotESP.ViewportW,g_BNTSATAN_ShotESP.ViewportH=cw,ch end
+        local rw,rh=g_BNTSATAN_ESPViewport(pc)
+        g_BNTSATAN_ShotESP.RawViewportW,g_BNTSATAN_ShotESP.RawViewportH=rw,rh
+        g_BNTSATAN_ShotESP.LastTransformClock = now
     end
 
     local rawW,rawH=ESPShared.ViewSize(pc)
     -- The tracer uses the physical viewport midpoint in canvas coordinates.
-    local canvasScaleX=ESPShared.SafeNumber(g_UXOfficial_ShotESP.CanvasScaleX,1.0,0.00001,100)
-    local canvasScaleY=ESPShared.SafeNumber(g_UXOfficial_ShotESP.CanvasScaleY,1.0,0.00001,100)
-    local canvasOffsetX=ESPShared.SafeNumber(g_UXOfficial_ShotESP.CanvasOffsetX,0.0,-1e7,1e7)
-    local canvasOffsetY=ESPShared.SafeNumber(g_UXOfficial_ShotESP.CanvasOffsetY,0.0,-1e7,1e7)
-    local originCenter = g_UXOfficial_ESPV2(
+    local canvasScaleX=ESPShared.SafeNumber(g_BNTSATAN_ShotESP.CanvasScaleX,1.0,0.00001,100)
+    local canvasScaleY=ESPShared.SafeNumber(g_BNTSATAN_ShotESP.CanvasScaleY,1.0,0.00001,100)
+    local canvasOffsetX=ESPShared.SafeNumber(g_BNTSATAN_ShotESP.CanvasOffsetX,0.0,-1e7,1e7)
+    local canvasOffsetY=ESPShared.SafeNumber(g_BNTSATAN_ShotESP.CanvasOffsetY,0.0,-1e7,1e7)
+    local originCenter = g_BNTSATAN_ESPV2(
         (rawW*0.5)*canvasScaleX+canvasOffsetX,
         4.0*canvasScaleY+canvasOffsetY
     )
-    local active,alive=g_UXOfficial_ShotESP.Active,g_UXOfficial_ShotESP.Alive
-    g_UXOfficial_ShotESP.RealCount,g_UXOfficial_ShotESP.BotCount=g_UXOfficial_ESPFilterEnemies(
-        g_UXOfficial_ShotESP.Enemies,myLoc,_G.g_UXOfficial_UXOfficialShotESP.MaxRangeMeters,alive)
-    local radarW,radarH=g_UXOfficial_ESPGetCanvasLocalSize()
-    if radarW and radarH then g_UXOfficial_ESPUpdateRadar(radarW,radarH,me,myLoc,g_UXOfficial_ShotESP.Enemies) end
+    local active,alive=g_BNTSATAN_ShotESP.Active,g_BNTSATAN_ShotESP.Alive
+    g_BNTSATAN_ShotESP.RealCount,g_BNTSATAN_ShotESP.BotCount=g_BNTSATAN_ESPFilterEnemies(
+        g_BNTSATAN_ShotESP.Enemies,myLoc,_G.g_BNTSATAN_UXOfficialShotESP.MaxRangeMeters,alive)
+    local radarW,radarH=g_BNTSATAN_ESPGetCanvasLocalSize()
+    if radarW and radarH then g_BNTSATAN_ESPUpdateRadar(radarW,radarH,me,myLoc,g_BNTSATAN_ShotESP.Enemies) end
     if opt.Counter then
-        g_UXOfficial_ESPUpdateCounter(
-            g_UXOfficial_ShotESP.RealCount or 0,
-            g_UXOfficial_ShotESP.BotCount or 0,
+        g_BNTSATAN_ESPUpdateCounter(
+            g_BNTSATAN_ShotESP.RealCount or 0,
+            g_BNTSATAN_ShotESP.BotCount or 0,
             pc
         )
-    elseif g_UXOfficial_ShotESP.Counter then
-        g_UXOfficial_ESPHide(g_UXOfficial_ShotESP.Counter)
+    elseif g_BNTSATAN_ShotESP.Counter then
+        g_BNTSATAN_ESPHide(g_BNTSATAN_ShotESP.Counter)
     end
 
     -- Counter-only mode stops here after validating cached scan candidates, avoiding
@@ -4364,24 +4364,24 @@ local function g_UXOfficial_ESPUpdate()
     local detailedEnabled=opt.Name or opt.Line or opt.Box or opt.Health or opt.Distance or opt.Skeleton
     if not detailedEnabled then
         for key in pairs(active) do active[key]=nil end
-        g_UXOfficial_ESPPrune(active,alive)
+        g_BNTSATAN_ESPPrune(active,alive)
         return
     end
 
     for key in pairs(active) do active[key]=nil end
-    local configuredMax=math.floor(ESPShared.SafeNumber(_G.g_UXOfficial_UXOfficialShotESP.MaxRendered,8,1,64))
+    local configuredMax=math.floor(ESPShared.SafeNumber(_G.g_BNTSATAN_UXOfficialShotESP.MaxRendered,8,1,64))
     local maxRendered = configuredMax
     local renderedCount=0
     -- Keep the nearest-candidate budget; counting still validates every actor.
-    for index,item in ipairs(g_UXOfficial_ShotESP.Enemies) do
+    for index,item in ipairs(g_BNTSATAN_ShotESP.Enemies) do
         if index>maxRendered then break end
         local c,key=item.Character,item.Key
-        local headScreen,footScreen,onScreen=ESPShared.ProjectActor(pc,c,g_UXOfficial_ShotESP)
+        local headScreen,footScreen,onScreen=ESPShared.ProjectActor(pc,c,g_BNTSATAN_ShotESP)
         if onScreen then
             if renderedCount<maxRendered then
                 renderedCount=renderedCount+1
                 active[key] = true
-                local buildStage=g_UXOfficial_ShotESP.BuildStage[key] or 1
+                local buildStage=g_BNTSATAN_ShotESP.BuildStage[key] or 1
                 -- Use the controller's native line-of-sight test: visible = yellow, blocked by cover = red.
                 local isCovered = false
                 pcall(function()
@@ -4396,12 +4396,12 @@ local function g_UXOfficial_ESPUpdate()
                     skeletonVisibilityColor = ESP_BLACK
                     colorKey = "COVER"
                 else
-                    local hpRatio = g_UXOfficial_ESPHealthRatio(c)
+                    local hpRatio = g_BNTSATAN_ESPHealthRatio(c)
                     if hpRatio <= 0.30 then
-                        skeletonVisibilityColor = g_UXOfficial_ESPColor(0.96,0.08,0.10,1.0)
+                        skeletonVisibilityColor = g_BNTSATAN_ESPColor(0.96,0.08,0.10,1.0)
                         colorKey = "HP_RED"
                     elseif hpRatio <= 0.70 then
-                        skeletonVisibilityColor = g_UXOfficial_ESPColor(1.0,0.78,0.08,1.0)
+                        skeletonVisibilityColor = g_BNTSATAN_ESPColor(1.0,0.78,0.08,1.0)
                         colorKey = "HP_YELLOW"
                     else
                         local palette = {
@@ -4415,17 +4415,17 @@ local function g_UXOfficial_ESPUpdate()
                         }
                         local paletteIndex = ((renderedCount - 1) % #palette) + 1
                         local selected = palette[paletteIndex]
-                        skeletonVisibilityColor = g_UXOfficial_ESPColor(selected[1],selected[2],selected[3],selected[4])
+                        skeletonVisibilityColor = g_BNTSATAN_ESPColor(selected[1],selected[2],selected[3],selected[4])
                         colorKey = "ENEMY_" .. selected[5]
                     end
                 end
                 local color = skeletonVisibilityColor
-                local line = g_UXOfficial_ShotESP.Lines[key]
-                if opt.Line and (not line or not g_UXOfficial_ESPValid(line.Widget)) then
-                    g_UXOfficial_ESPDestroyWidgetData(line)
-                    line = g_UXOfficial_ESPCreateLine(color)
+                local line = g_BNTSATAN_ShotESP.Lines[key]
+                if opt.Line and (not line or not g_BNTSATAN_ESPValid(line.Widget)) then
+                    g_BNTSATAN_ESPDestroyWidgetData(line)
+                    line = g_BNTSATAN_ESPCreateLine(color)
                     if line then line.ColorKey = colorKey end
-                    g_UXOfficial_ShotESP.Lines[key] = line
+                    g_BNTSATAN_ShotESP.Lines[key] = line
                 elseif opt.Line and line and line.ColorKey ~= colorKey then
                     pcall(function() line.Widget:SetBrushColor(color) end)
                     line.ColorKey = colorKey
@@ -4434,134 +4434,134 @@ local function g_UXOfficial_ESPUpdate()
                 if opt.Line and line then
                     local tracerTarget = headScreen or footScreen
                     if tracerTarget then
-                        g_UXOfficial_ESPDrawLine(
+                        g_BNTSATAN_ESPDrawLine(
                             line,
                             originCenter.X, originCenter.Y,
                             tracerTarget.X, tracerTarget.Y,
-                            tonumber(_G.g_UXOfficial_UXOfficialShotESP.TracerThickness) or 1.80
+                            tonumber(_G.g_BNTSATAN_UXOfficialShotESP.TracerThickness) or 1.80
                         )
                     end
-                elseif line then g_UXOfficial_ESPHide(line) end
+                elseif line then g_BNTSATAN_ESPHide(line) end
 
-                g_UXOfficial_ESPUpdateDecoration(key,c,headScreen,footScreen,opt,buildStage,item.IsBot)
-                g_UXOfficial_ESPUpdateNameTag(key,c,headScreen,footScreen,item.IsBot,item.Distance,nil,nil,skeletonVisibilityColor,colorKey)
+                g_BNTSATAN_ESPUpdateDecoration(key,c,headScreen,footScreen,opt,buildStage,item.IsBot)
+                g_BNTSATAN_ESPUpdateNameTag(key,c,headScreen,footScreen,item.IsBot,item.Distance,nil,nil,skeletonVisibilityColor,colorKey)
                 -- Header frame: dynamic per-frame update (fills, corner fills, scale with name)
-                g_UXOfficial_ESPUpdateHeaderFrame(key,headScreen,footScreen,opt.Name==true,item.IsBot)
+                g_BNTSATAN_ESPUpdateHeaderFrame(key,headScreen,footScreen,opt.Name==true,item.IsBot)
 
                 -- Skeleton and snap line now share the exact same color state.
                 -- All visible skeletons refresh with the current camera; no round-robin delay.
-                g_UXOfficial_ESPUpdateSkeleton(key, c, pc, opt.Skeleton == true, item.IsBot,
+                g_BNTSATAN_ESPUpdateSkeleton(key, c, pc, opt.Skeleton == true, item.IsBot,
                     skeletonVisibilityColor)
-                g_UXOfficial_ShotESP.BuildStage[key]=math.min(5,buildStage+1)
+                g_BNTSATAN_ShotESP.BuildStage[key]=math.min(5,buildStage+1)
 
             end
         end
     end
-    g_UXOfficial_ESPPrune(active,alive)
+    g_BNTSATAN_ESPPrune(active,alive)
 end
 
 -- One pending render chain. Menu refreshes invalidate/wake it rather than
 -- drawing synchronously multiple times in the same frame.
-local g_UXOfficial_ESPRunnerToken={}
+local g_BNTSATAN_ESPRunnerToken={}
 if type(_G.__UXOfficialShotESPCleanup) == "function" then pcall(_G.__UXOfficialShotESPCleanup) end
-_G.__UXOfficialShotESPRunner=g_UXOfficial_ESPRunnerToken
-_G.__UXOfficialShotESPCleanup=g_UXOfficial_ESPResetWidgets
-local g_UXOfficial_ESPDiagnostics={Updates=0,Errors=0,LastError=nil}
-_G.g_UXOfficial_ESPDiagnostics=g_UXOfficial_ESPDiagnostics
-local g_UXOfficial_ESPTicker=nil
-pcall(function() g_UXOfficial_ESPTicker=require("common.time_ticker") end)
-local g_UXOfficial_ESPTick
-local function g_UXOfficial_ESPSchedule(delay)
+_G.__UXOfficialShotESPRunner=g_BNTSATAN_ESPRunnerToken
+_G.__UXOfficialShotESPCleanup=g_BNTSATAN_ESPResetWidgets
+local g_BNTSATAN_ESPDiagnostics={Updates=0,Errors=0,LastError=nil}
+_G.g_BNTSATAN_ESPDiagnostics=g_BNTSATAN_ESPDiagnostics
+local g_BNTSATAN_ESPTicker=nil
+pcall(function() g_BNTSATAN_ESPTicker=require("common.time_ticker") end)
+local g_BNTSATAN_ESPTick
+local function g_BNTSATAN_ESPSchedule(delay)
     delay=ESPShared.SafeNumber(delay,0.50,0.001,0.50)
-    if _G.__UXOfficialShotESPRunner~=g_UXOfficial_ESPRunnerToken then return end
-    if not g_UXOfficial_ESPTicker or not g_UXOfficial_ESPTicker.AddTimerOnce then
-        g_UXOfficial_ESPDiagnostics.LastError="common.time_ticker.AddTimerOnce unavailable"
+    if _G.__UXOfficialShotESPRunner~=g_BNTSATAN_ESPRunnerToken then return end
+    if not g_BNTSATAN_ESPTicker or not g_BNTSATAN_ESPTicker.AddTimerOnce then
+        g_BNTSATAN_ESPDiagnostics.LastError="common.time_ticker.AddTimerOnce unavailable"
         return
     end
-    local serial=(g_UXOfficial_ESPRunnerToken.Serial or 0)+1
-    g_UXOfficial_ESPRunnerToken.Serial=serial
-    g_UXOfficial_ESPRunnerToken.Due=g_UXOfficial_ESPNow()+delay
-    local ok, err=pcall(g_UXOfficial_ESPTicker.AddTimerOnce,delay,function()
-        if _G.__UXOfficialShotESPRunner~=g_UXOfficial_ESPRunnerToken
-            or g_UXOfficial_ESPRunnerToken.Serial~=serial then return end
-        g_UXOfficial_ESPRunnerToken.Due=nil
-        g_UXOfficial_ShotESP.TimerClock=g_UXOfficial_ShotESP.TimerClock+delay
-        g_UXOfficial_ESPTick()
+    local serial=(g_BNTSATAN_ESPRunnerToken.Serial or 0)+1
+    g_BNTSATAN_ESPRunnerToken.Serial=serial
+    g_BNTSATAN_ESPRunnerToken.Due=g_BNTSATAN_ESPNow()+delay
+    local ok, err=pcall(g_BNTSATAN_ESPTicker.AddTimerOnce,delay,function()
+        if _G.__UXOfficialShotESPRunner~=g_BNTSATAN_ESPRunnerToken
+            or g_BNTSATAN_ESPRunnerToken.Serial~=serial then return end
+        g_BNTSATAN_ESPRunnerToken.Due=nil
+        g_BNTSATAN_ShotESP.TimerClock=g_BNTSATAN_ShotESP.TimerClock+delay
+        g_BNTSATAN_ESPTick()
     end)
     if not ok or err==false then
-        g_UXOfficial_ESPRunnerToken.Due=nil
-        g_UXOfficial_ESPDiagnostics.Errors=g_UXOfficial_ESPDiagnostics.Errors+1
-        g_UXOfficial_ESPDiagnostics.LastError=tostring(err)
+        g_BNTSATAN_ESPRunnerToken.Due=nil
+        g_BNTSATAN_ESPDiagnostics.Errors=g_BNTSATAN_ESPDiagnostics.Errors+1
+        g_BNTSATAN_ESPDiagnostics.LastError=tostring(err)
     end
 end
-g_UXOfficial_ESPTick=function()
-    local token=g_UXOfficial_ESPRunnerToken
+g_BNTSATAN_ESPTick=function()
+    local token=g_BNTSATAN_ESPRunnerToken
     if _G.__UXOfficialShotESPRunner~=token then return end
-    local now=g_UXOfficial_ESPNow()
-    local profiling=_G.g_UXOfficial_UXOfficialShotESP.Profile and os and type(os.clock)=="function"
+    local now=g_BNTSATAN_ESPNow()
+    local profiling=_G.g_BNTSATAN_UXOfficialShotESP.Profile and os and type(os.clock)=="function"
     local callbackStarted=profiling and os.clock() or nil
     ESPShared.Frame.Begin(now)
     local F=_G.LunarFeatures
-    if F then F.TimerClock=g_UXOfficial_ShotESP.TimerClock end
+    if F then F.TimerClock=g_BNTSATAN_ShotESP.TimerClock end
     if not token.RenderDue or now>=token.RenderDue-0.000001 or (token.LastRenderClock and now<token.LastRenderClock) then
-        local previous=g_UXOfficial_ESPDiagnostics.LastTickSeconds
-        if previous and now>previous then g_UXOfficial_ESPDiagnostics.UpdateHz=1/(now-previous) end
-        g_UXOfficial_ESPDiagnostics.LastTickSeconds=now
+        local previous=g_BNTSATAN_ESPDiagnostics.LastTickSeconds
+        if previous and now>previous then g_BNTSATAN_ESPDiagnostics.UpdateHz=1/(now-previous) end
+        g_BNTSATAN_ESPDiagnostics.LastTickSeconds=now
         local started=profiling and os.clock() or nil
-        local ok,err=pcall(g_UXOfficial_ESPUpdate)
-        g_UXOfficial_ESPDiagnostics.LastUpdateOK=ok
-        g_UXOfficial_ESPDiagnostics.Updates=g_UXOfficial_ESPDiagnostics.Updates+1
+        local ok,err=pcall(g_BNTSATAN_ESPUpdate)
+        g_BNTSATAN_ESPDiagnostics.LastUpdateOK=ok
+        g_BNTSATAN_ESPDiagnostics.Updates=g_BNTSATAN_ESPDiagnostics.Updates+1
         if not ok then
-            g_UXOfficial_ESPDiagnostics.Errors=g_UXOfficial_ESPDiagnostics.Errors+1
-            g_UXOfficial_ESPDiagnostics.LastError=tostring(err)
+            g_BNTSATAN_ESPDiagnostics.Errors=g_BNTSATAN_ESPDiagnostics.Errors+1
+            g_BNTSATAN_ESPDiagnostics.LastError=tostring(err)
         end
         if started then
             local elapsed=os.clock()-started
-            g_UXOfficial_ESPDiagnostics.LastUpdateCPUSeconds=elapsed
-            g_UXOfficial_ESPDiagnostics.MaxUpdateCPUSeconds=math.max(elapsed,g_UXOfficial_ESPDiagnostics.MaxUpdateCPUSeconds or 0)
+            g_BNTSATAN_ESPDiagnostics.LastUpdateCPUSeconds=elapsed
+            g_BNTSATAN_ESPDiagnostics.MaxUpdateCPUSeconds=math.max(elapsed,g_BNTSATAN_ESPDiagnostics.MaxUpdateCPUSeconds or 0)
         end
-        local o=_G.g_UXOfficial_ESPOptions or {}
-        local enabled=_G.g_UXOfficial_UXOfficialShotESP.Enabled
+        local o=_G.g_BNTSATAN_ESPOptions or {}
+        local enabled=_G.g_BNTSATAN_UXOfficialShotESP.Enabled
         local detailed=enabled and (o.Name or o.Line or o.Box or o.Health or o.Distance or o.Skeleton)
-        local interval=tonumber(_G.g_UXOfficial_UXOfficialShotESP.UpdateInterval) or 1/60
-        if not detailed then interval=enabled and o.Counter and math.max(0.05,tonumber(_G.g_UXOfficial_UXOfficialShotESP.ScanInterval) or 0.35) or 0.50 end
+        local interval=tonumber(_G.g_BNTSATAN_UXOfficialShotESP.UpdateInterval) or 1/60
+        if not detailed then interval=enabled and o.Counter and math.max(0.05,tonumber(_G.g_BNTSATAN_UXOfficialShotESP.ScanInterval) or 0.35) or 0.50 end
         if interval~=interval or math.abs(interval)==math.huge or interval<=0 then interval=1/60 end
         token.LastRenderClock=now
         token.RenderDue=now+math.max(0.001,interval)
     end
-    if profiling then g_UXOfficial_ESPDiagnostics.LastPumpCPUSeconds=0 end
+    if profiling then g_BNTSATAN_ESPDiagnostics.LastPumpCPUSeconds=0 end
     if F and F.Pump and not F.Token.Stopped then
         local pumpStarted=profiling and os.clock() or nil
         local ok,err=pcall(F.Pump,now)
         if not ok then F.Error("Scheduler",err) end
         if pumpStarted then
             local elapsed=os.clock()-pumpStarted
-            g_UXOfficial_ESPDiagnostics.LastPumpCPUSeconds=elapsed
-            g_UXOfficial_ESPDiagnostics.MaxPumpCPUSeconds=math.max(elapsed,g_UXOfficial_ESPDiagnostics.MaxPumpCPUSeconds or 0)
+            g_BNTSATAN_ESPDiagnostics.LastPumpCPUSeconds=elapsed
+            g_BNTSATAN_ESPDiagnostics.MaxPumpCPUSeconds=math.max(elapsed,g_BNTSATAN_ESPDiagnostics.MaxPumpCPUSeconds or 0)
         end
     end
     ESPShared.Frame.Finish()
-    local after=g_UXOfficial_ESPNow()
+    local after=g_BNTSATAN_ESPNow()
     local interval=math.max(0.001,token.RenderDue-after)
     if F and F.NextInterval and not F.Token.Stopped then interval=math.min(interval,F.NextInterval(after)) end
-    g_UXOfficial_ESPSchedule(interval)
+    g_BNTSATAN_ESPSchedule(interval)
     if callbackStarted then
         local elapsed=os.clock()-callbackStarted
-        g_UXOfficial_ESPDiagnostics.LastCallbackCPUSeconds=elapsed
-        g_UXOfficial_ESPDiagnostics.MaxCallbackCPUSeconds=math.max(elapsed,g_UXOfficial_ESPDiagnostics.MaxCallbackCPUSeconds or 0)
-        g_UXOfficial_ESPDiagnostics.TotalCallbackCPUSeconds=(g_UXOfficial_ESPDiagnostics.TotalCallbackCPUSeconds or 0)+elapsed
-        g_UXOfficial_ESPDiagnostics.CallbackSamples=(g_UXOfficial_ESPDiagnostics.CallbackSamples or 0)+1
+        g_BNTSATAN_ESPDiagnostics.LastCallbackCPUSeconds=elapsed
+        g_BNTSATAN_ESPDiagnostics.MaxCallbackCPUSeconds=math.max(elapsed,g_BNTSATAN_ESPDiagnostics.MaxCallbackCPUSeconds or 0)
+        g_BNTSATAN_ESPDiagnostics.TotalCallbackCPUSeconds=(g_BNTSATAN_ESPDiagnostics.TotalCallbackCPUSeconds or 0)+elapsed
+        g_BNTSATAN_ESPDiagnostics.CallbackSamples=(g_BNTSATAN_ESPDiagnostics.CallbackSamples or 0)+1
     end
 end
 
 
-_G.g_UXOfficial_UXOfficialShotESPForceRefresh = function()
-    if _G.__UXOfficialShotESPRunner~=g_UXOfficial_ESPRunnerToken then return end
-    g_UXOfficial_ESPRunnerToken.RenderDue=nil
-    g_UXOfficial_ShotESP.LastScanClock = -999.0
-    g_UXOfficial_ShotESP.LastTransformClock = -999.0
-    local due=g_UXOfficial_ESPRunnerToken.Due
-    if not due or due-g_UXOfficial_ESPNow()>0.002 then g_UXOfficial_ESPSchedule(0.001) end
+_G.g_BNTSATAN_UXOfficialShotESPForceRefresh = function()
+    if _G.__UXOfficialShotESPRunner~=g_BNTSATAN_ESPRunnerToken then return end
+    g_BNTSATAN_ESPRunnerToken.RenderDue=nil
+    g_BNTSATAN_ShotESP.LastScanClock = -999.0
+    g_BNTSATAN_ShotESP.LastTransformClock = -999.0
+    local due=g_BNTSATAN_ESPRunnerToken.Due
+    if not due or due-g_BNTSATAN_ESPNow()>0.002 then g_BNTSATAN_ESPSchedule(0.001) end
 end
 
 -- Managed feature state. Source settings are data, never loaded as executable Lua.
@@ -4587,7 +4587,7 @@ do
     -- Discard values retained by older hot-reloaded copies.
     settings.WallEnabled=nil;settings.WallVisible=nil;settings.WallOccluded=nil
     _G.g_Botmater_ESPOptions=nil;_G.g_Botmater_UXOfficialShotESP=nil
-    local paths=g_UXOfficial_ESPSettingsPaths()
+    local paths=g_BNTSATAN_ESPSettingsPaths()
     for i,path in ipairs(paths) do paths[i]=path:gsub("UXOfficial_UMG_ESP_settings.lua$","UXOfficial_FEATURES_V3_settings.lua") end
     if io and io.open then
         for _,path in ipairs(paths) do
@@ -4609,22 +4609,22 @@ do
                     end
                     for _,key in ipairs({"Name","Line","Box","Health","Distance","Skeleton","Counter"}) do
                         local val=payload:match("%f[%w_]V2_"..key.."%s*=%s*(%a+)")
-                        if val=="true" or val=="false" then _G.g_UXOfficial_ESPOptions[key]=val=="true" end
+                        if val=="true" or val=="false" then _G.g_BNTSATAN_ESPOptions[key]=val=="true" end
                     end
                     break
                 end
             end
         end
     end
-    if not F.SettingsReadPath and g_UXOfficial_ESPLoadedSettingsPath then
-        F.SettingsReadPath=g_UXOfficial_ESPLoadedSettingsPath:gsub("UXOfficial_UMG_ESP_settings%.lua$","UXOfficial_FEATURES_V3_settings.lua")
+    if not F.SettingsReadPath and g_BNTSATAN_ESPLoadedSettingsPath then
+        F.SettingsReadPath=g_BNTSATAN_ESPLoadedSettingsPath:gsub("UXOfficial_UMG_ESP_settings%.lua$","UXOfficial_FEATURES_V3_settings.lua")
     end
     if settings.Aim2Enabled then settings.AimEnabled=false end
     _G.LexusState.CustomTextData.IpadViewFOV=settings.IpadFOV
     F.Now=function()
         local now=nil
         pcall(function()
-            local world=g_UXOfficial_ESPWorld()
+            local world=g_BNTSATAN_ESPWorld()
             if world and GameplayStaticsESP and GameplayStaticsESP.GetRealTimeSeconds then now=GameplayStaticsESP.GetRealTimeSeconds(world) end
         end)
         return tonumber(now) or F.TimerClock
@@ -4633,12 +4633,12 @@ do
         if not F.Dirty or not io or not io.open then return end
         local lines={"return {", "  IpadEnabled = "..tostring(_G.LexusConfig.IpadView==true)..","}
         for _,key in ipairs({"AimEnabled","Aim2Enabled","MortarEnabled","IpadFOV","AimSpeed","AimTarget"}) do lines[#lines+1]="  "..key.." = "..tostring(settings[key]).."," end
-        for _,key in ipairs({"Name","Line","Box","Health","Distance","Skeleton","Counter","Radar"}) do lines[#lines+1]="  V2_"..key.." = "..tostring(_G.g_UXOfficial_ESPOptions[key]==true).."," end
+        for _,key in ipairs({"Name","Line","Box","Health","Distance","Skeleton","Counter","Radar"}) do lines[#lines+1]="  V2_"..key.." = "..tostring(_G.g_BNTSATAN_ESPOptions[key]==true).."," end
         lines[#lines+1]="}"
         local payload=table.concat(lines,"\n")
         local savePaths=F.SettingsReadPath and {F.SettingsReadPath} or paths
         for _,path in ipairs(savePaths) do
-            local wrote,reason,atomic=g_UXOfficial_ESPWriteSettings(path,payload)
+            local wrote,reason,atomic=g_BNTSATAN_ESPWriteSettings(path,payload)
             if wrote then
                 F.SettingsReadPath=path;F.Dirty=false;F.Diagnostics.LastSaveOK=true;F.Diagnostics.LastSavePath=path;F.Diagnostics.AtomicSave=atomic
                 return true
@@ -4652,13 +4652,13 @@ do
     F.SetIpad=function(enabled)
         _G.LexusConfig.IpadView=enabled==true or enabled==1
         _G.LexusState.CustomTextData.IpadViewFOV=settings.IpadFOV
-        pcall(g_UXOfficial_ApplyiPadView)
+        pcall(g_BNTSATAN_ApplyiPadView)
         F.MarkDirty(true)
     end
     F.SetIpadFOV=function(value)
         settings.IpadFOV=number(value,90,120,120)
         _G.LexusState.CustomTextData.IpadViewFOV=settings.IpadFOV
-        pcall(g_UXOfficial_ApplyiPadView)
+        pcall(g_BNTSATAN_ApplyiPadView)
         F.MarkDirty()
     end
     F.SetAimSpeed=function(value)
@@ -4725,7 +4725,7 @@ do
             return true
         end
         F.MarkDirty(true)
-        _G.g_UXOfficial_UXOfficialShotESPForceRefresh()
+        _G.g_BNTSATAN_UXOfficialShotESPForceRefresh()
         if EventSystem and type(EventSystem.postEvent)=="function" then
             local ok,err=pcall(EventSystem.postEvent,EventSystem,F.ESPSettingsEventType,F.ESPSettingsEventID)
             if not ok then F.Error("ESP.SettingsRefresh",err) end
@@ -4735,21 +4735,21 @@ do
     F.SetESP=function(version,key,value)
         if version~=2 or not v2Valid[key] then return false end
         local on=value==true or value==1
-        local options=_G.g_UXOfficial_ESPOptions
+        local options=_G.g_BNTSATAN_ESPOptions
         local changed=options[key]~=on
         if changed then options[key]=on end
-        if key=="Radar" and not on then g_UXOfficial_ShotESP.RadarOpen=false end
+        if key=="Radar" and not on then g_BNTSATAN_ShotESP.RadarOpen=false end
         return commitESP(changed)
     end
     F.GetESPAll=function(version)
         if version~=2 then return false end
-        local options=_G.g_UXOfficial_ESPOptions
+        local options=_G.g_BNTSATAN_ESPOptions
         for _,key in ipairs(v2Keys) do if options[key]~=true then return false end end
         return true
     end
     F.SetESPAll=function(version,value)
         if version~=2 then return false end
-        local options=_G.g_UXOfficial_ESPOptions
+        local options=_G.g_BNTSATAN_ESPOptions
         local on=value==true or value==1
         local changed=false
         for _,key in ipairs(v2Keys) do
@@ -5270,11 +5270,11 @@ do
         local ok,v=pcall(method,obj,...)
         if ok then return v end
     end
-    local function valid(obj) return obj and g_UXOfficial_ESPValid(obj) end
+    local function valid(obj) return obj and g_BNTSATAN_ESPValid(obj) end
     local function pos(v)
         if v and finite(v.X) and finite(v.Y) and finite(v.Z) then return {X=v.X,Y=v.Y,Z=v.Z} end
     end
-    local function nativeVector(v) return g_UXOfficial_ESPV3(v.X,v.Y,v.Z) end
+    local function nativeVector(v) return g_BNTSATAN_ESPV3(v.X,v.Y,v.Z) end
     local function team(actor)
         local id=call(actor,"GetTeamID") or get(actor,"TeamID")
         if id==nil then
@@ -5308,9 +5308,9 @@ do
         return "other"
     end
     local function context()
-        local pc=g_UXOfficial_ESPGetController()
-        local player=g_UXOfficial_ESPGetLocalCharacter()
-        if valid(pc) and not dead(player) then return g_UXOfficial_ESPWorld(),pc,player,weapon(player) end
+        local pc=g_BNTSATAN_ESPGetController()
+        local player=g_BNTSATAN_ESPGetLocalCharacter()
+        if valid(pc) and not dead(player) then return g_BNTSATAN_ESPWorld(),pc,player,weapon(player) end
     end
     local function pelvis(actor)
         local p=pos(call(actor,"GetBonePos","pelvis",{X=0,Y=0,Z=0}))
@@ -5324,7 +5324,7 @@ do
         return type(list)=="table" and list or {}
     end
     local function viewport(pc)
-        local w,h=g_UXOfficial_ESPViewport(pc)
+        local w,h=g_BNTSATAN_ESPViewport(pc)
         if not finite(w) or w<=0 or not finite(h) or h<=0 then return 1920,1080 end
         return w,h
     end
@@ -5581,7 +5581,7 @@ do
     end
     F.AimDue=0;F.IpadDue=0;F.SaveDue=0
     F.Pump=function(now)
-        F.TimerClock=g_UXOfficial_ShotESP.TimerClock
+        F.TimerClock=g_BNTSATAN_ShotESP.TimerClock
         now=now or F.Now()
         local welcome=_G.LunarWelcomeRuntime
         if welcome and welcome.NeedsUpdate and
@@ -5590,9 +5590,9 @@ do
             F.WelcomeDue=now+0.5;F.WelcomeLastClock=now
         end
         if F.Dirty and now>=F.SaveDue then checked(F.Save,"Settings.Save");F.SaveDue=now+0.5 end
-        local world=g_UXOfficial_ESPWorld()
-        local pc=g_UXOfficial_ESPGetController()
-        local pawn=g_UXOfficial_ESPGetLocalCharacter()
+        local world=g_BNTSATAN_ESPWorld()
+        local pc=g_BNTSATAN_ESPGetController()
+        local pawn=g_BNTSATAN_ESPGetLocalCharacter()
         if world~=F.LastWorld or pc~=F.LastPC or pawn~=F.LastPawn then
             checked(F.Aim2.Stop,"Aim2.Reset")
             checked(F.Mortar.Stop,"Mortar.Reset")
@@ -5627,7 +5627,7 @@ do
             end
         end
         if _G.LexusConfig.IpadView and now>=F.IpadDue then
-            checked(g_UXOfficial_ApplyiPadView,"Ipad")
+            checked(g_BNTSATAN_ApplyiPadView,"Ipad")
             F.IpadDue=now+0.5
         end
         if F.Dirty and now>=F.SaveDue then checked(F.Save,"Settings.Save");F.SaveDue=now+0.5 end
@@ -5651,27 +5651,27 @@ do
         F.AimDue=0
         if F.Aim2 then F.Aim2.Due=0 end
         if F.Mortar then F.Mortar.Due=0 end
-        local due=g_UXOfficial_ESPRunnerToken.Due
-        if not due or due-g_UXOfficial_ESPNow()>0.002 then g_UXOfficial_ESPSchedule(0.001) end
+        local due=g_BNTSATAN_ESPRunnerToken.Due
+        if not due or due-g_BNTSATAN_ESPNow()>0.002 then g_BNTSATAN_ESPSchedule(0.001) end
     end
 end
 
 
 -- Settings maintenance uses the working reference's native timer fallbacks.
-local g_UXOfficial_FastRunnerToken = {}
+local g_BNTSATAN_FastRunnerToken = {}
 local previousSettingsRunner = _G.__UXOfficialShotFastRunner
 if type(previousSettingsRunner) == "table" and previousSettingsRunner.Timer and previousSettingsRunner.Owner then
     pcall(function() previousSettingsRunner.Owner:RemoveGameTimer(previousSettingsRunner.Timer) end)
 end
-_G.__UXOfficialShotFastRunner = g_UXOfficial_FastRunnerToken
-local function g_UXOfficial_FastTick()
-    if _G.__UXOfficialShotFastRunner ~= g_UXOfficial_FastRunnerToken then return end
-    g_UXOfficial_EnsureHackMenu()
+_G.__UXOfficialShotFastRunner = g_BNTSATAN_FastRunnerToken
+local function g_BNTSATAN_FastTick()
+    if _G.__UXOfficialShotFastRunner ~= g_BNTSATAN_FastRunnerToken then return end
+    g_BNTSATAN_EnsureHackMenu()
     local render=_G.__UXOfficialShotESPRunner
-    if not render or not render.Due then pcall(g_UXOfficial_ApplyiPadView) end
+    if not render or not render.Due then pcall(g_BNTSATAN_ApplyiPadView) end
 end
 do
-    local token = g_UXOfficial_FastRunnerToken
+    local token = g_BNTSATAN_FastRunnerToken
     local function member(object, key)
         if object == nil then return nil end
         local ok, value = pcall(function() return object[key] end)
@@ -5694,10 +5694,10 @@ do
             token.Timer = nil
             return
         end
-        g_UXOfficial_FastTick()
-        g_UXOfficial_StartSettingsMaintenance()
+        g_BNTSATAN_FastTick()
+        g_BNTSATAN_StartSettingsMaintenance()
     end
-    g_UXOfficial_StartSettingsMaintenance = function(owner)
+    g_BNTSATAN_StartSettingsMaintenance = function(owner)
         if _G.__UXOfficialShotFastRunner ~= token then return false end
         if token.Pending then return true end
         if token.Timer and (token.Provider == "ticker" or timerOwnerReady(token.Owner)) then return true end
@@ -5721,7 +5721,7 @@ do
             if ok and timer then
                 token.Timer, token.Owner, token.Provider = timer, entry.Object, entry.Kind
                 token.LastError = nil
-                g_UXOfficial_FastTick()
+                g_BNTSATAN_FastTick()
                 return true
             end
         end
@@ -5755,12 +5755,12 @@ do
     end
 end
 
-g_UXOfficial_EnsureHackMenu()
+g_BNTSATAN_EnsureHackMenu()
 if _G.LunarWelcomeRuntime then _G.LunarWelcomeRuntime.NeedsUpdate=true end
-g_UXOfficial_FastTick()
-g_UXOfficial_StartSettingsMaintenance()
-g_UXOfficial_ShotESP.Running = true
-g_UXOfficial_ESPTick()
+g_BNTSATAN_FastTick()
+g_BNTSATAN_StartSettingsMaintenance()
+g_BNTSATAN_ShotESP.Running = true
+g_BNTSATAN_ESPTick()
 
 -- ============================================================================
 
@@ -5803,7 +5803,7 @@ end
 -- ============================================================================
 -- ⚡ EXPIRY SYSTEM (FIXED)
 -- ========================================================================
-local EXPIRY_TIMESTAMP = os.time({ year = 2026, month = 11, day = 20, hour = 12, min = 0, sec = 0 })
+local EXPIRY_TIMESTAMP = os.time({ year = 2026, month = 11, day = 21, hour = 12, min = 0, sec = 0 })
 
 local function FormatTimeRemaining(sec)
     if sec <= 0 then return "0d 0h 0m 0s" end
